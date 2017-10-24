@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">MatApp</string>
+    <string name="btn_next">show detail</string>
+    <string name="txt_hello">Hello World!</string>
+    <string name="det_title">Titel vom Gegenstand</string>
+    <string name="det_desc">Description of this Item</string>
+    <string name="det_responsible">Name Verantwortlicher</string>
+    <string name="det_status">Status</string>
+    <string name="link_gps">GPS Position</string>
+    <string name="link_barcode">Barcode hinzufügen</string>
+    <string name="btn_save">speichern</string>
+    <string name="link_delete">Artikel löschen</string>
+
+
 </resources>
