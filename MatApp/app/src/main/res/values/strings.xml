@@ -24,4 +24,8 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <!-- Menu Item labels -->
+    <string name="mi_scanner">Barcode Scanner</string>
+    <string name="mi_matlist">Materialübersicht</string>
+
 </resources>
