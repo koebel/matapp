@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MatApp</string>
     <string name="btn_next">show detail</string>
-    <string name="txt_hello">Hello World!</string>
+    <string name="txt_hello">Hello World2!</string>
     <string name="det_title">Titel vom Gegenstand</string>
     <string name="det_desc">Description of this Item</string>
     <string name="det_responsible">Name Verantwortlicher</string>
