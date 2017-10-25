@@ -11,6 +11,11 @@
     <string name="btn_save">speichern</string>
     <string name="link_delete">Artikel löschen</string>
 
+    <!-- Scan menu labels -->
+    <string name="turn_on_flashlight">flash on</string>
+    <string name="turn_off_flashlight">flash off</string>
+    <string name="scan_bar_code">Scan a Bar Code</string>
+
     <!-- Navigation Drawer menu labels -->
     <string name="nav_app_name">MatApp Menu</string>
     <string name="nav_home">MatApp Home</string>

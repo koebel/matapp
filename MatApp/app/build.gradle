@@ -29,3 +29,13 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:26.+'
 }
+//needed for scan (library)
+repositories {
+    jcenter()
+}
+//needed for scan (library)
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.journeyapps:zxing-android-embedded:3.4.0'
+    //compile 'com.android.support:appcompat-v7:23.1.0'   // Version 23+ is required
+}

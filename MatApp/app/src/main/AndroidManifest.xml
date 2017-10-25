@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -32,6 +33,20 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+        </activity>
+
+        <activity android:name=".AnyOrientationCaptureActivity"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
+
+        <activity android:name=".fragments.ScannerFragment"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
     </application>
 

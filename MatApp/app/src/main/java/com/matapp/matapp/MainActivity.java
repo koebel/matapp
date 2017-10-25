@@ -1,5 +1,6 @@
 package com.matapp.matapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -15,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.matapp.matapp.fragments.HomeFragment;
 import com.matapp.matapp.fragments.LogoutFragment;
@@ -23,6 +26,10 @@ import com.matapp.matapp.fragments.ScannerFragment;
 import com.matapp.matapp.fragments.SettingsFragment;
 import com.matapp.matapp.fragments.UsersFragment;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import static android.app.PendingIntent.getActivity;
+
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.matapp.matapp.MESSAGE";
@@ -30,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
+
+    private String codeFormat,codeContent;
+    private TextView formatTxt, contentTxt;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -129,7 +139,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.miScanner:
                 // do something
-                // onScannerAction();
+                Toast.makeText(MainActivity.this, "My toast 2",
+                        Toast.LENGTH_LONG).show();
+               // onScannerAction();
                 return true;
             case R.id.miMatList:
                 // Do something
@@ -193,10 +205,48 @@ public class MainActivity extends AppCompatActivity {
     // TODO
     /* Implement Functions for Click on MenuItems */
     public void onScannerAction(MenuItem mi) {
-        // handle click here
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setPrompt(this.getString(R.string.scan_bar_code));
+        integrator.setCaptureActivity(ScannerFragment.class);
+        integrator.setOrientationLocked(false);
+        //integrator.setResultDisplayDuration(0);
+        //integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
+        integrator.setCameraId(0);  // Use a specific camera of the device
+        integrator.setBarcodeImageEnabled(true);
+        // set turn the camera flash on by default
+        // integrator.addExtra(appConstants.CAMERA_FLASH_ON,true);
+        integrator.initiateScan();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        //retrieve scan result
+        /*Toast.makeText(MainActivity.this, "scan done",
+                Toast.LENGTH_LONG).show();*/
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+
+        if (scanningResult != null) {
+            if(scanningResult.getContents() != null){
+                //we have a result
+                codeContent = scanningResult.getContents();
+                codeFormat = scanningResult.getFormatName();
+
+                Toast.makeText(this, "Scan: " + codeContent, Toast.LENGTH_LONG).show();
+                // display it on screen
+                //formatTxt.setText("FORMAT: " + codeFormat);
+                //contentTxt.setText("CONTENT: " + codeContent);
+
+            }else{
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     public void onMatListAction(MenuItem mi) {
         // handle click here
     }
+
 }
