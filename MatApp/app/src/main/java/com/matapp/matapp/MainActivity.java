@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -119,6 +120,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        //return super.onOptionsItemSelected(item);
+
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.miScanner:
+                // do something
+                // onScannerAction();
+                return true;
+            case R.id.miMatList:
+                // Do something
+                // showProfileView();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
         // The action bar home/up action should open or close the drawer.
         /*
         switch (item.getItemId()) {
@@ -127,11 +147,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         */
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     // `onPostCreate` called when activity start-up is complete after `onStart()`
@@ -152,6 +167,13 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 
     /** Called when the user clicks on the button */
     public void clickButton(View view) {
@@ -166,5 +188,15 @@ public class MainActivity extends AppCompatActivity {
                 // Code here executes on main thread after user presses button
             }
         });
+    }
+
+    // TODO
+    /* Implement Functions for Click on MenuItems */
+    public void onScannerAction(MenuItem mi) {
+        // handle click here
+    }
+
+    public void onMatListAction(MenuItem mi) {
+        // handle click here
     }
 }
