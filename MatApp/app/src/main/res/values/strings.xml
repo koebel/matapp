@@ -11,5 +11,13 @@
     <string name="btn_save">speichern</string>
     <string name="link_delete">Artikel löschen</string>
 
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">MatApp Home</string>
+    <string name="nav_scanner">Barcode Scanner</string>
+    <string name="nav_matlist">Materialübersicht</string>
+    <string name="nav_users">Benutzerverwaltung</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_logout">Abmelden</string>
+
 
 </resources>
