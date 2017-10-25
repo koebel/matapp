@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Menu file for `activity_abc.xml` is located in a file
+         such as `res/menu/menu_abc.xml`  -->
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/miScanner"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:onClick="onScannerAction"
+        app:showAsAction="ifRoom"
+        android:title="@string/mi_scanner">
+    </item>
+    <item
+        android:id="@+id/miMatList"
+        android:icon="@drawable/ic_view_list_black_24dp"
+        android:onClick="onMatListAction"
+        app:showAsAction="ifRoom"
+        android:title="@string/mi_matlist">
+    </item>
+</menu>
+
+
