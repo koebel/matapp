@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_scanner:
                 fragmentClass = ScannerFragment.class;
+                //onScannerAction(menuItem);
                 break;
             case R.id.nav_matlist:
                 fragmentClass = MatListFragment.class;
