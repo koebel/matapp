@@ -1,12 +1,10 @@
 package com.matapp.matapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +32,7 @@ import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.matapp.matapp.MESSAGE";
+    public static final String EXTRA_DUMMY = "com.matapp.matapp.DUMMY";
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
@@ -190,13 +190,32 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user clicks on the button */
     public void clickButton(View view) {
-        Intent intent = new Intent(this, ListDetail.class);
+        Intent intent = new Intent(this, MatListDetail.class);
         String message = "Hello world";
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
 
+        /*
         Button btn = (Button) findViewById(R.id.btn_next);
         btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+            }
+        });
+        */
+    }
+
+    /** Called when the user clicks on the button */
+    public void onMatListItemClick(View view) {
+        Intent intent = new Intent(this, MatListDetail.class);
+        String message = "Hello world";
+        String dummy = "Lorem Ipsum";
+        intent.putExtra(EXTRA_MESSAGE, message);
+        intent.putExtra(EXTRA_DUMMY, dummy);
+        startActivity(intent);
+
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.row_mat_item);
+        rl.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
             }

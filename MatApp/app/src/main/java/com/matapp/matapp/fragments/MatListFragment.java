@@ -32,6 +32,13 @@ public class MatListFragment extends Fragment {
             "eirmod tempor invidunt ut ","labore et dolore ","magna aliquyam erat","sed diam voluptua",
             "at vero eos et accusam","et justo duo dolores ","et ea rebum","stet clita kasd gubergren",
             "no sea takimata sanctus"};
+    String[] mat_owner={"Kathrin Koebel","Rafael Reimann","Christoph Meyer","Kathrin Koebel",
+            "Rafael Reimann","Christoph Meyer ","Kathrin Koebel","Rafael Reimann", "Christoph Meyer",
+            "Kathrin Koebel","Rafael Reimann","Christoph Meyer", "Kathrin Koebel"};
+    String[] mat_location={"5.2A14","5.2A14","5.2A14","5.2A14", "5.2A14","5.2A14","5.2A14","5.2A14",
+            "5.2A14", "5.2A14","5.2A14","5.2A14", "5.2A14"};
+
+    String[] mat_gps, mat_status, mat_barcode, mat_img, mat_loan_name, mat_loan_contact, mat_loan_until, mat_loan_note;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     // either dynamically or via XML layout inflation.
@@ -44,7 +51,7 @@ public class MatListFragment extends Fragment {
         Log.d("debugMode", "The application stopped after this");
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
-        recyclerViewAdapter = new RecyclerAdapter(mat_title,mat_desc);
+        recyclerViewAdapter = new RecyclerAdapter(mat_title, mat_desc, mat_owner, mat_location, mat_gps, mat_status, mat_barcode, mat_img, mat_loan_name, mat_loan_contact, mat_loan_until, mat_loan_note);
         // recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(recyclerViewAdapter);
         return view;
@@ -57,5 +64,7 @@ public class MatListFragment extends Fragment {
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
     }
+
+
 
 }

@@ -9,6 +9,8 @@
     <string name="link_gps">GPS Position</string>
     <string name="link_barcode">Barcode hinzufügen</string>
     <string name="btn_save">speichern</string>
+    <string name="btn_loan">Ausleihen</string>
+    <string name="btn_return">Rückgabe</string>
     <string name="link_delete">Artikel löschen</string>
 
     <!-- Scan menu labels -->
