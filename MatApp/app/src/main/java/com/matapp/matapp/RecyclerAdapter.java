@@ -57,5 +57,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             row_mat_desc=(TextView)view.findViewById(R.id.row_mat_desc);
         }
     }
+
 }
 
