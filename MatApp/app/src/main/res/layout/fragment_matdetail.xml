@@ -1,54 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="48dp"
-        android:id="@+id/det_hello"
-        android:text="@string/txt_hello" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="48dp"
-        android:id="@+id/det_title"
-        android:text="@string/det_title" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="48dp"
-        android:id="@+id/det_desc"
-        android:text="@string/det_desc" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="48dp"
-        android:id="@+id/det_responsible"
-        android:text="@string/det_responsible" />
-
-    <Button
-        android:id="@+id/btn_loan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="48dp"
-        android:onClick="clickButton"
-        android:text="@string/btn_loan" />
-
-</LinearLayout> -->
-
-
 
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -66,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.6"
-        android:background="?attr/colorPrimaryDark"
+        android:background="?attr/colorPrimary"
         android:orientation="horizontal"/>
 
     <LinearLayout
@@ -89,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="6dp"
             android:id="@+id/det_title"
             android:text="@string/det_title" />
 
@@ -97,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="6dp"
             android:id="@+id/det_desc"
             android:text="@string/det_desc" />
 
@@ -105,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="6dp"
             android:id="@+id/det_responsible"
             android:text="@string/det_responsible" />
 
@@ -114,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="6dp"
             android:onClick="clickButton"
             android:text="@string/btn_loan" />
 
@@ -123,11 +73,12 @@
 </LinearLayout>
 
 <android.support.design.widget.FloatingActionButton
-    android:id="@+id/fab"
+    android:id="@+id/fab_add_photo"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:clickable="true"
+    android:onClick="addPhoto"
     android:src="@drawable/ic_camera_alt_white_24dp"
     app:layout_anchor="@id/viewPic"
     app:layout_anchorGravity="bottom|right|end"/>
