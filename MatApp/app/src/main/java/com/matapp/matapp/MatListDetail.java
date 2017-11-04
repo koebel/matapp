@@ -1,9 +1,13 @@
 package com.matapp.matapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MatListDetail extends AppCompatActivity {
 
@@ -24,5 +28,33 @@ public class MatListDetail extends AppCompatActivity {
 
         TextView textView2 = (TextView) findViewById(R.id.det_title);
         textView2.setText(title);
+    }
+
+
+    public void onAddPhoto(View view) {
+        Context context = getApplicationContext();
+        CharSequence text = "add Photo";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    public void onLendItem(View view) {
+        Context context = getApplicationContext();
+        CharSequence text = "Artikel ausleihen";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    public void onReturnItem(View view) {
+        Context context = getApplicationContext();
+        CharSequence text = "Artikel zurückgeben";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }

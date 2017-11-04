@@ -65,8 +65,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="6dp"
-            android:onClick="clickButton"
+            android:onClick="onLendItem"
             android:text="@string/btn_loan" />
+
+        <Button
+            android:id="@+id/btn_return"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="6dp"
+            android:onClick="onReturnItem"
+            android:text="@string/btn_return" />
 
     </LinearLayout>
 
@@ -78,7 +87,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:clickable="true"
-    android:onClick="addPhoto"
+    android:onClick="onAddPhoto"
     android:src="@drawable/ic_camera_alt_white_24dp"
     app:layout_anchor="@id/viewPic"
     app:layout_anchorGravity="bottom|right|end"/>

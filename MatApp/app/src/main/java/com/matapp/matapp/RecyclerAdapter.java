@@ -32,9 +32,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.matlist_row, parent, false);
-        RecyclerViewHolder RVH=new RecyclerViewHolder(view);
+        RecyclerViewHolder holder = new RecyclerViewHolder(view);
 
-        return RVH;
+        return holder;
     }
 
     @Override
@@ -48,6 +48,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     public int getItemCount() {
         return mat_list.length;
     }
+
     public  class  RecyclerViewHolder extends RecyclerView.ViewHolder{
         TextView row_mat_title;
         TextView row_mat_desc;
