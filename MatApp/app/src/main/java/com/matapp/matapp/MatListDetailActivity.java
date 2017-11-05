@@ -162,7 +162,7 @@ public class MatListDetailActivity extends AppCompatActivity {
         toast.show();
     }
 
-    public void onDeleteItemPopUp(View view, Intent intent) {
+    public void onDeleteItemPopUp(View view) {
         // TODO Popup Delete
         // if yes, delete Item and return to overview
         Context context = getApplicationContext();
