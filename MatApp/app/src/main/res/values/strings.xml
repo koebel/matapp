@@ -4,7 +4,8 @@
     <string name="txt_hello">Hello World2!</string>
     <string name="det_title">Titel vom Gegenstand</string>
     <string name="det_desc">Description of this Item</string>
-    <string name="det_responsible">Name Verantwortlicher</string>
+    <string name="det_owner">Name Verantwortlicher</string>
+    <string name="det_location">Standort vom Gegenstand</string>
     <string name="det_status">Status</string>
     <string name="link_gps">GPS Position</string>
     <string name="link_barcode">Barcode hinzufügen</string>

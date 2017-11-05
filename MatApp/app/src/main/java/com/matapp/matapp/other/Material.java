@@ -1,10 +1,14 @@
 package com.matapp.matapp.other;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by kathrinkoebel on 03.11.17.
  */
 
 public class Material {
+    public int uniqueId;
     public String title;
     public String description;
     public String owner;
@@ -18,19 +22,34 @@ public class Material {
     public String loan_until;
     public String loan_note;
 
+
+
     /* Constructor */
     public Material(String title, String description){
         this.title = title;
         this.description = description;
     }
 
-    public Material(String title, String description, String owner){
+    public Material(String title, String description, String owner, String location){
         this.title = title;
         this.description = description;
         this.owner = owner;
+        this.location = location;
     }
 
     /* Getter & Setter */
+    public int getUniqueId() {
+        return uniqueId;
+    }
+
+    // kein Setter, da ID nicht verändert werden darf
+    // sonst müsste geprüft werden, dass die neue ID wirklich unique ist :)
+    /*
+    public int setUniqueId(int uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+    */
+
     public String getTitle() {
         return title;
     }

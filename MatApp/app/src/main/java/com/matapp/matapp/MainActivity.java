@@ -1,5 +1,6 @@
 package com.matapp.matapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -206,12 +207,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /** Called when the user clicks on the button */
+
     public void onMatListItemClick(View view) {
+
         Intent intent = new Intent(this, MatListDetail.class);
         String message = "Hello world";
         String dummy = "Lorem Ipsum";
         intent.putExtra(EXTRA_MESSAGE, message);
         intent.putExtra(EXTRA_DUMMY, dummy);
+/*
+        intent.setClass(getActivity(), MatListDetail.class);
+        intent.putExtra("index", index);
+        */
         startActivity(intent);
 
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.row_mat_item);
@@ -220,7 +227,9 @@ public class MainActivity extends AppCompatActivity {
                 // Code here executes on main thread after user presses button
             }
         });
+
     }
+
 
     // TODO
     /* Implement Functions for Click on MenuItems */

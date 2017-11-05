@@ -24,29 +24,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.4"
-        android:background="@android:color/white"
+        android:layout_margin="16dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginTop="48dp"
-            android:id="@+id/det_hello"
-            android:text="@string/txt_hello" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:layout_marginTop="6dp"
             android:id="@+id/det_title"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"
             android:text="@string/det_title" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:layout_marginTop="6dp"
             android:id="@+id/det_desc"
             android:text="@string/det_desc" />
@@ -54,17 +46,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:layout_marginTop="6dp"
-            android:id="@+id/det_responsible"
-            android:text="@string/det_responsible" />
+            android:id="@+id/det_owner"
+            android:text="@string/det_owner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:id="@+id/det_location"
+            android:text="@string/det_location" />
 
         <Button
             android:id="@+id/btn_loan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="12dp"
             android:onClick="onLendItem"
             android:text="@string/btn_loan" />
 
@@ -72,7 +69,6 @@
             android:id="@+id/btn_return"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:layout_marginTop="6dp"
             android:onClick="onReturnItem"
             android:text="@string/btn_return" />
@@ -82,13 +78,13 @@
 </LinearLayout>
 
 <android.support.design.widget.FloatingActionButton
-    android:id="@+id/fab_add_photo"
+    android:id="@+id/fab_edit_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:clickable="true"
-    android:onClick="onAddPhoto"
-    android:src="@drawable/ic_camera_alt_white_24dp"
+    android:onClick="onEditItem"
+    android:src="@drawable/ic_mode_edit_white_24dp"
     app:layout_anchor="@id/viewPic"
     app:layout_anchorGravity="bottom|right|end"/>
 
