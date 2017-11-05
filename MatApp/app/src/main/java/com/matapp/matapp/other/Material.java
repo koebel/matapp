@@ -5,14 +5,21 @@ package com.matapp.matapp.other;
  * Created by kathrinkoebel on 03.11.17.
  */
 
+
+
 public class Material {
-    public int uniqueId;
+    private static long idCounter = 0;
+    public static final int STATUS_AVAILABLE = 0;
+    public static final int STATUS_LENT = 1;
+    public static final int STATUS_UNAVAILABLE = 2;
+
+    public String uniqueId;
     public String title;
     public String description;
     public String owner;
     public String location;
     public String gps;
-    public String status;
+    public int status;
     public String barcode;
     public String img;
     public String loan_name;
@@ -24,29 +31,28 @@ public class Material {
 
     /* Constructor */
     public Material(String title, String description){
+        this.uniqueId = createUniqueId();
         this.title = title;
         this.description = description;
     }
 
-    public Material(String title, String description, String owner, String location){
+    public Material(String title, String description, String owner, String location, int status){
+        this.uniqueId = createUniqueId();
         this.title = title;
         this.description = description;
         this.owner = owner;
         this.location = location;
+        this.status = status;
     }
 
     /* Getter & Setter */
-    public int getUniqueId() {
+    public String getUniqueId() {
         return uniqueId;
     }
 
-    // kein Setter, da ID nicht verändert werden darf
-    // sonst müsste geprüft werden, dass die neue ID wirklich unique ist :)
-    /*
-    public int setUniqueId(int uniqueId) {
-        this.uniqueId = uniqueId;
-    }
-    */
+    // no Setter for uniqueID, because the Id should never be changed.
+    // in case modifictation of the Id is requested, it needs to be checked if new Id is really unique.
+
 
     public String getTitle() {
         return title;
@@ -88,11 +94,11 @@ public class Material {
         this.gps = gps;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -144,4 +150,10 @@ public class Material {
         this.loan_note = loan_note;
     }
 
+
+    /* static Methods */
+    public static synchronized String createUniqueId()
+    {
+        return String.valueOf(idCounter++);
+    }
 }

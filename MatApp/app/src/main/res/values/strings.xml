@@ -7,6 +7,10 @@
     <string name="det_owner">Name Verantwortlicher</string>
     <string name="det_location">Standort vom Gegenstand</string>
     <string name="det_status">Status</string>
+    <string name="det_status_available">verfügbar</string>
+    <string name="det_status_lent">ausgeliehen</string>
+    <string name="det_status_unavailable">nicht verfügbar</string>
+
     <string name="link_gps">GPS Position</string>
     <string name="link_barcode">Barcode hinzufügen</string>
     <string name="btn_save">speichern</string>

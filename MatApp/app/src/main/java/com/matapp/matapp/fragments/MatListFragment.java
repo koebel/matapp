@@ -76,19 +76,19 @@ public class MatListFragment extends Fragment {
     // This method creates an ArrayList that contains some Dummy Material objects
     public void initializeData(){
         items = new ArrayList<>();
-        items.add(new Material("Digital Camera", "lorem ipsum", "Kathrin Koebel", "5.2A14" ));
-        items.add(new Material("VR Headset", "dolor sit amet", "Rafael Reimann", "5.2A14"));
-        items.add(new Material("portable Beamer", "consetetur sadipscing elitr", "Christoph Meyer", "5.2A14"));
-        items.add(new Material("Android Book", "sed diam nonumy", "Kathrin Koebel", "5.2A14" ));
-        items.add(new Material("3D Printer", "eirmod tempor invidunt ut", "Rafael Reimann", "5.2A14"));
-        items.add(new Material("Coffee Machine", "labore et dolore", "Christoph Meyer", "5.2A14"));
-        items.add(new Material("GoPro", "magna aliquyam erat", "Kathrin Koebel", "5.2A14" ));
-        items.add(new Material("Pixel Phone", "sed diam voluptua", "Rafael Reimann", "5.2A14"));
-        items.add(new Material("Adapterset", "at vero eos et accusam", "Christoph Meyer", "5.2A14"));
-        items.add(new Material("Screen", "et justo duo dolores", "Kathrin Koebel", "5.2A14" ));
-        items.add(new Material("Powerboard", "et ea rebum", "Rafael Reimann", "5.2A14"));
-        items.add(new Material("Tripod", "stet clita kasd gubergren", "Christoph Meyer", "5.2A14"));
-        items.add(new Material("Spotlight", "no sea takimata sanctus", "Kathrin Koebel", "5.2A14" ));
+        items.add(new Material("Digital Camera", "lorem ipsum", "Kathrin Koebel", "5.2A14", Material.STATUS_AVAILABLE ));
+        items.add(new Material("VR Headset", "dolor sit amet", "Rafael Reimann", "5.2A14", Material.STATUS_AVAILABLE));
+        items.add(new Material("portable Beamer", "consetetur sadipscing elitr", "Christoph Meyer", "5.2A14", Material.STATUS_LENT));
+        items.add(new Material("Android Book", "sed diam nonumy", "Kathrin Koebel", "5.2A14", Material.STATUS_LENT));
+        items.add(new Material("3D Printer", "eirmod tempor invidunt ut", "Rafael Reimann", "5.2A14", Material.STATUS_UNAVAILABLE));
+        items.add(new Material("Coffee Machine", "labore et dolore", "Christoph Meyer", "5.2A14", Material.STATUS_AVAILABLE));
+        items.add(new Material("GoPro", "magna aliquyam erat", "Kathrin Koebel", "5.2A14", Material.STATUS_AVAILABLE));
+        items.add(new Material("Pixel Phone", "sed diam voluptua", "Rafael Reimann", "5.2A14", Material.STATUS_LENT));
+        items.add(new Material("Adapterset", "at vero eos et accusam", "Christoph Meyer", "5.2A14", Material.STATUS_LENT));
+        items.add(new Material("Screen", "et justo duo dolores", "Kathrin Koebel", "5.2A14", Material.STATUS_UNAVAILABLE));
+        items.add(new Material("Powerboard", "et ea rebum", "Rafael Reimann", "5.2A14", Material.STATUS_AVAILABLE));
+        items.add(new Material("Tripod", "stet clita kasd gubergren", "Christoph Meyer", "5.2A14", Material.STATUS_AVAILABLE));
+        items.add(new Material("Spotlight", "no sea takimata sanctus", "Kathrin Koebel", "5.2A14", Material.STATUS_AVAILABLE ));
     }
 
     /* Methods */

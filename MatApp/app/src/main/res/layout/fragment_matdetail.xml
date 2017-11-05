@@ -57,11 +57,20 @@
             android:id="@+id/det_location"
             android:text="@string/det_location" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:id="@+id/det_status"
+            android:text="@string/det_status" />
+
         <Button
             android:id="@+id/btn_loan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:background="?attr/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="24dp"
             android:onClick="onLendItem"
             android:text="@string/btn_loan" />
 
@@ -69,7 +78,9 @@
             android:id="@+id/btn_return"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:background="?attr/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="24dp"
             android:onClick="onReturnItem"
             android:text="@string/btn_return" />
 
