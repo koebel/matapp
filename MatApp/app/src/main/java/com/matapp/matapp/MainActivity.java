@@ -1,6 +1,5 @@
 package com.matapp.matapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -13,9 +12,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,19 +24,15 @@ import com.matapp.matapp.fragments.UsersFragment;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import static android.app.PendingIntent.getActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.matapp.matapp.MESSAGE";
-    public static final String EXTRA_DUMMY = "com.matapp.matapp.DUMMY";
 
-    private DrawerLayout mDrawer;
+    private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private NavigationView nvDrawer;
+    private NavigationView navigationDrawer;
 
     private String codeFormat,codeContent;
-    private TextView formatTxt, contentTxt;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -56,21 +48,21 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Find our drawer view
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = setupDrawerToggle();
 
         // Tie DrawerLayout events to the ActionBarToggle
-        mDrawer.addDrawerListener(drawerToggle);
+        drawerLayout.addDrawerListener(drawerToggle);
 
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        navigationDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
-        setupDrawerContent(nvDrawer);
+        setupDrawerContent(navigationDrawer);
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
         // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
         // and will not render the hamburger icon without it.
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,  R.string.drawer_close);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -127,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         // Set action bar title
         setTitle(menuItem.getTitle());
         // Close the navigation drawer
-        mDrawer.closeDrawers();
+        drawerLayout.closeDrawers();
     }
 
     @Override
@@ -146,8 +138,7 @@ public class MainActivity extends AppCompatActivity {
                // onScannerAction();
                 return true;
             case R.id.miMatList:
-                // Do something
-                // showProfileView();
+                //onMatListAction(mi);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -186,15 +177,6 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-
-    /** Called when the user clicks on the button */
-    public void clickButton(View view) {
-        Intent intent = new Intent(this, MatListDetail.class);
-        String message = "Hello world";
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
     }
 
 
@@ -241,7 +223,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMatListAction(MenuItem mi) {
-        // handle click here
+        /*
+        Toast toast = Toast.makeText(getApplicationContext(),"switch to listview", Toast.LENGTH_SHORT);
+        toast.show();
+        */
+
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        Class fragmentClass = MatListFragment.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
+
+        // Highlight the selected item has been done by NavigationView
+        mi.setChecked(true);
+        // Set action bar title
+        setTitle(mi.getTitle());
     }
 
 }
+
+
+

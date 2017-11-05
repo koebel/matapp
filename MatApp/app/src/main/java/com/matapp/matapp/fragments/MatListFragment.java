@@ -28,8 +28,6 @@ import java.util.List;
 public class MatListFragment extends Fragment {
 
     private List<Material> items;
-    public int curPosition = 0; // checked position in list
-
 
     public RecyclerView recyclerView;
     public RecyclerView.Adapter recyclerViewAdapter;
@@ -60,7 +58,6 @@ public class MatListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
 
         FloatingActionButton fabAddItem = (FloatingActionButton) view.findViewById(R.id.fab_add_item);
         fabAddItem.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +71,6 @@ public class MatListFragment extends Fragment {
                 toast.show();
             }
         });
-
     }
 
     // This method creates an ArrayList that contains some Dummy Material objects
@@ -93,30 +89,6 @@ public class MatListFragment extends Fragment {
         items.add(new Material("Powerboard", "et ea rebum", "Rafael Reimann", "5.2A14"));
         items.add(new Material("Tripod", "stet clita kasd gubergren", "Christoph Meyer", "5.2A14"));
         items.add(new Material("Spotlight", "no sea takimata sanctus", "Kathrin Koebel", "5.2A14" ));
-    }
-
-    /*
-    private void initializeAdapter(){
-        RecyclerAdapter adapter = new RecyclerAdapter(items);
-        rv.setAdapter(adapter);
-    }
-    */
-
-    /**
-     * Helper function to show the details of a selected item, either by
-     * displaying a fragment in-place in the current UI, or starting a whole new
-     * activity in which it is displayed.
-     */
-    void showDetails(int index) {
-        curPosition = index;
-
-        // launch a new activity to display
-        // the dialog fragment with selected text.
-        Intent intent = new Intent();
-        Log.i("fragmentdemo", "TitlesFragment:showDetails activity is " + getActivity().toString() + "class is " + MatListDetail.class.toString());
-        intent.setClass(getActivity(), MatListDetail.class);
-        intent.putExtra("index", index);
-        startActivity(intent);
     }
 
     /* Methods */

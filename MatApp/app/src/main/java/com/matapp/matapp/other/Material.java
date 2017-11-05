@@ -1,7 +1,5 @@
 package com.matapp.matapp.other;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kathrinkoebel on 03.11.17.
