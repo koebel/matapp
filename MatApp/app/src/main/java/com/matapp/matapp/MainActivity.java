@@ -223,10 +223,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMatListAction(MenuItem mi) {
-        /*
-        Toast toast = Toast.makeText(getApplicationContext(),"switch to listview", Toast.LENGTH_SHORT);
-        toast.show();
-        */
 
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;

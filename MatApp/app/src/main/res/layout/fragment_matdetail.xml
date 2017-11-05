@@ -1,102 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+ <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/viewPic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.6"
-        android:background="?attr/colorPrimary"
-        android:orientation="horizontal"/>
-
-    <LinearLayout
-        android:id="@+id/viewDetails"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        android:layout_margin="16dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:id="@+id/det_title"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textStyle="bold"
-            android:text="@string/det_title" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:id="@+id/det_desc"
-            android:text="@string/det_desc" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:id="@+id/det_owner"
-            android:text="@string/det_owner" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:id="@+id/det_location"
-            android:text="@string/det_location" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:id="@+id/det_status"
-            android:text="@string/det_status" />
-
-        <Button
-            android:id="@+id/btn_loan"
+        <LinearLayout
+            android:id="@+id/viewPic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
             android:background="?attr/colorPrimary"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="24dp"
-            android:onClick="onLendItem"
-            android:text="@string/btn_loan" />
+            android:orientation="horizontal"/>
 
-        <Button
-            android:id="@+id/btn_return"
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollViewDetails"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="24dp"
-            android:onClick="onReturnItem"
-            android:text="@string/btn_return" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.4" >
+
+        <LinearLayout
+            android:id="@+id/viewDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_title"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor ="?attr/colorPrimaryDark"
+                android:textStyle="bold"
+                android:text="@string/det_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_position"
+                android:text="@string/det_position" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_desc"
+                android:text="@string/det_desc" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_owner"
+                android:text="@string/det_owner" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_location"
+                android:text="@string/det_location" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_status"
+                android:text="@string/det_status" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:id="@+id/det_loan"
+                android:text="@string/det_loan_sub" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_loan_name"
+                android:text="@string/det_loan_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_loan_contact"
+                android:text="@string/det_loan_contact" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_loan_until"
+                android:text="@string/det_loan_until" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_loan_note"
+                android:text="@string/det_loan_note" />
+
+            <Button
+                android:id="@+id/btn_loan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/matapp_button"
+                android:layout_marginTop="24dp"
+                android:onClick="onLendItem"
+                android:text="@string/btn_loan" />
+
+            <Button
+                android:id="@+id/btn_return"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/matapp_button"
+                android:layout_marginTop="24dp"
+                android:onClick="onReturnItem"
+                android:text="@string/btn_return" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor ="?attr/colorPrimaryDark"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="left"
+                android:paddingLeft="3dp"
+                android:onClick="onDeleteItemPopUp"
+                android:text="@string/link_delete" />
+
+        </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView >
 
     </LinearLayout>
 
-</LinearLayout>
-
-<android.support.design.widget.FloatingActionButton
-    android:id="@+id/fab_edit_item"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:clickable="true"
-    android:onClick="onEditItem"
-    android:src="@drawable/ic_mode_edit_white_24dp"
-    app:layout_anchor="@id/viewPic"
-    app:layout_anchorGravity="bottom|right|end"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_edit_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:onClick="onEditItem"
+        android:src="@drawable/ic_mode_edit_white_24dp"
+        app:layout_anchor="@id/viewPic"
+        app:layout_anchorGravity="bottom|right|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
+

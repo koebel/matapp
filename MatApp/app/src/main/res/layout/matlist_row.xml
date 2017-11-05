@@ -20,6 +20,7 @@
         android:id="@+id/row_mat_title"
         android:textAppearance="?android:textAppearanceMedium"
         android:textStyle="bold"
+        android:textColor ="?attr/colorPrimaryDark"
         android:gravity="left"
         android:singleLine="true"
         android:ellipsize="marquee"

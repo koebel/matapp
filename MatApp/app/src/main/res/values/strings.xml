@@ -10,6 +10,13 @@
     <string name="det_status_available">verfügbar</string>
     <string name="det_status_lent">ausgeliehen</string>
     <string name="det_status_unavailable">nicht verfügbar</string>
+    <string name="det_loan_sub">Informationen zur Ausleihe</string>
+    <string name="det_loan_name">Ausgeliehen an</string>
+    <string name="det_loan_contact">Kontaktdaten</string>
+    <string name="det_loan_until">voraussichtlich ausgeliehen bis </string>
+    <string name="det_loan_note">Notiz zur Ausleihe </string>
+
+    <string name="det_position">Position des Elements</string>
 
     <string name="link_gps">GPS Position</string>
     <string name="link_barcode">Barcode hinzufügen</string>

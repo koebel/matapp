@@ -16,4 +16,20 @@
         -->
     </style>
 
+    <style name="matapp_button" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+        <!--
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        -->
+    </style>
+
+    <style name="matapp_textlink" parent="@android:style/Widget.Button">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>

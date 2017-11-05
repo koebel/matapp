@@ -45,6 +45,24 @@ public class Material {
         this.status = status;
     }
 
+    /* full Constructor */
+    public Material(String title, String description, String owner, String location, int status,
+                    String gps, String barcode, String img, String loan_name, String loan_contact, String loan_until, String loan_note){
+        this.uniqueId = createUniqueId();
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+        this.location = location;
+        this.status = status;
+        this.gps = gps;
+        this.barcode = barcode;
+        this.img = img;
+        this.loan_name = loan_name;
+        this.loan_contact = loan_contact;
+        this.loan_until = loan_until;
+        this.loan_note = loan_note;
+    }
+
     /* Getter & Setter */
     public String getUniqueId() {
         return uniqueId;

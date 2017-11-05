@@ -63,14 +63,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
+                    System.out.println(position);
 
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, MatListDetail.class);
+                    Intent intent = new Intent(context, MatListDetailActivity.class);
+                    //intent.putExtra("POSITION_KEY", getAdapterPosition());
                     intent.putExtra("TITLE_KEY", items.get(position).getTitle());
                     intent.putExtra("DESCRIPTION_KEY", items.get(position).getDescription());
                     intent.putExtra("OWNER_KEY", items.get(position).getOwner());
                     intent.putExtra("LOCATION_KEY", items.get(position).getLocation());
                     intent.putExtra("STATUS_KEY", items.get(position).getStatus());
+                    intent.putExtra("GPS_KEY", items.get(position).getGps());
+                    intent.putExtra("BARCODE_KEY", items.get(position).getBarcode());
+                    intent.putExtra("IMAGE_KEY", items.get(position).getImg());
+                    intent.putExtra("LOAN_NAME_KEY", items.get(position).getLoanName());
+                    intent.putExtra("LOAN_CONTACT_KEY", items.get(position).getLoanContact());
+                    intent.putExtra("LOAN_UNTIL_KEY", items.get(position).getLoanUntil());
+                    intent.putExtra("LOAN_NOTE_KEY", items.get(position).getLoanNote());
+
                     context.startActivity(intent);
                 }
             });

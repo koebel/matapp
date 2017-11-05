@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MatListDetail"
+        <activity android:name=".MatListDetailActivity"
             android:parentActivityName=".MainActivity" >
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
