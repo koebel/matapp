@@ -195,43 +195,9 @@ public class MainActivity extends AppCompatActivity {
         String message = "Hello world";
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-
-        /*
-        Button btn = (Button) findViewById(R.id.btn_next);
-        btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-            }
-        });
-        */
-    }
-
-    /** Called when the user clicks on the button */
-
-    public void onMatListItemClick(View view) {
-
-        Intent intent = new Intent(this, MatListDetail.class);
-        String message = "Hello world";
-        String dummy = "Lorem Ipsum";
-        intent.putExtra(EXTRA_MESSAGE, message);
-        intent.putExtra(EXTRA_DUMMY, dummy);
-/*
-        intent.setClass(getActivity(), MatListDetail.class);
-        intent.putExtra("index", index);
-        */
-        startActivity(intent);
-
-        RelativeLayout rl = (RelativeLayout) findViewById(R.id.row_mat_item);
-        rl.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-            }
-        });
-
     }
 
 
-    // TODO
     /* Implement Functions for Click on MenuItems */
     public void onScannerAction(MenuItem mi) {
         IntentIntegrator integrator = new IntentIntegrator(this);

@@ -1,20 +1,16 @@
 package com.matapp.matapp.fragments;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.matapp.matapp.MatListDetail;
@@ -48,7 +44,6 @@ public class MatListFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_matlist);
         recyclerViewLayoutManager = new LinearLayoutManager(this.getContext());
-        Log.d("debugMode", "The application stopped after this");
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
         initializeData();
@@ -133,20 +128,5 @@ public class MatListFragment extends Fragment {
         int index = items.size();
         items.add(index, m);
     }
-
-
-    /** Called when the user clicks on the button */
-    /*
-    public void onMatListItemClick(View view) {
-        Context context = getContext();
-        CharSequence text = "Detail anzeigen";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-    */
-
-
 
 }
