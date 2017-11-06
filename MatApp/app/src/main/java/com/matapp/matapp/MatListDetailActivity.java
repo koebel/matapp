@@ -2,22 +2,25 @@ package com.matapp.matapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.matapp.matapp.other.Material;
+import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
+import com.matapp.matapp.fragments.DeleteMatDialogFragment;
 
 public class MatListDetailActivity extends AppCompatActivity {
 
     TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode, det_img,
             det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note, det_position;
-    Button btn_loan, btn_return;
+    Button btn_loan, btn_return, btn_delete;
+
+    FragmentManager fm = getSupportFragmentManager();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +41,21 @@ public class MatListDetailActivity extends AppCompatActivity {
 
         btn_loan = (Button) findViewById(R.id.btn_loan);
         btn_return = (Button) findViewById(R.id.btn_return);
+        btn_delete = (Button) findViewById(R.id.btn_delete_material);
+
+        // attach AlertDialog to Mat Delete Button
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MatDeleteAlertDialogFragment alertDialog = new MatDeleteAlertDialogFragment();
+                alertDialog.show(fm, "Alert Dialog Fragment");
+            }
+        });
 
         // Get the Intent that started this activity and extract the string
         Intent intent = this.getIntent();
 
         // receive Extras
         //int position = intent.getExtras().getInt("POSITION_KEY");
-
         String title = intent.getExtras().getString("TITLE_KEY");
         String description = intent.getExtras().getString("DESCRIPTION_KEY");
         String owner = intent.getExtras().getString("OWNER_KEY");
@@ -72,9 +83,6 @@ public class MatListDetailActivity extends AppCompatActivity {
         //det_position.setText(position);
         det_position.setVisibility(View.GONE);
 
-
-
-
         // status dependent bindings & visibility settings
         // det_status: transform status value into text variable
         // buttons: show/hide depending on status
@@ -91,7 +99,6 @@ public class MatListDetailActivity extends AppCompatActivity {
             det_loan_contact.setVisibility(View.GONE);
             det_loan_until.setVisibility(View.GONE);
             det_loan_note.setVisibility(View.GONE);
-
         }
 
         // 1 = material ausgeliehen
@@ -131,7 +138,6 @@ public class MatListDetailActivity extends AppCompatActivity {
                 det_loan_note.setVisibility(View.GONE);
             }
         }
-
     }
 
 
@@ -162,6 +168,7 @@ public class MatListDetailActivity extends AppCompatActivity {
         toast.show();
     }
 
+
     public void onDeleteItemPopUp(View view) {
         // TODO Popup Delete
         // if yes, delete Item and return to overview
@@ -178,6 +185,17 @@ public class MatListDetailActivity extends AppCompatActivity {
         // if yes, delete Item and return to overview
         Context context = getApplicationContext();
         CharSequence text = "Artikel löschen";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    public void onDeleteItemCancelled(View view) {
+        // TODO  dont delete
+        // if yes, delete Item and return to overview
+        Context context = getApplicationContext();
+        CharSequence text = "Artikel nicht löschen";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);

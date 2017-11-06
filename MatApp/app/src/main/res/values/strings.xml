@@ -24,6 +24,10 @@
     <string name="btn_loan">Ausleihen</string>
     <string name="btn_return">Rückgabe</string>
     <string name="link_delete">Artikel löschen</string>
+    <string name="delete_item_title">Artikel löschen?</string>
+    <string name="delete_item_text">Wollen Sie diesen Artikel wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="btn_delete">löschen</string>
+    <string name="btn_cancel">abbrechen</string>
 
     <!-- Scan menu labels -->
     <string name="turn_on_flashlight">flash on</string>
