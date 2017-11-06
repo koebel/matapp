@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
-import com.matapp.matapp.fragments.DeleteMatDialogFragment;
 
 public class MatListDetailActivity extends AppCompatActivity {
 
@@ -20,6 +19,8 @@ public class MatListDetailActivity extends AppCompatActivity {
     Button btn_loan, btn_return, btn_delete;
 
     FragmentManager fm = getSupportFragmentManager();
+
+    int currentItemID;
 
 
     @Override
@@ -43,19 +44,14 @@ public class MatListDetailActivity extends AppCompatActivity {
         btn_return = (Button) findViewById(R.id.btn_return);
         btn_delete = (Button) findViewById(R.id.btn_delete_material);
 
-        // attach AlertDialog to Mat Delete Button
-        btn_delete.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                MatDeleteAlertDialogFragment alertDialog = new MatDeleteAlertDialogFragment();
-                alertDialog.show(fm, "Alert Dialog Fragment");
-            }
-        });
+
 
         // Get the Intent that started this activity and extract the string
         Intent intent = this.getIntent();
 
         // receive Extras
         //int position = intent.getExtras().getInt("POSITION_KEY");
+        currentItemID = intent.getExtras().getInt("ID_KEY");
         String title = intent.getExtras().getString("TITLE_KEY");
         String description = intent.getExtras().getString("DESCRIPTION_KEY");
         String owner = intent.getExtras().getString("OWNER_KEY");
@@ -68,6 +64,17 @@ public class MatListDetailActivity extends AppCompatActivity {
         String loanContact = intent.getExtras().getString("LOAN_CONTACT_KEY");
         String loanUntil = intent.getExtras().getString("LOAN_UNTIL_KEY");
         String loanNote = intent.getExtras().getString("LOAN_NOTE_KEY");
+
+        // attach AlertDialog to Mat Delete Button
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                MatDeleteAlertDialogFragment alertDialog = new MatDeleteAlertDialogFragment();
+                Bundle args = new Bundle();
+                args.putInt("title", currentItemID);
+                alertDialog.setArguments(args);
+                alertDialog.show(fm, "MatDeleteAlertDialogFragment");
+            }
+        });
 
         // Bind
         det_title.setText(title);
@@ -168,19 +175,7 @@ public class MatListDetailActivity extends AppCompatActivity {
         toast.show();
     }
 
-
-    public void onDeleteItemPopUp(View view) {
-        // TODO Popup Delete
-        // if yes, delete Item and return to overview
-        Context context = getApplicationContext();
-        CharSequence text = "Artikel löschen PopUp";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-
-    public void onDeleteItem(View view) {
+    public void onDeleteItem() {
         // TODO  Delete
         // if yes, delete Item and return to overview
         Context context = getApplicationContext();
@@ -191,14 +186,12 @@ public class MatListDetailActivity extends AppCompatActivity {
         toast.show();
     }
 
-    public void onDeleteItemCancelled(View view) {
-        // TODO  dont delete
-        // if yes, delete Item and return to overview
-        Context context = getApplicationContext();
-        CharSequence text = "Artikel nicht löschen";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+    public int getCurrentItemID() {
+        return currentItemID;
     }
+
+    public void setCurrentItemID(int currentItemID) {
+        this.currentItemID = currentItemID;
+    }
+
 }

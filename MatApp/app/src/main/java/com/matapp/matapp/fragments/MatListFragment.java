@@ -100,4 +100,16 @@ public class MatListFragment extends Fragment {
         items.add(index, m);
     }
 
+    public void deleteMaterial (int uniqueId) {
+        Material foundMaterial = null;
+        for(Material m : items){
+            if(m.getUniqueId() == uniqueId){
+                foundMaterial = m;
+            }
+        }
+
+        if (foundMaterial != null && items.contains(foundMaterial)) {
+            items.remove(foundMaterial);
+        }
+    }
 }

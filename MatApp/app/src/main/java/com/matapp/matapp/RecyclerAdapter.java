@@ -63,11 +63,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    System.out.println(position);
 
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MatListDetailActivity.class);
                     //intent.putExtra("POSITION_KEY", getAdapterPosition());
+                    intent.putExtra("ID_KEY", items.get(position).getUniqueId());
                     intent.putExtra("TITLE_KEY", items.get(position).getTitle());
                     intent.putExtra("DESCRIPTION_KEY", items.get(position).getDescription());
                     intent.putExtra("OWNER_KEY", items.get(position).getOwner());

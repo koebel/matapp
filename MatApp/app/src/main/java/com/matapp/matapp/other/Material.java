@@ -8,12 +8,12 @@ package com.matapp.matapp.other;
 
 
 public class Material {
-    private static long idCounter = 0;
+    private static int idCounter = 0;
     public static final int STATUS_AVAILABLE = 0;
     public static final int STATUS_LENT = 1;
     public static final int STATUS_UNAVAILABLE = 2;
 
-    public String uniqueId;
+    public int uniqueId;
     public String title;
     public String description;
     public String owner;
@@ -64,7 +64,7 @@ public class Material {
     }
 
     /* Getter & Setter */
-    public String getUniqueId() {
+    public int getUniqueId() {
         return uniqueId;
     }
 
@@ -170,8 +170,8 @@ public class Material {
 
 
     /* static Methods */
-    public static synchronized String createUniqueId()
+    public static synchronized int createUniqueId()
     {
-        return String.valueOf(idCounter++);
+        return idCounter++;
     }
 }
