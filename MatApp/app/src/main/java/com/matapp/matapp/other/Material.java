@@ -33,7 +33,16 @@ public class Material {
     public Material(String title, String description){
         this.uniqueId = createUniqueId();
         this.title = title;
-        this.description = description;
+        this.owner = "";
+        this.location = "";
+        this.gps = "";
+        this.status = 2;
+        this.barcode = "";
+        this.img = "";
+        this.loan_name = "";
+        this.loan_contact = "";
+        this.loan_until = "";
+        this.loan_note = "";
     }
 
     public Material(String title, String description, String owner, String location, int status){
@@ -43,6 +52,13 @@ public class Material {
         this.owner = owner;
         this.location = location;
         this.status = status;
+        this.gps = "";
+        this.barcode = "";
+        this.img = "";
+        this.loan_name = "";
+        this.loan_contact = "";
+        this.loan_until = "";
+        this.loan_note = "";
     }
 
     /* full Constructor */

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
+import com.matapp.matapp.other.Material;
 
 public class MatListDetailActivity extends AppCompatActivity {
 
@@ -95,8 +96,7 @@ public class MatListDetailActivity extends AppCompatActivity {
         // buttons: show/hide depending on status
         // loan: show/hide section
 
-        // 0 = material verfügbar
-        if (status == 0) {
+        if (status == Material.STATUS_AVAILABLE) {
             det_status.setText(R.string.det_status_available);
             btn_loan.setVisibility(View.VISIBLE);
             btn_return.setVisibility(View.GONE);
@@ -108,8 +108,7 @@ public class MatListDetailActivity extends AppCompatActivity {
             det_loan_note.setVisibility(View.GONE);
         }
 
-        // 1 = material ausgeliehen
-        else if (status == 1) {
+        else if (status == Material.STATUS_LENT) {
             det_status.setText(R.string.det_status_lent);
             btn_loan.setVisibility(View.GONE);
             btn_return.setVisibility(View.VISIBLE);
