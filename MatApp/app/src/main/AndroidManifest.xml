@@ -43,7 +43,7 @@
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
-        <activity android:name=".fragments.ScannerFragment"
+        <activity android:name=".ScannerActivity"
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"

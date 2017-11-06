@@ -12,13 +12,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matapp.matapp.fragments.HomeFragment;
 import com.matapp.matapp.fragments.LogoutFragment;
 import com.matapp.matapp.fragments.MatListFragment;
-import com.matapp.matapp.fragments.ScannerFragment;
 import com.matapp.matapp.fragments.SettingsFragment;
 import com.matapp.matapp.fragments.UsersFragment;
 
@@ -79,29 +77,21 @@ public class MainActivity extends AppCompatActivity {
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
-        Class fragmentClass;
+        Class fragmentClass = MatListFragment.class;
         switch(menuItem.getItemId()) {
-            case R.id.nav_home:
-                fragmentClass = HomeFragment.class;
-                break;
             case R.id.nav_scanner:
-                fragmentClass = ScannerFragment.class;
-                //onScannerAction(menuItem);
+                onScannerAction(menuItem);
                 break;
             case R.id.nav_matlist:
                 fragmentClass = MatListFragment.class;
                 break;
-            case R.id.nav_users:
-                fragmentClass = UsersFragment.class;
-                break;
-            case R.id.nav_settings:
-                fragmentClass = SettingsFragment.class;
-                break;
             case R.id.nav_logout:
+
                 fragmentClass = LogoutFragment.class;
                 break;
+
             default:
-                fragmentClass = ScannerFragment.class;
+                fragmentClass = MatListFragment.class;
         }
 
         try {
@@ -185,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
         integrator.setPrompt(this.getString(R.string.scan_bar_code));
-        integrator.setCaptureActivity(ScannerFragment.class);
+        integrator.setCaptureActivity(ScannerActivity.class);
         integrator.setOrientationLocked(false);
         //integrator.setResultDisplayDuration(0);
         //integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
