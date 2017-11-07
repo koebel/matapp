@@ -235,23 +235,6 @@ public class MainActivity extends AppCompatActivity {
         // Set action bar title
         setTitle(mi.getTitle());
     }
-
-    // Material hinzufügen
-    public void onAddItem(View view) {
-        Log.d("main", "halli hallo");
-
-/*        Context context = getApplicationContext();
-        CharSequence text = "Artikel erstellen";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-        */
-
-        Intent intent = new Intent(getApplicationContext(), MatAddActivity.class);
-        startActivity(intent);
-    }
-
 }
 
 

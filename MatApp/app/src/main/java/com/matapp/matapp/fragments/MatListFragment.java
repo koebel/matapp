@@ -63,24 +63,13 @@ public class MatListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Setup any handles to view objects here
 
+        // neues Material erstellen
         FloatingActionButton fabAddItem = (FloatingActionButton) view.findViewById(R.id.fab_add_item);
-
-
         fabAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO korrekte inmplementation von Material hinzufügen!!!
                 Intent intent = new Intent(getActivity(), MatAddActivity.class);
                 startActivity(intent);
-
-                /*
-                Context context = getContext();
-                CharSequence text = "Artikel erstellen";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-                */
             }
         });
 
