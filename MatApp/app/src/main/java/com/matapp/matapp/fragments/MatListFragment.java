@@ -63,7 +63,7 @@ public class MatListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Setup any handles to view objects here
 
-        // neues Material erstellen
+        // FAB neues Material erstellen
         FloatingActionButton fabAddItem = (FloatingActionButton) view.findViewById(R.id.fab_add_item);
         fabAddItem.setOnClickListener(new View.OnClickListener() {
             @Override

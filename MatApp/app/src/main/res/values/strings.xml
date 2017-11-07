@@ -3,15 +3,16 @@
 <resources>
     <string name="app_name">MatApp</string>
     <string name="btn_next">show detail</string>
-    <string name="txt_hello">Hello World2!</string>
-    <string name="det_title">Titel vom Gegenstand</string>
-    <string name="det_desc">Description of this Item</string>
+    <string name="det_title">Bezeichnung des Gegenstands</string>
+    <string name="det_title_error">Bitte Bezeichnung des Gegenstands eingeben</string>
+    <string name="det_desc">Kurzbeschrieb des Gegenstands</string>
     <string name="det_owner">Name Verantwortlicher</string>
-    <string name="det_location">Standort vom Gegenstand</string>
-    <string name="det_status">Status</string>
-    <string name="det_status_available">verfügbar</string>
-    <string name="det_status_lent">ausgeliehen</string>
-    <string name="det_status_unavailable">nicht verfügbar</string>
+    <string name="det_location">Standort des Gegenstands</string>
+    <string name="det_status">Ausleihstatus</string>
+    <string name="det_status_label">Ausleihstatus</string>
+    <string name="det_status_available">Gegenstand verfügbar</string>
+    <string name="det_status_lent">Gegenstand ausgeliehen</string>
+    <string name="det_status_unavailable">Gegenstand nicht verfügbar</string>
     <string name="det_status_prompt">bitte Status wählen</string>
 
     <string name="det_loan_sub">Informationen zur Ausleihe</string>

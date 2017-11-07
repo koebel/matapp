@@ -33,36 +33,89 @@ android:layout_height="match_parent">
             android:layout_margin="16dp"
             android:orientation="vertical">
 
+            <!--
+            <TextView
+                android:id="@+id/det_title_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textIsSelectable="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Titel" />
+            -->
+
             <EditText
+                android:id="@+id/det_title_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:id="@+id/det_title_add"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor ="?attr/colorPrimaryDark"
                 android:textStyle="bold"
                 android:text="@string/det_title" />
 
+            <!--
+            <TextView
+                android:id="@+id/det_desc_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textIsSelectable="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Beschrieb" />
+                -->
+
             <EditText
+                android:id="@+id/det_desc_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:id="@+id/det_desc_add"
                 android:text="@string/det_desc" />
 
-            <EditText
+            <!--
+            <TextView
+                android:id="@+id/det_owner_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:id="@+id/det_owner_add"
-                android:text="@string/det_owner" />
+                android:lines="1"
+                android:textIsSelectable="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Verantwortlicher" />
+                -->
 
             <EditText
+                android:id="@+id/det_owner_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:text="@string/det_owner" />
+
+            <!--
+            <TextView
+                android:id="@+id/det_location_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textIsSelectable="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Standort" />
+                -->
+
+            <EditText
                 android:id="@+id/det_location_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:text="@string/det_location" />
+
+            <TextView
+                android:id="@+id/det_status_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textIsSelectable="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/det_status_label" />
 
             <Spinner
                 android:id="@+id/det_status_add"
