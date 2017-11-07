@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,11 +36,9 @@ public class MatDetailActivity extends AppCompatActivity
     TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode, det_img,
             det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
 
-    /* Variables for Mat Detail Edit */
-    EditText det_title_edit, det_desc_edit, det_owner_edit, det_location_edit, det_gps_edit, det_barcode_edit, det_img_edit,
-            det_loan_edit, det_loan_name_edit, det_loan_contact_edit, det_loan_until_edit, det_loan_note_edit;
     Spinner det_status_edit;
     Button btn_loan, btn_return, btn_update, btn_delete;
+    FloatingActionButton fabEditItem;
     int itemId, status;
     String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
 
@@ -52,7 +49,7 @@ public class MatDetailActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_matdetail);
+        setContentView(R.layout.activity_matdetail);
 
         // binding of UI elements
         det_title = (TextView) findViewById(R.id.det_title);
@@ -89,31 +86,97 @@ public class MatDetailActivity extends AppCompatActivity
         loanUntil = intent.getExtras().getString("LOAN_UNTIL_KEY");
         loanNote = intent.getExtras().getString("LOAN_NOTE_KEY");
 
-        // attach
-        FloatingActionButton fabEditItem = (FloatingActionButton) findViewById(R.id.fab_edit_item);
+        // binding of extracted values to the UI elements
+        det_title.setText(title);
+        det_desc.setText(description);
+        det_owner.setText(owner);
+        det_location.setText(location);
+        det_loan_name.setText(loanName);
+        det_loan_contact.setText(loanContact);
+        det_loan_until.setText(loanUntil);
+        det_loan_note.setText(loanNote);
+
+        // display loan subtitle only if any of the loan attributes contains a value
+        // if (loanName.trim().length() == 0 && loanContact.trim().length() == 0 && loanUntil.trim().length() == 0 && loanNote.trim().length() == 0 )
+        String loanDetails = loanName + loanContact + loanUntil + loanNote;
+        if (loanDetails.trim().length() == 0) {
+            det_loan.setVisibility(View.GONE);
+        }
+        // hide empty fields
+        if (loanName != null && loanName.trim().length() > 0) {
+            det_loan_name.setVisibility(View.VISIBLE);
+        } else {
+            det_loan_name.setVisibility(View.GONE);
+        }
+        if (loanContact != null && loanContact.trim().length() > 0) {
+            det_loan_contact.setVisibility(View.VISIBLE);
+        } else {
+            det_loan_contact.setVisibility(View.GONE);
+        }
+        if (loanUntil != null && loanUntil.trim().length() > 0) {
+            det_loan_until.setVisibility(View.VISIBLE);
+        } else {
+            det_loan_until.setVisibility(View.GONE);
+        }
+        if (loanNote != null && loanNote.trim().length() > 0) {
+            det_loan_note.setVisibility(View.VISIBLE);
+        } else {
+            det_loan_note.setVisibility(View.GONE);
+        }
+
+        // status dependent bindings & visibility settings
+        // det_status: transform status value into text variable
+        // buttons: show/hide depending on status
+        if (status == Material.STATUS_AVAILABLE) {
+            det_status.setText(R.string.det_status_available);
+            btn_loan.setVisibility(View.VISIBLE);
+            btn_return.setVisibility(View.GONE);
+        }
+
+        else if (status == Material.STATUS_LENT) {
+            det_status.setText(R.string.det_status_lent);
+            btn_loan.setVisibility(View.GONE);
+            btn_return.setVisibility(View.VISIBLE);
+        }
+
+        // 2 = material nicht verfügbar (default)
+        else {
+            det_status.setText(R.string.det_status_unavailable);
+            btn_loan.setVisibility(View.GONE);
+            btn_return.setVisibility(View.GONE);
+        }
+
+        // edit Item FAB
+        // on click all attributes of current item are passed on to the edit material activity
+        fabEditItem = (FloatingActionButton) findViewById(R.id.fab_edit_item);
         fabEditItem.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                Context context = v.getContext();
+
+                // put extras into intent to pass them on to the Material Detail
+                Intent intent = new Intent(context, MatEditActivity.class);
+                intent.putExtra("ID_KEY", itemId);
+                intent.putExtra("TITLE_KEY", title);
+                intent.putExtra("DESCRIPTION_KEY", description);
+                intent.putExtra("OWNER_KEY", owner);
+                intent.putExtra("LOCATION_KEY", location);
+                intent.putExtra("STATUS_KEY", status);
+                intent.putExtra("GPS_KEY", gps);
+                intent.putExtra("BARCODE_KEY", barcode);
+                intent.putExtra("IMAGE_KEY", img);
+                intent.putExtra("LOAN_NAME_KEY", loanName);
+                intent.putExtra("LOAN_CONTACT_KEY", loanContact);
+                intent.putExtra("LOAN_UNTIL_KEY", loanUntil);
+                intent.putExtra("LOAN_NOTE_KEY", loanNote);
+
+                // start Material Edit Activity
+                context.startActivity(intent);
+
                 // change view
                 setContentView(R.layout.fragment_mat_edit);
             }
         });
-
-        /*
-        FloatingActionButton fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
-        fabAddImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO add image
-                Context context = getApplicationContext();
-                CharSequence text = "Bild hinzufügen";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        });
-        */
 
         // attach AlertDialog to Delete Button
         // and pass the item's uniqueId and title on to the AlertDialog
@@ -169,69 +232,6 @@ public class MatDetailActivity extends AppCompatActivity
         });
         */
 
-        // binding of extracted values to the UI elements
-        det_title.setText(title);
-        det_desc.setText(description);
-        det_owner.setText(owner);
-        det_location.setText(location);
-        det_loan.setText(R.string.det_loan_sub);
-        det_loan_name.setText(loanName);
-        det_loan_contact.setText(loanContact);
-        det_loan_until.setText(loanUntil);
-        det_loan_note.setText(loanNote);
-
-        // status dependent bindings & visibility settings
-        // det_status: transform status value into text variable
-        // buttons: show/hide depending on status
-        // loan: show/hide section
-        if (status == Material.STATUS_AVAILABLE) {
-            det_status.setText(R.string.det_status_available);
-            btn_loan.setVisibility(View.VISIBLE);
-            btn_return.setVisibility(View.GONE);
-
-            det_loan.setVisibility(View.GONE);
-            det_loan_name.setVisibility(View.GONE);
-            det_loan_contact.setVisibility(View.GONE);
-            det_loan_until.setVisibility(View.GONE);
-            det_loan_note.setVisibility(View.GONE);
-        }
-
-        else if (status == Material.STATUS_LENT) {
-            det_status.setText(R.string.det_status_lent);
-            btn_loan.setVisibility(View.GONE);
-            btn_return.setVisibility(View.VISIBLE);
-
-            // display only if not empty
-            if(loanName != null && loanName.length() == 0) {
-                det_loan_name.setVisibility(View.GONE);
-            }
-            if(loanContact != null && loanContact.length() == 0) {
-                det_loan_contact.setVisibility(View.GONE);
-            }
-            if(loanUntil != null && loanUntil.length() == 0) {
-                det_loan_contact.setVisibility(View.GONE);
-            }
-            if(loanNote != null && loanNote.length() == 0) {
-                det_loan_note.setVisibility(View.GONE);
-            }
-        }
-
-        // 2 = material nicht verfügbar (default)
-        else {
-            det_status.setText(R.string.det_status_unavailable);
-            btn_loan.setVisibility(View.GONE);
-            btn_return.setVisibility(View.GONE);
-            //btn_loan.setVisibility(View.INVISIBLE);
-            //btn_return.setVisibility(View.INVISIBLE);
-
-            det_loan.setVisibility(View.GONE);
-            det_loan_name.setVisibility(View.GONE);
-            det_loan_contact.setVisibility(View.GONE);
-            det_loan_until.setVisibility(View.GONE);
-            if(loanNote != null && loanNote.length() == 0) {
-                det_loan_note.setVisibility(View.GONE);
-            }
-        }
     }
 
     public void onEditItem(View view) {

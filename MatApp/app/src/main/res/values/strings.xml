@@ -34,9 +34,9 @@
 
     <string name="det_loan_sub">Informationen zur Ausleihe</string>
     <string name="det_loan_name">Ausgeliehen an</string>
-    <string name="det_loan_contact">Kontaktdaten</string>
+    <string name="det_loan_contact">Kontaktdaten (Mail oder Mobile)</string>
     <string name="det_loan_until">voraussichtlich ausgeliehen bis </string>
-    <string name="det_loan_note">Notiz zur Ausleihe </string>
+    <string name="det_loan_note">Notiz zur Ausleihe hinzufügen</string>
 
     <string name="link_gps">GPS Position</string>
     <string name="link_barcode">Barcode hinzufügen</string>

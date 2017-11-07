@@ -64,6 +64,15 @@
                     android:id="@+id/det_location_edit"
                     android:text="@string/det_location" />
 
+                <TextView
+                    android:id="@+id/det_status_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_status_label" />
+
                 <Spinner
                     android:id="@+id/det_status_edit"
                     android:layout_width="match_parent"
