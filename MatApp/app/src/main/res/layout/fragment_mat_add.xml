@@ -73,47 +73,6 @@ android:layout_height="match_parent">
                 android:prompt="@string/det_status_prompt"
                 android:spinnerMode="dropdown" />
 
-            <!--
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:id="@+id/det_loan"
-                android:text="@string/det_loan_sub" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:id="@+id/det_loan_name_add"
-                android:text="@string/det_loan_name" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:id="@+id/det_loan_contact_add"
-                android:text="@string/det_loan_contact" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:id="@+id/det_loan_until_add"
-                android:text="@string/det_loan_until" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:ems="4"
-                android:inputType="textMultiLine"
-                android:id="@+id/det_loan_note_add"
-                android:text="@string/det_loan_note" />
-                -->
-
             <Button
                 android:id="@+id/btn_create"
                 android:layout_width="match_parent"
@@ -149,7 +108,7 @@ android:layout_height="match_parent">
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:clickable="true"
-    android:onClick="onEditItem"
+    android:onClick="onAddImg"
     android:src="@drawable/ic_camera_alt_white_24dp"
     app:layout_anchor="@id/viewPic"
     app:layout_anchorGravity="bottom|right|end"/>

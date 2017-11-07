@@ -1,5 +1,6 @@
 package com.matapp.matapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -10,8 +11,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.matapp.matapp.fragments.HomeFragment;
@@ -231,6 +234,22 @@ public class MainActivity extends AppCompatActivity {
         mi.setChecked(true);
         // Set action bar title
         setTitle(mi.getTitle());
+    }
+
+    // Material hinzufügen
+    public void onAddItem(View view) {
+        Log.d("main", "halli hallo");
+
+/*        Context context = getApplicationContext();
+        CharSequence text = "Artikel erstellen";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        */
+
+        Intent intent = new Intent(getApplicationContext(), MatAddActivity.class);
+        startActivity(intent);
     }
 
 }

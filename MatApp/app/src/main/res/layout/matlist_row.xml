@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/row_mat_item"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingLeft="12dp"
-    android:paddingTop="6dp"
-    android:id="@+id/row_mat_item">
+    android:paddingTop="6dp">
 
     <ImageButton
         android:id="@+id/row_mat_img"
@@ -15,33 +15,33 @@
         android:icon="@drawable/material_placeholder" />
 
     <TextView
+        android:id="@+id/row_mat_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/row_mat_title"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textStyle="bold"
-        android:textColor ="?attr/colorPrimaryDark"
-        android:gravity="left"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:layout_toRightOf="@+id/row_mat_img"
         android:layout_alignParentTop="true"
-        android:paddingTop="8dp"
+        android:layout_toRightOf="@+id/row_mat_img"
+        android:ellipsize="marquee"
+        android:gravity="left"
         android:paddingBottom="2dp"
         android:paddingLeft="12dp"
-        android:text="Title of the Item" />
+        android:paddingTop="8dp"
+        android:singleLine="true"
+        android:text="Title of the Item"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/row_mat_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/row_mat_desc"
-        android:gravity="left"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:layout_toRightOf="@+id/row_mat_img"
         android:layout_below="@+id/row_mat_title"
+        android:layout_toRightOf="@+id/row_mat_img"
+        android:ellipsize="marquee"
+        android:gravity="left"
         android:paddingBottom="12dp"
         android:paddingLeft="12dp"
+        android:singleLine="true"
         android:text="Short description of the Item..." />
 
 </RelativeLayout>

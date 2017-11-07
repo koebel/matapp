@@ -29,7 +29,7 @@ import java.util.List;
  * Created by kathrinkoebel on 25.10.17.
  */
 
-public class MatListFragment extends Fragment implements MatAddAlertDialogFragment.MatAddDialogListener {
+public class MatListFragment extends Fragment {
 
     public List<Material> materials;
 
@@ -45,14 +45,14 @@ public class MatListFragment extends Fragment implements MatAddAlertDialogFragme
         View view = inflater.inflate(R.layout.fragment_matlist, parent, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_matlist);
-        recyclerViewLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
         initializeData();
         recyclerViewAdapter = new RecyclerAdapter(materials);
         // if size of recycler view does not change add setHasFixedSize for better performance
         // recyclerView.setHasFixedSize(true);
 
+        recyclerViewLayoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(recyclerViewLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
         return view;
     }
@@ -64,29 +64,26 @@ public class MatListFragment extends Fragment implements MatAddAlertDialogFragme
         // Setup any handles to view objects here
 
         FloatingActionButton fabAddItem = (FloatingActionButton) view.findViewById(R.id.fab_add_item);
-        // set position of the fab
-        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) fabAddItem.getLayoutParams();
-        lp.gravity = Gravity.END;
-        lp.gravity = Gravity.BOTTOM;
-        fabAddItem.setLayoutParams(lp);
+
 
         fabAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO korrekte inmplementation von Material hinzufügen!!!
-                /*
-                Intent intent = new Intent(getContext(), MatAddActivity.class);
+                Intent intent = new Intent(getActivity(), MatAddActivity.class);
                 startActivity(intent);
-                */
 
+                /*
                 Context context = getContext();
                 CharSequence text = "Artikel erstellen";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                */
             }
         });
+
     }
 
     // This method creates an ArrayList that contains some Dummy Material objects
@@ -130,18 +127,5 @@ public class MatListFragment extends Fragment implements MatAddAlertDialogFragme
         if (foundMaterial != null && materials.contains(foundMaterial)) {
             materials.remove(foundMaterial);
         }
-    }
-
-    /* Implementation of MatAddDialogListener */
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        // TODO delete Material with this id
-        // deleteMaterial(id);
-        dialog.dismiss();
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        dialog.dismiss();
     }
 }

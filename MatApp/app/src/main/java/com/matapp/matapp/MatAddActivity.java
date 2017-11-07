@@ -24,8 +24,7 @@ import com.matapp.matapp.other.Material;
 public class MatAddActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Add */
-    EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode, det_img,
-            det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
+    EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode, det_img;
 
     Spinner det_status;
 
@@ -40,7 +39,7 @@ public class MatAddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_matdetail);
+        setContentView(R.layout.fragment_mat_add);
 
         det_title = (EditText) findViewById(R.id.det_title_add);
         det_desc = (EditText) findViewById(R.id.det_desc_add);

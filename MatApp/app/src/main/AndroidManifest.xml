@@ -36,6 +36,14 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity android:name=".MatAddActivity"
+            android:parentActivityName=".MainActivity" >
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
         <activity android:name=".AnyOrientationCaptureActivity"
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"

@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
-import com.matapp.matapp.fragments.MatListFragment;
 import com.matapp.matapp.other.Material;
 
 public class MatListDetailActivity extends AppCompatActivity implements MatDeleteAlertDialogFragment.MatDeleteDialogListener {
