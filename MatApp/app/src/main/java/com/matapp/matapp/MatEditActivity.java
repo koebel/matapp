@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.matapp.matapp.other.Material;
+
 
 /**
  *
@@ -29,7 +31,7 @@ public class MatEditActivity extends AppCompatActivity {
     Spinner det_status;
     int itemId, status;
     String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
-    Button btn_update, btn_delete;
+    Button btn_update, btn_cancel;
     FloatingActionButton fabAddImg;
 
     Intent intent;
@@ -38,7 +40,7 @@ public class MatEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_mat_edit);
+        setContentView(R.layout.activity_mat_edit);
 
         // binding of UI elements
         det_title = (EditText) findViewById(R.id.det_title_edit);
@@ -53,7 +55,7 @@ public class MatEditActivity extends AppCompatActivity {
         det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
 
         btn_update = (Button) findViewById(R.id.btn_update);
-        btn_delete = (Button) findViewById(R.id.btn_delete_material);
+        btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
         // Get the Intent that started this activity and extract values
         intent = this.getIntent();
@@ -183,17 +185,19 @@ public class MatEditActivity extends AppCompatActivity {
             }
         });
 
+
         // Cancel Button:
         // return to Material Detail view without making any changes
-        btn_update.setOnClickListener(new View.OnClickListener() {
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Änderungen wurde verworfen", Toast.LENGTH_SHORT).show();
-
+                // this.finish();
                 // TODO return to Material Detail
                 // passing on intent with material details
                 // or simulating Back button?
             }
         });
+
 
         // add Image FAB
         fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
@@ -207,4 +211,14 @@ public class MatEditActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*
+    public void onCancel(View view) {
+        this.finish();
+    }
+    */
+
+
+
+
 }

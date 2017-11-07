@@ -37,7 +37,7 @@ public class MatAddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_mat_add);
+        setContentView(R.layout.activity_mat_add);
 
         // binding of UI elements
         det_title = (EditText) findViewById(R.id.det_title_add);

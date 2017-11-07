@@ -1,5 +1,6 @@
 package com.matapp.matapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -37,7 +38,7 @@ public class MatDetailActivity extends AppCompatActivity
             det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
 
     Spinner det_status_edit;
-    Button btn_loan, btn_return, btn_update, btn_delete;
+    Button btn_loan, btn_return, btn_delete;
     FloatingActionButton fabEditItem;
     int itemId, status;
     String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
@@ -65,7 +66,6 @@ public class MatDetailActivity extends AppCompatActivity
 
         btn_loan = (Button) findViewById(R.id.btn_loan);
         btn_return = (Button) findViewById(R.id.btn_return);
-        //btn_update = (Button) findViewById(R.id.btn_update);
         btn_delete = (Button) findViewById(R.id.btn_delete_material);
 
         // Get the Intent that started this activity and extract values
@@ -174,7 +174,7 @@ public class MatDetailActivity extends AppCompatActivity
                 context.startActivity(intent);
 
                 // change view
-                setContentView(R.layout.fragment_mat_edit);
+                setContentView(R.layout.activity_mat_edit);
             }
         });
 
@@ -191,19 +191,6 @@ public class MatDetailActivity extends AppCompatActivity
             }
         });
 
-        // attach AlertDialog to Return Button
-        btn_return.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO implement Return Item
-                Context context = getApplicationContext();
-                CharSequence text = "Artikel zurückgeben";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        });
-
         // attach AlertDialog to Loan Button
         btn_loan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -216,33 +203,29 @@ public class MatDetailActivity extends AppCompatActivity
                 toast.show();
             }
         });
-
-        /*
-        // attach AlertDialog to Mat Loan Button
-        btn_update.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO implement save changes
-                Context context = getApplicationContext();
-                CharSequence text = "Änderungen speichern";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        });
-        */
-
     }
 
-    public void onEditItem(View view) {
-        Context context = getApplicationContext();
-        CharSequence text = "edit this Material";
-        int duration = Toast.LENGTH_SHORT;
+    // Return Button
+    // change status of item and reset loan attributes
+    public void onReturnItem(View view) {
+        this.status = Material.STATUS_AVAILABLE;
+        this.loanName = "";
+        this.loanContact = "";
+        this.loanUntil = "";
+        this.loanNote = "";
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        // TODO save changes into DB
+
+        // reload this Activity
+        Intent intent = this.getIntent();
+        intent.putExtra("STATUS_KEY", this.status);
+        intent.putExtra("LOAN_NAME_KEY", this.loanName);
+        intent.putExtra("LOAN_CONTACT_KEY", this.loanContact);
+        intent.putExtra("LOAN_UNTIL_KEY", this.loanUntil);
+        intent.putExtra("LOAN_NOTE_KEY", this.loanNote);
+        startActivity(intent);
     }
-
+    
 
     /* Implementation of MatDeleteDialogListener */
     @Override
