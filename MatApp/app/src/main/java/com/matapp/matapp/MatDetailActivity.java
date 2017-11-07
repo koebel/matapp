@@ -1,6 +1,5 @@
 package com.matapp.matapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -36,8 +35,6 @@ public class MatDetailActivity extends AppCompatActivity
     /* Variables for Mat Detail */
     TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode, det_img,
             det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
-
-    Spinner det_status_edit;
     Button btn_loan, btn_return, btn_delete;
     FloatingActionButton fabEditItem;
     int itemId, status;
@@ -139,7 +136,7 @@ public class MatDetailActivity extends AppCompatActivity
             btn_return.setVisibility(View.VISIBLE);
         }
 
-        // 2 = material nicht verfügbar (default)
+        // material nicht verfügbar
         else {
             det_status.setText(R.string.det_status_unavailable);
             btn_loan.setVisibility(View.GONE);
@@ -194,13 +191,9 @@ public class MatDetailActivity extends AppCompatActivity
         // attach AlertDialog to Loan Button
         btn_loan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // TODO implement borrow Item
-                Context context = getApplicationContext();
-                CharSequence text = "Artikel ausleihen";
-                int duration = Toast.LENGTH_SHORT;
+                // TODO implement borrow Item Popup
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                Toast.makeText(getApplicationContext(), "Artikel ausleihen", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -225,7 +218,7 @@ public class MatDetailActivity extends AppCompatActivity
         intent.putExtra("LOAN_NOTE_KEY", this.loanNote);
         startActivity(intent);
     }
-    
+
 
     /* Implementation of MatDeleteDialogListener */
     @Override

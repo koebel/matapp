@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.matapp.matapp.fragments.MatListFragment;
 import com.matapp.matapp.other.Material;
 
 
@@ -53,49 +54,6 @@ public class MatAddActivity extends AppCompatActivity {
         // there are no values passed into this activity
         Intent intent = this.getIntent();
 
-        // attach AlertDialog to Mat Delete Button
-        btn_create.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // get Content from Input fields
-                // if fields contain Helpertext reset to empty String
-                title = det_title.getText().toString();
-
-                if (title.equals(getText(R.string.det_title).toString())) {
-                    title = "";
-                }
-
-                if (title.trim().length() == 0) {
-                    // TODO: to something, title shouldn't be empty!!!
-                    // don't allow material to be saved unless there is a valid title
-                    {
-                        Toast.makeText(getApplicationContext(), R.string.det_title_error, Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                description = det_desc.getText().toString();
-                if (description.equals(getText(R.string.det_desc).toString())) {
-                    description = "";
-                }
-                owner = det_owner.getText().toString();
-                if (owner.equals(getText(R.string.det_owner).toString())) {
-                    owner = "";
-                }
-                location = det_location.getText().toString();
-                if (location.equals(getText(R.string.det_location).toString())) {
-                    location = "";
-                }
-                status = det_status.getSelectedItemPosition();
-
-                Material newMaterial = new Material(title, description, owner, location, status);
-
-                // TODO save newMaterial
-                Toast.makeText(getApplicationContext(), "Gegenstand wurde gespeichert", Toast.LENGTH_SHORT).show();
-
-                // TODO make certain fields (e.g. Title) required?
-                // TODO load Material Detail or MatList?!?
-            }
-        });
-
         // add Image FAB
         fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
         fabAddImg.setOnClickListener(new View.OnClickListener() {
@@ -105,13 +63,66 @@ public class MatAddActivity extends AppCompatActivity {
                 // TODO add image
                 // same as update image on Edit Material?!?
 
-                Context context = getApplicationContext();
-                CharSequence text = "Bild hinzufügen";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                Toast.makeText(getApplicationContext(), "Bild hinzufügen", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    // create new Material
+    public void onCreateItem (View view){
+        // get Content from Input fields
+        // if fields contain Helpertext reset to empty String
+        title = det_title.getText().toString();
+
+        if (title.equals(getText(R.string.det_title).toString())) {
+            title = "";
+        }
+
+        if (title.trim().length() == 0) {
+            // TODO make certain fields (e.g. Title) required?
+            // do something, title shouldn't be empty!!!
+            // don't allow material to be saved unless there is a valid title
+            {
+                Toast.makeText(getApplicationContext(), R.string.det_title_error, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        description = det_desc.getText().toString();
+        if (description.equals(getText(R.string.det_desc).toString())) {
+            description = "";
+        }
+        owner = det_owner.getText().toString();
+        if (owner.equals(getText(R.string.det_owner).toString())) {
+            owner = "";
+        }
+        location = det_location.getText().toString();
+        if (location.equals(getText(R.string.det_location).toString())) {
+            location = "";
+        }
+        status = det_status.getSelectedItemPosition();
+
+        // create new Material Object
+        Material newMat = new Material(title, description, owner, location, status);
+
+        // TODO save newMat into DB!!!
+
+        // load Mat Detail activity
+        Intent intent = new Intent(this, MatDetailActivity.class);
+        intent.putExtra("ID_KEY", newMat.getUniqueId());
+        intent.putExtra("TITLE_KEY", newMat.getTitle());
+        intent.putExtra("DESCRIPTION_KEY", newMat.getDescription());
+        intent.putExtra("OWNER_KEY", newMat.getOwner());
+        intent.putExtra("LOCATION_KEY", newMat.getLocation());
+        intent.putExtra("STATUS_KEY", newMat.getStatus());
+        intent.putExtra("GPS_KEY", newMat.getGps());
+        intent.putExtra("BARCODE_KEY", newMat.getBarcode());
+        intent.putExtra("IMAGE_KEY", newMat.getImg());
+        intent.putExtra("LOAN_NAME_KEY", newMat.getLoanName());
+        intent.putExtra("LOAN_CONTACT_KEY", newMat.getLoanContact());
+        intent.putExtra("LOAN_UNTIL_KEY", newMat.getLoanUntil());
+        intent.putExtra("LOAN_NOTE_KEY", newMat.getLoanNote());
+
+        // start Material Detail Activity
+        startActivity(intent);
     }
 }
