@@ -28,6 +28,7 @@ public class Material {
     public int status;
     public String barcode;
     public String img;
+    public String thumb;
     public String loan_name;
     public String loan_contact;
     public String loan_until;
@@ -45,6 +46,7 @@ public class Material {
         this.status = STATUS_AVAILABLE;
         this.barcode = "";
         this.img = "";
+        this.thumb = "";
         this.loan_name = "";
         this.loan_contact = "";
         this.loan_until = "";
@@ -62,6 +64,7 @@ public class Material {
         this.gps = "";
         this.barcode = "";
         this.img = "";
+        this.thumb = "";
         this.loan_name = "";
         this.loan_contact = "";
         this.loan_until = "";
@@ -80,6 +83,7 @@ public class Material {
         this.gps = gps;
         this.barcode = barcode;
         this.img = img;
+        this.thumb = makeThumb(img);
         this.loan_name = loan_name;
         this.loan_contact = loan_contact;
         this.loan_until = loan_until;
@@ -196,5 +200,16 @@ public class Material {
     public static synchronized int createUniqueId()
     {
         return idCounter++;
+    }
+
+
+    public String makeThumb(String img) {
+
+        // TODO resize image to thumbnail size (64 x 64dp)
+        // https://stackoverflow.com/questions/35195713/re-sizing-an-image-which-in-base64-format-and-converting-to-base64-again-in-java
+        // https://www.playframework.com/documentation/1.0/api/play/libs/Images.html
+        String thumb = new String("this is a placeholder for the thumbnail size image");
+
+        return thumb;
     }
 }
