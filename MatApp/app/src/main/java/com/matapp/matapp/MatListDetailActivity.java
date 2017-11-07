@@ -17,7 +17,21 @@ import android.widget.Toast;
 import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
 import com.matapp.matapp.other.Material;
 
-public class MatListDetailActivity extends AppCompatActivity implements MatDeleteAlertDialogFragment.MatDeleteDialogListener {
+
+/**
+ *
+ * This activity is used to display the details of a Material item.
+ * Depending on its status, an item can be lent or returned through this activity.
+ * This activity also allows to delete items and pass them on to MatEditActivity
+ * for further modification.
+ *
+ * Created by kathrinkoebel on 07.11.17.
+ *
+ **/
+
+
+public class MatListDetailActivity extends AppCompatActivity
+        implements MatDeleteAlertDialogFragment.MatDeleteDialogListener {
 
     /* Variables for Mat Detail */
     TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode, det_img,
@@ -27,21 +41,20 @@ public class MatListDetailActivity extends AppCompatActivity implements MatDelet
     EditText det_title_edit, det_desc_edit, det_owner_edit, det_location_edit, det_gps_edit, det_barcode_edit, det_img_edit,
             det_loan_edit, det_loan_name_edit, det_loan_contact_edit, det_loan_until_edit, det_loan_note_edit;
     Spinner det_status_edit;
-
     Button btn_loan, btn_return, btn_update, btn_delete;
-
-    int currentItemID, status;
+    int itemId, status;
     String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
 
     FragmentManager fm = getSupportFragmentManager();
 
 
-
+    /* Lifecycle Methods */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_matdetail);
 
+        // binding of UI elements
         det_title = (TextView) findViewById(R.id.det_title);
         det_desc = (TextView) findViewById(R.id.det_desc);
         det_owner = (TextView) findViewById(R.id.det_owner);
@@ -58,11 +71,11 @@ public class MatListDetailActivity extends AppCompatActivity implements MatDelet
         //btn_update = (Button) findViewById(R.id.btn_update);
         btn_delete = (Button) findViewById(R.id.btn_delete_material);
 
-        // Get the Intent that started this activity and extract the string
+        // Get the Intent that started this activity and extract values
         Intent intent = this.getIntent();
 
         // receive Extras
-        currentItemID = intent.getExtras().getInt("ID_KEY");
+        itemId = intent.getExtras().getInt("ID_KEY");
         title = intent.getExtras().getString("TITLE_KEY");
         description = intent.getExtras().getString("DESCRIPTION_KEY");
         owner = intent.getExtras().getString("OWNER_KEY");
@@ -102,19 +115,20 @@ public class MatListDetailActivity extends AppCompatActivity implements MatDelet
         });
         */
 
-        // attach AlertDialog to Mat Delete Button
+        // attach AlertDialog to Delete Button
+        // and pass the item's uniqueId and title on to the AlertDialog
         btn_delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MatDeleteAlertDialogFragment alertDialog = new MatDeleteAlertDialogFragment();
                 Bundle args = new Bundle();
-                args.putInt("ID", currentItemID);
+                args.putInt("ID", itemId);
                 args.putString("TITLE", title);
                 alertDialog.setArguments(args);
                 alertDialog.show(fm, "MatDeleteAlertDialogFragment");
             }
         });
 
-        // attach AlertDialog to Mat Return Button
+        // attach AlertDialog to Return Button
         btn_return.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO implement Return Item
@@ -127,7 +141,7 @@ public class MatListDetailActivity extends AppCompatActivity implements MatDelet
             }
         });
 
-        // attach AlertDialog to Mat Loan Button
+        // attach AlertDialog to Loan Button
         btn_loan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO implement borrow Item
@@ -155,7 +169,7 @@ public class MatListDetailActivity extends AppCompatActivity implements MatDelet
         });
         */
 
-        // Bind
+        // binding of extracted values to the UI elements
         det_title.setText(title);
         det_desc.setText(description);
         det_owner.setText(owner);
@@ -170,7 +184,6 @@ public class MatListDetailActivity extends AppCompatActivity implements MatDelet
         // det_status: transform status value into text variable
         // buttons: show/hide depending on status
         // loan: show/hide section
-
         if (status == Material.STATUS_AVAILABLE) {
             det_status.setText(R.string.det_status_available);
             btn_loan.setVisibility(View.VISIBLE);
@@ -220,8 +233,7 @@ public class MatListDetailActivity extends AppCompatActivity implements MatDelet
             }
         }
     }
-
-
+    
     public void onEditItem(View view) {
         Context context = getApplicationContext();
         CharSequence text = "edit this Material";
@@ -229,25 +241,6 @@ public class MatListDetailActivity extends AppCompatActivity implements MatDelet
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-    }
-
-    public void onDeleteItem() {
-        // TODO  Delete
-        // if yes, delete Item and return to overview
-        Context context = getApplicationContext();
-        CharSequence text = "Artikel löschen";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-
-    public int getCurrentItemID() {
-        return currentItemID;
-    }
-
-    public void setCurrentItemID(int currentItemID) {
-        this.currentItemID = currentItemID;
     }
 
 

@@ -1,6 +1,5 @@
 package com.matapp.matapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -11,17 +10,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.matapp.matapp.fragments.HomeFragment;
 import com.matapp.matapp.fragments.LogoutFragment;
 import com.matapp.matapp.fragments.MatListFragment;
-import com.matapp.matapp.fragments.SettingsFragment;
-import com.matapp.matapp.fragments.UsersFragment;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -136,15 +130,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-        // The action bar home/up action should open or close the drawer.
-        /*
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawer.openDrawer(GravityCompat.START);
-                return true;
-        }
-        */
     }
 
     // `onPostCreate` called when activity start-up is complete after `onStart()`

@@ -13,24 +13,25 @@ import android.widget.Toast;
 
 import com.matapp.matapp.other.Material;
 
+
 /**
+ *
+ * This activity is used to add new Materials to the app.
+ *
  * Created by kathrinkoebel on 07.11.17.
- */
+ *
+ **/
 
 public class MatAddActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Add */
     EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode, det_img;
-
     Spinner det_status;
-
     int status;
-
     String title, description, owner, location, gps, barcode, img;
-
     Button btn_create, btn_delete;
-
     FloatingActionButton fabAddImg;
+
 
     /* Lifecycle Methods */
     @Override
@@ -38,21 +39,18 @@ public class MatAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_mat_add);
 
+        // binding of UI elements
         det_title = (EditText) findViewById(R.id.det_title_add);
         det_desc = (EditText) findViewById(R.id.det_desc_add);
         det_owner = (EditText) findViewById(R.id.det_owner_add);
         det_location = (EditText) findViewById(R.id.det_location_add);
         det_status = (Spinner) findViewById(R.id.det_status_add);
 
-        /*
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.det_status_dropdown, null);
-        det_status.setAdapter(adapter);
-        */
-
         btn_create = (Button) findViewById(R.id.btn_create);
         btn_delete = (Button) findViewById(R.id.btn_delete_material);
 
-        // Get the Intent that started this activity and extract the string
+        // Get the Intent that started this activity (and extract values)
+        // there are no values passed into this activity
         Intent intent = this.getIntent();
 
         // attach AlertDialog to Mat Delete Button
@@ -98,7 +96,7 @@ public class MatAddActivity extends AppCompatActivity {
             }
         });
 
-        // FAB add Image
+        // add Image FAB
         fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
         fabAddImg.setOnClickListener(new View.OnClickListener() {
             @Override

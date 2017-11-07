@@ -43,8 +43,6 @@ public class LogoutFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
-
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -85,7 +83,6 @@ public class LogoutFragment extends Fragment {
                                 }
                             }
                         });
-
 
             }
         });

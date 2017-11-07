@@ -6,7 +6,6 @@ package com.matapp.matapp.other;
  */
 
 
-
 public class Material {
     private static int idCounter = 0;
     public static final int STATUS_AVAILABLE = 0;
