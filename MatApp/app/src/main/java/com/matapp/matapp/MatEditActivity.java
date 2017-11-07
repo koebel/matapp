@@ -55,7 +55,7 @@ public class MatEditActivity extends AppCompatActivity {
         det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
 
         btn_update = (Button) findViewById(R.id.btn_update);
-        btn_cancel = (Button) findViewById(R.id.btn_cancel);
+        // btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
         // Get the Intent that started this activity and extract values
         intent = this.getIntent();
@@ -185,20 +185,6 @@ public class MatEditActivity extends AppCompatActivity {
             }
         });
 
-
-        // Cancel Button:
-        // return to Material Detail view without making any changes
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Änderungen wurde verworfen", Toast.LENGTH_SHORT).show();
-                // this.finish();
-                // TODO return to Material Detail
-                // passing on intent with material details
-                // or simulating Back button?
-            }
-        });
-
-
         // add Image FAB
         fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
         fabAddImg.setOnClickListener(new View.OnClickListener() {
@@ -212,11 +198,31 @@ public class MatEditActivity extends AppCompatActivity {
         });
     }
 
-    /*
+    // Cancel Button:
+    // return to Material Detail view without making any changes
     public void onCancel(View view) {
-        this.finish();
+        
+        // create intent with original values passed on to this view
+        // and load Mat Detail activity
+        Intent intent = new Intent(this, MatDetailActivity.class);
+        intent.putExtra("ID_KEY", this.itemId);
+        intent.putExtra("TITLE_KEY", this.title);
+        intent.putExtra("DESCRIPTION_KEY", this.description);
+        intent.putExtra("OWNER_KEY", this.owner);
+        intent.putExtra("LOCATION_KEY", this.location);
+        intent.putExtra("STATUS_KEY", this.status);
+        intent.putExtra("GPS_KEY", this.gps);
+        intent.putExtra("BARCODE_KEY", this.barcode);
+        intent.putExtra("IMAGE_KEY", this.img);
+        intent.putExtra("LOAN_NAME_KEY", this.loanName);
+        intent.putExtra("LOAN_CONTACT_KEY", this.loanContact);
+        intent.putExtra("LOAN_UNTIL_KEY", this.loanUntil);
+        intent.putExtra("LOAN_NOTE_KEY", this.loanNote);
+
+        // start Material Detail Activity
+        startActivity(intent);
     }
-    */
+
 
 
 
