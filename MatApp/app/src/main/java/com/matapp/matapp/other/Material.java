@@ -2,16 +2,23 @@ package com.matapp.matapp.other;
 
 
 /**
+ *
+ * This class is used for creation and management of Material items.
+ *
  * Created by kathrinkoebel on 03.11.17.
+ *
  */
 
 
 public class Material {
+
+    /* static Attributes */
     private static int idCounter = 0;
     public static final int STATUS_AVAILABLE = 0;
     public static final int STATUS_LENT = 1;
     public static final int STATUS_UNAVAILABLE = 2;
 
+    /* Material Attributes */
     public int uniqueId;
     public String title;
     public String description;
@@ -27,11 +34,11 @@ public class Material {
     public String loan_note;
 
 
-
-    /* Constructor */
+    /* basic Constructor */
     public Material(String title, String description){
         this.uniqueId = createUniqueId();
         this.title = title;
+        this.description = description;
         this.owner = "";
         this.location = "";
         this.gps = "";
@@ -44,6 +51,7 @@ public class Material {
         this.loan_note = "";
     }
 
+    /* Constructor for initial creation of Materials in MatAddActivity */
     public Material(String title, String description, String owner, String location, int status){
         this.uniqueId = createUniqueId();
         this.title = title;
@@ -60,7 +68,7 @@ public class Material {
         this.loan_note = "";
     }
 
-    /* full Constructor */
+    /* full Constructor for creation of Material with all attributes */
     public Material(String title, String description, String owner, String location, int status,
                     String gps, String barcode, String img, String loan_name, String loan_contact, String loan_until, String loan_note){
         this.uniqueId = createUniqueId();
@@ -78,14 +86,14 @@ public class Material {
         this.loan_note = loan_note;
     }
 
-    /* Getter & Setter */
+
+    /* Getter & Setter Methods */
     public int getUniqueId() {
         return uniqueId;
     }
 
     // no Setter for uniqueID, because the Id should never be changed.
     // in case modifictation of the Id is requested, it needs to be checked if new Id is really unique.
-
 
     public String getTitle() {
         return title;

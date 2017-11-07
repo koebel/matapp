@@ -8,24 +8,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.matapp.matapp.fragments.MatListFragment;
 import com.matapp.matapp.other.Material;
 
 import java.util.List;
 
+
 /**
+ *
+ * This class is used to create an adapter that binds Material items to the recycler view
+ * of the Material List (displaying all items).
+ * In addition, it offers an implementation of RecyclerViewHolder
+ *
  * Created by kathrinkoebel on 26.10.17.
+ *
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
 
+    /* Attributes */
     List<Material> items;
-
     public RecyclerAdapter (List<Material> items){
         this.items = items;
     }
 
-
+    /* Implementation of Adapter Methods */
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.matlist_row, parent, false);
@@ -50,14 +56,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         super.onAttachedToRecyclerView(recyclerView);
     }
 
+    /* RecyclerViewHolder implementation */
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         TextView row_mat_title;
         TextView row_mat_desc;
+
+        /* Constructor */
         public RecyclerViewHolder(View view){
             super(view);
-            row_mat_title=(TextView)view.findViewById(R.id.row_mat_title);
-            row_mat_desc=(TextView)view.findViewById(R.id.row_mat_desc);
+            row_mat_title = (TextView)view.findViewById(R.id.row_mat_title);
+            row_mat_desc = (TextView)view.findViewById(R.id.row_mat_desc);
 
+            // set listener to each list item
             itemView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -65,7 +75,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     int position = getAdapterPosition();
 
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, MatListDetailActivity.class);
+
+                    // put extras into intent to pass them on to the Material Detail
+                    Intent intent = new Intent(context, MatDetailActivity.class);
                     intent.putExtra("ID_KEY", items.get(position).getUniqueId());
                     intent.putExtra("TITLE_KEY", items.get(position).getTitle());
                     intent.putExtra("DESCRIPTION_KEY", items.get(position).getDescription());
@@ -80,12 +92,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     intent.putExtra("LOAN_UNTIL_KEY", items.get(position).getLoanUntil());
                     intent.putExtra("LOAN_NOTE_KEY", items.get(position).getLoanNote());
 
+                    // start Material Detail Activity
                     context.startActivity(intent);
                 }
             });
         }
     }
-
 }
 
 

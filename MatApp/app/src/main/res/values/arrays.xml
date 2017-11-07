@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string-array name="det_status_dropdown">
-        <item>verfügbar</item>
+        <item>@string/det_status_available</item>
         <item>ausgeliehen</item>
         <item>nicht verfügbar</item>
     </string-array>

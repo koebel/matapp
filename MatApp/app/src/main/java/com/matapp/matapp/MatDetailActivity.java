@@ -30,7 +30,7 @@ import com.matapp.matapp.other.Material;
  **/
 
 
-public class MatListDetailActivity extends AppCompatActivity
+public class MatDetailActivity extends AppCompatActivity
         implements MatDeleteAlertDialogFragment.MatDeleteDialogListener {
 
     /* Variables for Mat Detail */
@@ -233,7 +233,7 @@ public class MatListDetailActivity extends AppCompatActivity
             }
         }
     }
-    
+
     public void onEditItem(View view) {
         Context context = getApplicationContext();
         CharSequence text = "edit this Material";
