@@ -47,13 +47,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:id="@+id/det_position"
-                android:text="@string/det_position" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
                 android:id="@+id/det_desc"
                 android:text="@string/det_desc" />
 

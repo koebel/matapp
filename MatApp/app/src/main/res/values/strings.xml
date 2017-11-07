@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string name="app_name">MatApp</string>
     <string name="btn_next">show detail</string>
@@ -10,6 +12,8 @@
     <string name="det_status_available">verfügbar</string>
     <string name="det_status_lent">ausgeliehen</string>
     <string name="det_status_unavailable">nicht verfügbar</string>
+    <string name="det_status_prompt">bitte Status wählen</string>
+
     <string name="det_loan_sub">Informationen zur Ausleihe</string>
     <string name="det_loan_name">Ausgeliehen an</string>
     <string name="det_loan_contact">Kontaktdaten</string>
@@ -21,9 +25,13 @@
     <string name="link_gps">GPS Position</string>
     <string name="link_barcode">Barcode hinzufügen</string>
     <string name="btn_save">speichern</string>
-    <string name="btn_loan">Ausleihen</string>
+    <string name="btn_loan">ausleihen</string>
+    <string name="btn_create">erstellen</string>
+    <string name="btn_update">Änderungen speichern</string>
     <string name="btn_return">Rückgabe</string>
     <string name="link_delete">Artikel löschen</string>
+    <string name="link_cancel">Änderungen verwerfen</string>
+
     <string name="delete_item_title">Artikel löschen?</string>
     <string name="delete_item_text">Wollen Sie diesen Artikel wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="btn_delete">löschen</string>

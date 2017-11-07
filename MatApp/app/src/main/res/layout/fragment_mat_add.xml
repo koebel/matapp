@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/viewPic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
+        android:background="?attr/colorPrimary"
+        android:orientation="horizontal"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollViewDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4" >
+
+        <LinearLayout
+            android:id="@+id/viewDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_title_add"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor ="?attr/colorPrimaryDark"
+                android:textStyle="bold"
+                android:text="@string/det_title" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_desc_add"
+                android:text="@string/det_desc" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_owner_add"
+                android:text="@string/det_owner" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_location_add"
+                android:text="@string/det_location" />
+
+            <Spinner
+                android:id="@+id/det_status_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:entries="@array/det_status_dropdown"
+                android:prompt="@string/det_status_prompt"
+                android:spinnerMode="dropdown" />
+
+            <!--
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:id="@+id/det_loan"
+                android:text="@string/det_loan_sub" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_loan_name_add"
+                android:text="@string/det_loan_name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_loan_contact_add"
+                android:text="@string/det_loan_contact" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:id="@+id/det_loan_until_add"
+                android:text="@string/det_loan_until" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:ems="4"
+                android:inputType="textMultiLine"
+                android:id="@+id/det_loan_note_add"
+                android:text="@string/det_loan_note" />
+                -->
+
+            <Button
+                android:id="@+id/btn_create"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/matapp_button"
+                android:layout_marginTop="24dp"
+                android:onClick="onCreateItem"
+                android:text="@string/btn_create" />
+
+            <!--
+            <Button
+                android:id="@+id/btn_delete_material"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor ="?attr/colorPrimaryDark"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="left"
+                android:paddingLeft="3dp"
+                android:text="@string/link_cancel" />
+                -->
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView >
+
+</LinearLayout>
+
+<android.support.design.widget.FloatingActionButton
+    android:id="@+id/fab_add_img"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:clickable="true"
+    android:onClick="onEditItem"
+    android:src="@drawable/ic_camera_alt_white_24dp"
+    app:layout_anchor="@id/viewPic"
+    app:layout_anchorGravity="bottom|right|end"/>
+
+</android.support.design.widget.CoordinatorLayout>
+

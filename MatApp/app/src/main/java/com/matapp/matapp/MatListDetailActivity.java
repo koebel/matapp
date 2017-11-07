@@ -2,26 +2,40 @@ package com.matapp.matapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
+import com.matapp.matapp.fragments.MatListFragment;
 import com.matapp.matapp.other.Material;
 
-public class MatListDetailActivity extends AppCompatActivity {
+public class MatListDetailActivity extends AppCompatActivity implements MatDeleteAlertDialogFragment.MatDeleteDialogListener {
 
+    /* Variables for Mat Detail */
     TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode, det_img,
-            det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note, det_position;
-    Button btn_loan, btn_return, btn_delete;
+            det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
+
+    /* Variables for Mat Detail Edit */
+    EditText det_title_edit, det_desc_edit, det_owner_edit, det_location_edit, det_gps_edit, det_barcode_edit, det_img_edit,
+            det_loan_edit, det_loan_name_edit, det_loan_contact_edit, det_loan_until_edit, det_loan_note_edit;
+    Spinner det_status_edit;
+
+    Button btn_loan, btn_return, btn_update, btn_delete;
+
+    int currentItemID, status;
+    String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
 
     FragmentManager fm = getSupportFragmentManager();
 
-    int currentItemID;
 
 
     @Override
@@ -34,7 +48,6 @@ public class MatListDetailActivity extends AppCompatActivity {
         det_owner = (TextView) findViewById(R.id.det_owner);
         det_location = (TextView) findViewById(R.id.det_location);
         det_status = (TextView) findViewById(R.id.det_status);
-        det_position = (TextView) findViewById(R.id.det_position);
         det_loan = (TextView) findViewById(R.id.det_loan);
         det_loan_name = (TextView) findViewById(R.id.det_loan_name);
         det_loan_contact = (TextView) findViewById(R.id.det_loan_contact);
@@ -43,39 +56,105 @@ public class MatListDetailActivity extends AppCompatActivity {
 
         btn_loan = (Button) findViewById(R.id.btn_loan);
         btn_return = (Button) findViewById(R.id.btn_return);
+        //btn_update = (Button) findViewById(R.id.btn_update);
         btn_delete = (Button) findViewById(R.id.btn_delete_material);
-
-
 
         // Get the Intent that started this activity and extract the string
         Intent intent = this.getIntent();
 
         // receive Extras
-        //int position = intent.getExtras().getInt("POSITION_KEY");
         currentItemID = intent.getExtras().getInt("ID_KEY");
-        String title = intent.getExtras().getString("TITLE_KEY");
-        String description = intent.getExtras().getString("DESCRIPTION_KEY");
-        String owner = intent.getExtras().getString("OWNER_KEY");
-        String location = intent.getExtras().getString("LOCATION_KEY");
-        int status = intent.getExtras().getInt("STATUS_KEY");
-        String gps = intent.getExtras().getString("GPS_KEY");
-        String barcode = intent.getExtras().getString("BARCODE_KEY");
-        String img = intent.getExtras().getString("IMAGE_KEY");
-        String loanName = intent.getExtras().getString("LOAN_NAME_KEY");
-        String loanContact = intent.getExtras().getString("LOAN_CONTACT_KEY");
-        String loanUntil = intent.getExtras().getString("LOAN_UNTIL_KEY");
-        String loanNote = intent.getExtras().getString("LOAN_NOTE_KEY");
+        title = intent.getExtras().getString("TITLE_KEY");
+        description = intent.getExtras().getString("DESCRIPTION_KEY");
+        owner = intent.getExtras().getString("OWNER_KEY");
+        location = intent.getExtras().getString("LOCATION_KEY");
+        status = intent.getExtras().getInt("STATUS_KEY");
+        gps = intent.getExtras().getString("GPS_KEY");
+        barcode = intent.getExtras().getString("BARCODE_KEY");
+        img = intent.getExtras().getString("IMAGE_KEY");
+        loanName = intent.getExtras().getString("LOAN_NAME_KEY");
+        loanContact = intent.getExtras().getString("LOAN_CONTACT_KEY");
+        loanUntil = intent.getExtras().getString("LOAN_UNTIL_KEY");
+        loanNote = intent.getExtras().getString("LOAN_NOTE_KEY");
+
+        // attach
+        FloatingActionButton fabEditItem = (FloatingActionButton) findViewById(R.id.fab_edit_item);
+        fabEditItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // change view
+                setContentView(R.layout.fragment_mat_edit);
+            }
+        });
+
+        /*
+        FloatingActionButton fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
+        fabAddImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO add image
+                Context context = getApplicationContext();
+                CharSequence text = "Bild hinzufügen";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+        */
 
         // attach AlertDialog to Mat Delete Button
         btn_delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MatDeleteAlertDialogFragment alertDialog = new MatDeleteAlertDialogFragment();
                 Bundle args = new Bundle();
-                args.putInt("title", currentItemID);
+                args.putInt("ID", currentItemID);
+                args.putString("TITLE", title);
                 alertDialog.setArguments(args);
                 alertDialog.show(fm, "MatDeleteAlertDialogFragment");
             }
         });
+
+        // attach AlertDialog to Mat Return Button
+        btn_return.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO implement Return Item
+                Context context = getApplicationContext();
+                CharSequence text = "Artikel zurückgeben";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
+        // attach AlertDialog to Mat Loan Button
+        btn_loan.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO implement borrow Item
+                Context context = getApplicationContext();
+                CharSequence text = "Artikel ausleihen";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
+        /*
+        // attach AlertDialog to Mat Loan Button
+        btn_update.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO implement save changes
+                Context context = getApplicationContext();
+                CharSequence text = "Änderungen speichern";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+        */
 
         // Bind
         det_title.setText(title);
@@ -87,9 +166,6 @@ public class MatListDetailActivity extends AppCompatActivity {
         det_loan_contact.setText(loanContact);
         det_loan_until.setText(loanUntil);
         det_loan_note.setText(loanNote);
-
-        //det_position.setText(position);
-        det_position.setVisibility(View.GONE);
 
         // status dependent bindings & visibility settings
         // det_status: transform status value into text variable
@@ -114,16 +190,16 @@ public class MatListDetailActivity extends AppCompatActivity {
             btn_return.setVisibility(View.VISIBLE);
 
             // display only if not empty
-            if(loanName.length() == 0) {
+            if(loanName != null && loanName.length() == 0) {
                 det_loan_name.setVisibility(View.GONE);
             }
-            if(loanContact.length() == 0) {
+            if(loanContact != null && loanContact.length() == 0) {
                 det_loan_contact.setVisibility(View.GONE);
             }
-            if(loanUntil.length() == 0) {
+            if(loanUntil != null && loanUntil.length() == 0) {
                 det_loan_contact.setVisibility(View.GONE);
             }
-            if(loanNote.length() == 0) {
+            if(loanNote != null && loanNote.length() == 0) {
                 det_loan_note.setVisibility(View.GONE);
             }
         }
@@ -140,7 +216,7 @@ public class MatListDetailActivity extends AppCompatActivity {
             det_loan_name.setVisibility(View.GONE);
             det_loan_contact.setVisibility(View.GONE);
             det_loan_until.setVisibility(View.GONE);
-            if(loanNote.length() == 0) {
+            if(loanNote != null && loanNote.length() == 0) {
                 det_loan_note.setVisibility(View.GONE);
             }
         }
@@ -150,24 +226,6 @@ public class MatListDetailActivity extends AppCompatActivity {
     public void onEditItem(View view) {
         Context context = getApplicationContext();
         CharSequence text = "edit this Material";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-
-    public void onLendItem(View view) {
-        Context context = getApplicationContext();
-        CharSequence text = "Artikel ausleihen";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-
-    public void onReturnItem(View view) {
-        Context context = getApplicationContext();
-        CharSequence text = "Artikel zurückgeben";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
@@ -191,6 +249,20 @@ public class MatListDetailActivity extends AppCompatActivity {
 
     public void setCurrentItemID(int currentItemID) {
         this.currentItemID = currentItemID;
+    }
+
+
+    /* Implementation of MatDeleteDialogListener */
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, int id) {
+        // TODO delete Material with this id
+        // deleteMaterial(id);
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        dialog.dismiss();
     }
 
 }

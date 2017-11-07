@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.matapp.matapp.fragments.MatListFragment;
 import com.matapp.matapp.other.Material;
 
 import java.util.List;
@@ -42,7 +43,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public int getItemCount() {
         return items.size();
-        //return mat_list.length;
     }
 
     @Override
@@ -66,7 +66,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MatListDetailActivity.class);
-                    //intent.putExtra("POSITION_KEY", getAdapterPosition());
                     intent.putExtra("ID_KEY", items.get(position).getUniqueId());
                     intent.putExtra("TITLE_KEY", items.get(position).getTitle());
                     intent.putExtra("DESCRIPTION_KEY", items.get(position).getDescription());

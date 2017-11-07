@@ -36,7 +36,7 @@ public class Material {
         this.owner = "";
         this.location = "";
         this.gps = "";
-        this.status = 2;
+        this.status = STATUS_AVAILABLE;
         this.barcode = "";
         this.img = "";
         this.loan_name = "";
