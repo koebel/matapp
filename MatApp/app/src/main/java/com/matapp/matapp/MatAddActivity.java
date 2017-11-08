@@ -67,6 +67,10 @@ public class MatAddActivity extends AppCompatActivity {
 
         //formatTxt = (TextView)findViewById(R.id.scan_format);
         contentTxt = (TextView)findViewById(R.id.barcode_result);
+        String scannercontext = getIntent().getExtras().getString("codeContent",codeContent);
+        if(scannercontext != null){
+            contentTxt.setText(scannercontext);
+        }
 
         // change color of all "optional" attributes to Placeholder color
         // det_title.setTextColor(getResources().getColor(R.color.colorPlaceholder));
@@ -81,6 +85,9 @@ public class MatAddActivity extends AppCompatActivity {
         // Get the Intent that started this activity (and extract values)
         // there are no values passed into this activity
         final Intent intent = this.getIntent();
+
+
+
 
         scanning = (FloatingActionButton) findViewById(R.id.fab_add_barcode);
         scanning.setOnClickListener(new View.OnClickListener() {

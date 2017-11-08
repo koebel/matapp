@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView navigationDrawer;
 
-    private String codeFormat,codeContent;
+    String codeFormat,codeContent;
 
     private FirebaseAuth auth;
 
@@ -206,8 +206,9 @@ public class MainActivity extends AppCompatActivity {
                 codeFormat = scanningResult.getFormatName();
                 Toast.makeText(this, "Scan: " + codeContent, Toast.LENGTH_LONG).show();
 
-                Intent intent2 = new Intent(this, MatAddActivity.class);
-                startActivity(intent2);
+                Intent NewMatIntent = new Intent(this, MatAddActivity.class);
+                NewMatIntent.putExtra("codeContent",codeContent);
+                startActivity(NewMatIntent);
 
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
