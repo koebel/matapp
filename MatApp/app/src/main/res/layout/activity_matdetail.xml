@@ -18,7 +18,15 @@
             android:layout_height="match_parent"
             android:layout_weight="0.6"
             android:background="?attr/colorPrimary"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_mat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <!-- Content Section, scrollable -->
         <android.support.v4.widget.NestedScrollView

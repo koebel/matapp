@@ -3,7 +3,6 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +18,15 @@
             android:layout_height="match_parent"
             android:layout_weight="0.6"
             android:background="?attr/colorPrimary"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/img_mat_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scrollViewDetails"
@@ -49,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_desc_edit"/>
+                    android:id="@+id/det_desc_edit" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -63,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/barcode_reslt"/>
+                    android:id="@+id/barcode_result"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -109,32 +116,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_loan_name_edit"
-                    android:text="@string/det_loan_name" />
+                    android:id="@+id/det_loan_name_edit" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_loan_contact_edit"
-                    android:text="@string/det_loan_contact" />
+                    android:id="@+id/det_loan_contact_edit" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_loan_until_edit"
-                    android:text="@string/det_loan_until" />
+                    android:id="@+id/det_loan_until_edit" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:ems="4"
-                    android:inputType="textMultiLine"
-                    android:id="@+id/det_loan_note_edit"
-                    android:text="@string/det_loan_note" />
+                    android:id="@+id/det_loan_note_edit" />
 
+                <!-- Buttons -->
                 <Button
                     android:id="@+id/btn_update"
                     android:layout_width="match_parent"

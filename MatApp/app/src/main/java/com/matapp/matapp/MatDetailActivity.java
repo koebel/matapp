@@ -2,13 +2,17 @@ package com.matapp.matapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +37,12 @@ public class MatDetailActivity extends AppCompatActivity
         implements MatDeleteAlertDialogFragment.MatDeleteDialogListener {
 
     /* Variables for Mat Detail */
-    TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode, det_img,
+    TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode,
             det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Button btn_loan, btn_return, btn_delete;
     FloatingActionButton fabEditItem;
+    ImageView det_img;
+
     int itemId, status;
     String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
 
@@ -60,6 +66,7 @@ public class MatDetailActivity extends AppCompatActivity
         det_loan_contact = (TextView) findViewById(R.id.det_loan_contact);
         det_loan_until = (TextView) findViewById(R.id.det_loan_until);
         det_loan_note = (TextView) findViewById(R.id.det_loan_note);
+        det_img = (ImageView) findViewById(R.id.img_mat);
 
         btn_loan = (Button) findViewById(R.id.btn_loan);
         btn_return = (Button) findViewById(R.id.btn_return);
@@ -92,6 +99,8 @@ public class MatDetailActivity extends AppCompatActivity
         det_loan_contact.setText(loanContact);
         det_loan_until.setText(loanUntil);
         det_loan_note.setText(loanNote);
+
+        det_img.setImageBitmap(stringToBitmap(img));
 
         // display loan subtitle only if any of the loan attributes contains a value
         // if (loanName.trim().length() == 0 && loanContact.trim().length() == 0 && loanUntil.trim().length() == 0 && loanNote.trim().length() == 0 )
@@ -216,6 +225,18 @@ public class MatDetailActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    // TODO check this function
+    // https://stackoverflow.com/questions/23005948/convert-string-to-bitmap
+    public Bitmap stringToBitmap(String imgString){
+        try{
+            byte[] encode = Base64.decode(imgString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(Base64.decode(imgString,Base64.DEFAULT), 0, encode.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
 
     /* Implementation of MatDeleteDialogListener */
     @Override

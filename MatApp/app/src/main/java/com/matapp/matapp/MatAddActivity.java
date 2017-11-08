@@ -37,7 +37,7 @@ import java.io.ByteArrayOutputStream;
 public class MatAddActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Add */
-    EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode, det_img;
+    EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode;
     Spinner det_status;
     int status;
     String title, description, owner, location, gps, barcode, img, codeFormat,codeContent;
@@ -63,7 +63,7 @@ public class MatAddActivity extends AppCompatActivity {
         det_owner = (EditText) findViewById(R.id.det_owner_add);
         det_location = (EditText) findViewById(R.id.det_location_add);
         det_status = (Spinner) findViewById(R.id.det_status_add);
-        imageView = (ImageView) findViewById(R.id.showPic);
+        //imageView = (ImageView) findViewById(R.id.showPic);
 
         //formatTxt = (TextView)findViewById(R.id.scan_format);
         contentTxt = (TextView)findViewById(R.id.barcode_result);
@@ -99,9 +99,6 @@ public class MatAddActivity extends AppCompatActivity {
 
                 // TODO add image
                 // same as update image on Edit Material?!?
-                Intent picintent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(picintent,0);
-
                 Toast.makeText(getApplicationContext(), "Bild hinzufügen", Toast.LENGTH_SHORT).show();
                 // take Picture
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -118,6 +115,27 @@ public class MatAddActivity extends AppCompatActivity {
     // TODO save Image into DB!
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // super.onActivityResult(requestCode, resultCode, intent);
+
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (scanningResult != null) {
+            if(scanningResult.getContents() != null){
+                //we have a result
+                codeContent = scanningResult.getContents();
+                //codeFormat = scanningResult.getFormatName();
+
+                // formatTxt.setText("FORMAT: " + codeFormat);
+                contentTxt.setText(codeContent);
+
+            }else{
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -129,6 +147,22 @@ public class MatAddActivity extends AppCompatActivity {
             // TODO convert Bitmap into String with Base64 and downsize it
             // this not sure if this basic conversion is working...
             img = imageBitmap.toString();
+
+            /*
+        Bitmap bitmap = (Bitmap)intent.getExtras().get("intent");
+        //imageView.setImageBitmap(bitmap);
+
+        //endcode the Bitmap Image to Base 64
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArry = byteArrayOutputStream.toByteArray();
+        String encodedImage = Base64.encodeToString(byteArry,Base64.DEFAULT); //comprimiertes und konvertiertes Bild. ev.
+
+        Toast.makeText(getApplicationContext(), "Bild: " +encodedImage, Toast.LENGTH_SHORT).show();
+
+        //decode the Image from Base64 to Bitmap
+        byte[] decodedString = Base64.decode(encodedImage,Base64.DEFAULT);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString,0,decodedString.length);*/
 
             /*
             maybe use this code for Base64 conversion:
@@ -168,49 +202,6 @@ public class MatAddActivity extends AppCompatActivity {
         integrator.initiateScan();
 
     }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
-        Toast.makeText(getApplicationContext(), "Bild anzeigen", Toast.LENGTH_SHORT).show();
-
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-
-        if (scanningResult != null) {
-            if(scanningResult.getContents() != null){
-                //we have a result
-                codeContent = scanningResult.getContents();
-                //codeFormat = scanningResult.getFormatName();
-
-               // formatTxt.setText("FORMAT: " + codeFormat);
-                contentTxt.setText(codeContent);
-
-            }else{
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-            }
-        }else{
-            Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
-        /*
-        Bitmap bitmap = (Bitmap)intent.getExtras().get("intent");
-        //imageView.setImageBitmap(bitmap);
-
-        //endcode the Bitmap Image to Base 64
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArry = byteArrayOutputStream.toByteArray();
-        String encodedImage = Base64.encodeToString(byteArry,Base64.DEFAULT); //comprimiertes und konvertiertes Bild. ev.
-
-        Toast.makeText(getApplicationContext(), "Bild: " +encodedImage, Toast.LENGTH_SHORT).show();
-
-        //decode the Image from Base64 to Bitmap
-        byte[] decodedString = Base64.decode(encodedImage,Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString,0,decodedString.length);*/
-    }
-
-
 
 
     // create new Material
