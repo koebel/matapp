@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.matapp.matapp.fragments.MatListFragment;
 import com.matapp.matapp.other.Material;
 
 
@@ -31,7 +32,6 @@ public class MatEditActivity extends AppCompatActivity {
     Spinner det_status;
     int itemId, status;
     String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
-    Button btn_update, btn_cancel;
     FloatingActionButton fabAddImg;
 
     Intent intent;
@@ -53,9 +53,6 @@ public class MatEditActivity extends AppCompatActivity {
         det_loan_contact = (EditText) findViewById(R.id.det_loan_contact_edit);
         det_loan_until = (EditText) findViewById(R.id.det_loan_until_edit);
         det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
-
-        btn_update = (Button) findViewById(R.id.btn_update);
-        // btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
         // Get the Intent that started this activity and extract values
         intent = this.getIntent();
@@ -127,64 +124,6 @@ public class MatEditActivity extends AppCompatActivity {
             det_loan_note.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         }
 
-        // Update Button:
-        // store changes into DB by updating the modified Material item attributes
-        btn_update.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // get Content from Input fields
-                // if fields contain Helpertext reset to empty String
-                title = det_title.getText().toString();
-
-                if (title.equals(getText(R.string.det_title).toString())) {
-                    title = "";
-                }
-
-                if (title.trim().length() == 0) {
-                    // TODO: to something, title shouldn't be empty!!!
-                    // don't allow material to be saved unless there is a valid title
-                    // see add material for implementation of this
-                }
-
-                description = det_desc.getText().toString();
-                if (description.equals(getText(R.string.det_desc).toString())) {
-                    description = "";
-                }
-                owner = det_owner.getText().toString();
-                if (owner.equals(getText(R.string.det_owner).toString())) {
-                    owner = "";
-                }
-                location = det_location.getText().toString();
-                if (location.equals(getText(R.string.det_location).toString())) {
-                    location = "";
-                }
-                status = det_status.getSelectedItemPosition();
-
-                loanName = det_loan_name.getText().toString();
-                if (loanName.equals(getText(R.string.det_loan_name).toString())) {
-                    loanName = "";
-                }
-                loanContact = det_loan_contact.getText().toString();
-                if (loanContact.equals(getText(R.string.det_loan_contact).toString())) {
-                    loanContact = "";
-                }
-                loanUntil = det_loan_until.getText().toString();
-                if (loanUntil.equals(getText(R.string.det_loan_until).toString())) {
-                    loanUntil = "";
-                }
-                loanNote = det_loan_note.getText().toString();
-                if (loanNote.equals(getText(R.string.det_loan_note).toString())) {
-                    loanNote = "";
-                }
-
-                // TODO save changes of this material
-                // important: item should keep the same uniqueId!
-                Toast.makeText(getApplicationContext(), "Änderungen wurde gespeichert", Toast.LENGTH_SHORT).show();
-
-                // TODO make certain fields (e.g. Title) required?
-                // TODO Display Material Detail
-            }
-        });
-
         // add Image FAB
         fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
         fabAddImg.setOnClickListener(new View.OnClickListener() {
@@ -198,10 +137,82 @@ public class MatEditActivity extends AppCompatActivity {
         });
     }
 
+    // Update Button:
+    // store changes into DB by updating the modified Material item attributes
+    public void onEditItem(View v) {
+        // get Content from Input fields
+        // if fields contain Helpertext reset to empty String
+        title = det_title.getText().toString();
+
+        if (title.equals(getText(R.string.det_title).toString())) {
+            title = "";
+        }
+
+        if (title.trim().length() == 0) {
+            // TODO: to something, title shouldn't be empty!!!
+            // don't allow material to be saved unless there is a valid title
+            // see add material for implementation of this
+        }
+
+        description = det_desc.getText().toString();
+        if (description.equals(getText(R.string.det_desc).toString())) {
+            description = "";
+        }
+        owner = det_owner.getText().toString();
+        if (owner.equals(getText(R.string.det_owner).toString())) {
+            owner = "";
+        }
+        location = det_location.getText().toString();
+        if (location.equals(getText(R.string.det_location).toString())) {
+            location = "";
+        }
+        status = det_status.getSelectedItemPosition();
+
+        loanName = det_loan_name.getText().toString();
+        if (loanName.equals(getText(R.string.det_loan_name).toString())) {
+            loanName = "";
+        }
+        loanContact = det_loan_contact.getText().toString();
+        if (loanContact.equals(getText(R.string.det_loan_contact).toString())) {
+            loanContact = "";
+        }
+        loanUntil = det_loan_until.getText().toString();
+        if (loanUntil.equals(getText(R.string.det_loan_until).toString())) {
+            loanUntil = "";
+        }
+        loanNote = det_loan_note.getText().toString();
+        if (loanNote.equals(getText(R.string.det_loan_note).toString())) {
+            loanNote = "";
+        }
+
+        // TODO save changes of this material
+        // important: item should keep the same uniqueId!
+        // Toast.makeText(getApplicationContext(), "Änderungen wurde gespeichert", Toast.LENGTH_SHORT).show();
+
+        // put extras into intent to pass them on to the Material Detail
+        Intent intent = new Intent(this, MatDetailActivity.class);
+        intent.putExtra("ID_KEY", itemId);
+        intent.putExtra("TITLE_KEY", title);
+        intent.putExtra("DESCRIPTION_KEY", description);
+        intent.putExtra("OWNER_KEY", owner);
+        intent.putExtra("LOCATION_KEY", location);
+        intent.putExtra("STATUS_KEY", status);
+        intent.putExtra("GPS_KEY", gps);
+        intent.putExtra("BARCODE_KEY", barcode);
+        intent.putExtra("IMAGE_KEY", img);
+        intent.putExtra("LOAN_NAME_KEY", loanName);
+        intent.putExtra("LOAN_CONTACT_KEY", loanContact);
+        intent.putExtra("LOAN_UNTIL_KEY", loanUntil);
+        intent.putExtra("LOAN_NOTE_KEY", loanNote);
+
+        // start Material Detail Activity
+        startActivity(intent);
+    }
+
     // Cancel Button:
     // return to Material Detail view without making any changes
     public void onCancel(View view) {
-        
+
         // create intent with original values passed on to this view
         // and load Mat Detail activity
         Intent intent = new Intent(this, MatDetailActivity.class);
@@ -222,9 +233,4 @@ public class MatEditActivity extends AppCompatActivity {
         // start Material Detail Activity
         startActivity(intent);
     }
-
-
-
-
-
 }

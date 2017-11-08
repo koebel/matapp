@@ -169,9 +169,6 @@ public class MatDetailActivity extends AppCompatActivity
 
                 // start Material Edit Activity
                 context.startActivity(intent);
-
-                // change view
-                setContentView(R.layout.activity_mat_edit);
             }
         });
 

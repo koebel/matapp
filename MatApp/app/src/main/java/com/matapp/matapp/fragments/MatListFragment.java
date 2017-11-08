@@ -88,9 +88,19 @@ public class MatListFragment extends Fragment {
         materials.add(new Material("Spotlight", "no sea takimata sanctus", "Kathrin Koebel", "5.2A14", Material.STATUS_AVAILABLE ));
     }
 
-    /* Methods */
+    /* Helper Methods */
     public Material getMaterialAtPosition (int index) {
         return materials.get(index);
+    }
+
+    public int getMaterialIndex (int uniqueId) {
+        int index = -1;
+        int count = 0;
+        for(Material m : materials){
+            if (m.getUniqueId() == uniqueId){ return index = count; }
+            count++;
+        }
+        return index;
     }
 
     public void addMaterial (Material m) {
@@ -99,15 +109,9 @@ public class MatListFragment extends Fragment {
     }
 
     public void deleteMaterial (int uniqueId) {
-        Material foundMaterial = null;
-        for(Material m : materials){
-            if(m.getUniqueId() == uniqueId){
-                foundMaterial = m;
-            }
-        }
-
-        if (foundMaterial != null && materials.contains(foundMaterial)) {
-            materials.remove(foundMaterial);
+        int index = getMaterialIndex(uniqueId);
+        if (index >= 0 && index < materials.size()) {
+            materials.remove(index);
         }
     }
 }
