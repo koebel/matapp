@@ -19,6 +19,7 @@ import com.matapp.matapp.fragments.MatListFragment;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationDrawer;
 
     private String codeFormat,codeContent;
+
+    private FirebaseAuth auth;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -52,6 +55,17 @@ public class MainActivity extends AppCompatActivity {
         navigationDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(navigationDrawer);
+
+        //Get Firebase auth instance
+        auth = FirebaseAuth.getInstance();
+        //Check if logged in
+        if (auth.getCurrentUser() == null) {
+            //Call login screen
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "uid: " + auth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
@@ -72,39 +86,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
-        Class fragmentClass = MatListFragment.class;
-        switch(menuItem.getItemId()) {
-            case R.id.nav_scanner:
-                onScannerAction(menuItem);
-                break;
-            case R.id.nav_matlist:
-                fragmentClass = MatListFragment.class;
-                break;
-            case R.id.nav_logout:
+        if(menuItem.getItemId() != R.id.nav_logout) {
+            // Create a new fragment and specify the fragment to show based on nav item clicked
+            Fragment fragment = null;
+            Class fragmentClass = MatListFragment.class;
+            switch (menuItem.getItemId()) {
+                case R.id.nav_scanner:
+                    onScannerAction(menuItem);
+                    break;
+                case R.id.nav_matlist:
+                    fragmentClass = MatListFragment.class;
+                    break;
 
-                fragmentClass = LogoutFragment.class;
-                break;
+                default:
+                    fragmentClass = MatListFragment.class;
+            }
 
-            default:
-                fragmentClass = MatListFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
+            // Set action bar title
+            setTitle(menuItem.getTitle());
+        } else {
+            // Start activity
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
-        // Set action bar title
-        setTitle(menuItem.getTitle());
         // Close the navigation drawer
         drawerLayout.closeDrawers();
     }
