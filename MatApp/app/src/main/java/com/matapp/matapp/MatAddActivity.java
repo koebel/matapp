@@ -1,15 +1,11 @@
 package com.matapp.matapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,10 +16,7 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.matapp.matapp.fragments.MatListFragment;
 import com.matapp.matapp.other.Material;
-
-import java.io.ByteArrayOutputStream;
 
 
 /**
@@ -68,11 +61,6 @@ public class MatAddActivity extends AppCompatActivity {
         //formatTxt = (TextView)findViewById(R.id.scan_format);
         contentTxt = (TextView)findViewById(R.id.barcode_result);
 
-        // change color of all "optional" attributes to Placeholder color
-        // det_title.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        // det_desc.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        // det_owner.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        // det_location.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         det_img = (ImageView) findViewById(R.id.img_mat_add);
 
         btn_create = (Button) findViewById(R.id.btn_create);

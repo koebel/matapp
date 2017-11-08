@@ -1,14 +1,19 @@
-package com.matapp.matapp.fragments;
+package com.matapp.matapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.matapp.matapp.MatAddActivity;
 import com.matapp.matapp.RecyclerAdapter;
@@ -18,11 +23,16 @@ import com.matapp.matapp.other.Material;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
+ *
+ * This activity is used to display a list of all Material items using a Recycler View.
+ *
  * Created by kathrinkoebel on 25.10.17.
+ *
  */
 
-public class MatListFragment extends Fragment {
+public class MatListActivity extends AppCompatActivity {
 
     public List<Material> materials;
 
@@ -32,40 +42,47 @@ public class MatListFragment extends Fragment {
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     // either dynamically or via XML layout inflation.
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        View view = inflater.inflate(R.layout.fragment_matlist, parent, false);
+    /* Lifecycle Methods */
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_matlist);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_matlist);
+
+        // set Statusbar Color
+        Window window = this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
+        // set Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        recyclerView = (RecyclerView) findViewById(R.id.rv_matlist);
 
         initializeData();
         recyclerViewAdapter = new RecyclerAdapter(materials);
         // if size of recycler view does not change add setHasFixedSize for better performance
         // recyclerView.setHasFixedSize(true);
 
-        recyclerViewLayoutManager = new LinearLayoutManager(this.getContext());
+        recyclerViewLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
-        return view;
-    }
-
-    // This event is triggered soon after onCreateView().
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        // Setup any handles to view objects here
 
         // FAB neues Material erstellen
-        FloatingActionButton fabAddItem = (FloatingActionButton) view.findViewById(R.id.fab_add_item);
+        FloatingActionButton fabAddItem = (FloatingActionButton) findViewById(R.id.fab_add_item);
         fabAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MatAddActivity.class);
+                Context context = view.getContext();
+                Intent intent = new Intent(context, MatAddActivity.class);
                 startActivity(intent);
             }
         });
-
     }
 
     // This method creates an ArrayList that contains some Dummy Material objects
