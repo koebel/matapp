@@ -33,7 +33,6 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical">
 
-                <!-- Input Fields for Material -->
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -41,25 +40,29 @@
                     android:id="@+id/det_title_edit"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor ="?attr/colorPrimaryDark"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:text="@string/det_title" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_desc_edit" />
+                    android:id="@+id/det_desc_edit"
+                    android:text="@string/det_desc" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_owner_edit" />
+                    android:id="@+id/det_owner_edit"
+                    android:text="@string/det_owner" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_location_edit" />
+                    android:id="@+id/det_location_edit"
+                    android:text="@string/det_location" />
 
                 <TextView
                     android:id="@+id/det_status_label"
@@ -79,7 +82,6 @@
                     android:prompt="@string/det_status_prompt"
                     android:spinnerMode="dropdown" />
 
-                <!-- Input Fields regarding Loan -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,27 +95,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_loan_name_edit" />
+                    android:id="@+id/det_loan_name_edit"
+                    android:text="@string/det_loan_name" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_loan_contact_edit" />
+                    android:id="@+id/det_loan_contact_edit"
+                    android:text="@string/det_loan_contact" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_loan_until_edit" />
+                    android:id="@+id/det_loan_until_edit"
+                    android:text="@string/det_loan_until" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:id="@+id/det_loan_note_edit" />
+                    android:ems="4"
+                    android:inputType="textMultiLine"
+                    android:id="@+id/det_loan_note_edit"
+                    android:text="@string/det_loan_note" />
 
-                <!-- Buttons -->
                 <Button
                     android:id="@+id/btn_update"
                     android:layout_width="match_parent"
