@@ -129,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            backButtonCount = 0;
         } else {
             //Ask to hit back again
             Toast.makeText(this, getString(R.string.login_backBtn), Toast.LENGTH_LONG).show();
