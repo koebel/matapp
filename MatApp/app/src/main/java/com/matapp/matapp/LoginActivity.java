@@ -1,5 +1,6 @@
 package com.matapp.matapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn, registerBtn;
     private EditText emailInput, passwordInput;
 
+    private int backButtonCount;
+
     private FirebaseAuth auth;
 
     @Override
@@ -29,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //Reset backButton counter
+        backButtonCount = 0;
+
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         //Check if logged in
@@ -104,14 +110,29 @@ public class LoginActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-                            Toast.makeText(view.getContext(), getString(R.string.login_registerSuccessful), Toast.LENGTH_LONG).show();
+                            Toast.makeText(view.getContext(), getString(R.string.login_registerSuccessful), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(view.getContext(), getString(R.string.login_registerFailed) + task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(view.getContext(), getString(R.string.login_registerFailed) + task.getException(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(backButtonCount >= 1) {
+            //Close App
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            //Ask to hit back again
+            Toast.makeText(this, getString(R.string.login_backBtn), Toast.LENGTH_LONG).show();
+            backButtonCount++;
+        }
     }
 }

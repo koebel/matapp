@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         //Check if logged in
+        // TODO: maybe in onStart or onResume?
         if (auth.getCurrentUser() == null) {
             //Call login screen
             Intent intent = new Intent(this, LoginActivity.class);

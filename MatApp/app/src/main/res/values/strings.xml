@@ -83,5 +83,6 @@
     <string name="login_registerFailed">Registration failed</string>
     <string name="login_registerMissingEmail">Enter email address!</string>
     <string name="login_registerShortPassword">Password too short, enter minimum 6 characters!</string>
+    <string name="login_backBtn">Press the back button once again to close the application.</string>
 
 </resources>
