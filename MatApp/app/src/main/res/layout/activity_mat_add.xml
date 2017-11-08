@@ -11,13 +11,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- Image Section on Top -->
         <LinearLayout
             android:id="@+id/viewPic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.6"
             android:background="?attr/colorPrimary"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_mat_add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scrollViewDetails"
