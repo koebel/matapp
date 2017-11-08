@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- Image Section on Top -->
         <LinearLayout
             android:id="@+id/viewPic"
             android:layout_width="match_parent"

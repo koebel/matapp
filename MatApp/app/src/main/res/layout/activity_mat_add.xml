@@ -18,10 +18,14 @@ android:layout_height="match_parent">
         android:layout_weight="0.6"
         android:background="?attr/colorPrimary"
         android:orientation="horizontal"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/showPic"/>
+
+         <ImageView
+             android:id="@+id/img_mat_add"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_weight="1" />
+
+        </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollViewDetails"
@@ -37,22 +41,23 @@ android:layout_height="match_parent">
             android:layout_margin="16dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/det_title_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor ="?attr/colorPrimaryDark"
-                android:textStyle="bold"
-                android:hint="@string/det_title_hint" />
+                <!-- Input Fields -->
+                <EditText
+                    android:id="@+id/det_title_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor ="?attr/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:hint="@string/det_title_hint" />
 
-            <EditText
-                android:id="@+id/det_desc_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:hint="@string/det_desc_hint" />
+                <EditText
+                    android:id="@+id/det_desc_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:hint="@string/det_desc_hint" />
 
                 <TextView
                 android:id="@+id/det_barcode_edit"
@@ -76,56 +81,57 @@ android:layout_height="match_parent">
                     android:layout_marginTop="6dp"
                     android:hint="@string/det_owner_hint" />
 
-            <EditText
-                android:id="@+id/det_location_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:hint="@string/det_location_hint" />
+                <EditText
+                    android:id="@+id/det_location_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:hint="@string/det_location_hint" />
 
-            <TextView
-                android:id="@+id/det_status_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:textIsSelectable="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/det_status_label" />
+                <TextView
+                    android:id="@+id/det_status_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_status_label" />
 
-            <Spinner
-                android:id="@+id/det_status_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:entries="@array/det_status_dropdown"
-                android:prompt="@string/det_status_prompt"
-                android:spinnerMode="dropdown" />
+                <Spinner
+                    android:id="@+id/det_status_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:entries="@array/det_status_dropdown"
+                    android:prompt="@string/det_status_prompt"
+                    android:spinnerMode="dropdown" />
 
-            <Button
-                android:id="@+id/btn_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/matapp_button"
-                android:layout_marginTop="24dp"
-                android:onClick="onCreateItem"
-                android:text="@string/btn_create" />
+                <!-- Buttons -->
+                <Button
+                    android:id="@+id/btn_create"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/matapp_button"
+                    android:layout_marginTop="24dp"
+                    android:onClick="onCreateItem"
+                    android:text="@string/btn_create" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView >
+        </android.support.v4.widget.NestedScrollView >
 
-</LinearLayout>
+    </LinearLayout>
 
-<android.support.design.widget.FloatingActionButton
-    android:id="@+id/fab_add_img"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:clickable="true"
-    android:onClick="onAddImg"
-    android:src="@drawable/ic_camera_alt_white_24dp"
-    app:layout_anchor="@id/viewPic"
-    app:layout_anchorGravity="bottom|right|end"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:onClick="onAddImg"
+        android:src="@drawable/ic_camera_alt_white_24dp"
+        app:layout_anchor="@id/viewPic"
+        app:layout_anchorGravity="bottom|right|end"/>
 
 <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_barcode"

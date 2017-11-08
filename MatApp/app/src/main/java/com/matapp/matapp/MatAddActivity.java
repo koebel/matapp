@@ -45,6 +45,10 @@ public class MatAddActivity extends AppCompatActivity {
     FloatingActionButton fabAddImg, scanning;
     ImageView imageView;
     TextView formatTxt, contentTxt;
+    ImageView det_img;
+
+    /* static Variables */
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
     /* Lifecycle Methods */
@@ -69,6 +73,7 @@ public class MatAddActivity extends AppCompatActivity {
         // det_desc.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         // det_owner.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         // det_location.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+        det_img = (ImageView) findViewById(R.id.img_mat_add);
 
         btn_create = (Button) findViewById(R.id.btn_create);
         btn_delete = (Button) findViewById(R.id.btn_delete_material);
@@ -98,11 +103,50 @@ public class MatAddActivity extends AppCompatActivity {
                 startActivityForResult(picintent,0);
 
                 Toast.makeText(getApplicationContext(), "Bild hinzufügen", Toast.LENGTH_SHORT).show();
+                // take Picture
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
             }
 
         });
 
 
+    }
+
+    // TODO save Image into DB!
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            // TODO resize image, make it fit the full header area...
+            // more Info here: https://developer.android.com/training/camera/photobasics.html
+            det_img.setImageBitmap(imageBitmap);
+
+            // TODO convert Bitmap into String with Base64 and downsize it
+            // this not sure if this basic conversion is working...
+            img = imageBitmap.toString();
+
+            /*
+            maybe use this code for Base64 conversion:
+            https://stackoverflow.com/questions/4837110/how-to-convert-a-base64-string-into-a-bitmap-image-to-show-it-in-a-imageview
+
+            //encode image to base64 string
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] imageBytes = baos.toByteArray();
+            String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+            //decode base64 string to image
+            imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            image.setImageBitmap(decodedImage);
+             */
+        }
     }
 
     /* Implement Functions for Click on MenuItems */
@@ -204,6 +248,7 @@ public class MatAddActivity extends AppCompatActivity {
 
         // create new Material Object
         Material newMat = new Material(title, description, owner, location, status);
+        newMat.setImg(img);
 
         // TODO save newMat into DB!!!
 
