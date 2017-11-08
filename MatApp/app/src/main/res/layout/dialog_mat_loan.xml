@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loan_material"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="48dp"
+    android:padding="16dp"
+    android:layout_gravity="center"
+    android:orientation="vertical"  >
+
+    <TextView
+        android:id="@+id/loan_dialog_title"
+        android:text="@string/loan_dialog_title"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor ="?attr/colorPrimaryDark"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/loan_dialog_text"
+        android:text="@string/loan_dialog_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/loan_dialog_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/det_loan_name_hint"
+        android:imeOptions="actionDone" />
+
+    <EditText
+        android:id="@+id/loan_dialog_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/det_loan_contact_hint"
+        android:imeOptions="actionDone" />
+
+    <EditText
+        android:id="@+id/loan_dialog_until"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/det_loan_until_hint"
+        android:imeOptions="actionDone" />
+
+    <EditText
+        android:id="@+id/loan_dialog_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/det_loan_note_hint"
+        android:imeOptions="actionDone" />
+
+    <Button
+        style="@style/matapp_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:onClick="onLoanItemSuccess"
+        android:text="@string/btn_loan" />
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor ="?attr/colorPrimaryDark"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="right"
+        android:onClick="onLoanItemCancelled"
+        android:text="@string/btn_cancel" />
+
+</LinearLayout>
