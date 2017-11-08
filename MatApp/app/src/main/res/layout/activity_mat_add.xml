@@ -1,112 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.design.widget.CoordinatorLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-
-<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/viewPic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.6"
-        android:background="?attr/colorPrimary"
-        android:orientation="horizontal"/>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scrollViewDetails"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4" >
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/viewDetails"
+            android:id="@+id/viewPic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:layout_margin="16dp"
-            android:orientation="vertical">
+            android:layout_weight="0.6"
+            android:background="?attr/colorPrimary"
+            android:orientation="horizontal"/>
 
-            <EditText
-                android:id="@+id/det_title_add"
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollViewDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4" >
+
+            <LinearLayout
+                android:id="@+id/viewDetails"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor ="?attr/colorPrimaryDark"
-                android:textStyle="bold"
-                android:hint="@string/det_title_hint" />
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/det_desc_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:hint="@string/det_desc_hint" />
+                <!-- Input Fields -->
+                <EditText
+                    android:id="@+id/det_title_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor ="?attr/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:hint="@string/det_title_hint" />
 
-            <EditText
-                android:id="@+id/det_owner_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:hint="@string/det_owner_hint" />
+                <EditText
+                    android:id="@+id/det_desc_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:hint="@string/det_desc_hint" />
 
-            <EditText
-                android:id="@+id/det_location_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:hint="@string/det_location_hint" />
+                <EditText
+                    android:id="@+id/det_owner_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:hint="@string/det_owner_hint" />
 
-            <TextView
-                android:id="@+id/det_status_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:textIsSelectable="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/det_status_label" />
+                <EditText
+                    android:id="@+id/det_location_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:hint="@string/det_location_hint" />
 
-            <Spinner
-                android:id="@+id/det_status_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:entries="@array/det_status_dropdown"
-                android:prompt="@string/det_status_prompt"
-                android:spinnerMode="dropdown" />
+                <TextView
+                    android:id="@+id/det_status_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_status_label" />
 
-            <Button
-                android:id="@+id/btn_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/matapp_button"
-                android:layout_marginTop="24dp"
-                android:onClick="onCreateItem"
-                android:text="@string/btn_create" />
+                <Spinner
+                    android:id="@+id/det_status_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:entries="@array/det_status_dropdown"
+                    android:prompt="@string/det_status_prompt"
+                    android:spinnerMode="dropdown" />
 
-        </LinearLayout>
+                <!-- Buttons -->
+                <Button
+                    android:id="@+id/btn_create"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/matapp_button"
+                    android:layout_marginTop="24dp"
+                    android:onClick="onCreateItem"
+                    android:text="@string/btn_create" />
 
-    </android.support.v4.widget.NestedScrollView >
+            </LinearLayout>
 
-</LinearLayout>
+        </android.support.v4.widget.NestedScrollView >
 
-<android.support.design.widget.FloatingActionButton
-    android:id="@+id/fab_add_img"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:clickable="true"
-    android:onClick="onAddImg"
-    android:src="@drawable/ic_camera_alt_white_24dp"
-    app:layout_anchor="@id/viewPic"
-    app:layout_anchorGravity="bottom|right|end"/>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:onClick="onAddImg"
+        android:src="@drawable/ic_camera_alt_white_24dp"
+        app:layout_anchor="@id/viewPic"
+        app:layout_anchorGravity="bottom|right|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
 

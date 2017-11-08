@@ -5,13 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.matapp.matapp.fragments.MatListFragment;
-import com.matapp.matapp.other.Material;
 
 
 /**
@@ -79,22 +75,22 @@ public class MatEditActivity extends AppCompatActivity {
         if (description != null && description.trim().length() > 0) {
             det_desc.setText(description);
         } else {
-            det_desc.setText(R.string.det_desc);
-            det_desc.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+            det_desc.setHint(R.string.det_desc_hint);
+            //det_desc.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         }
 
         if (owner != null && owner.trim().length() > 0) {
             det_owner.setText(owner);
         } else {
-            det_owner.setText(R.string.det_loan_name);
-            det_owner.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+            det_owner.setHint(R.string.det_owner_hint);
+            //det_owner.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         }
 
         if (location != null && location.trim().length() > 0) {
             det_location.setText(location);
         } else {
-            det_location.setText(R.string.det_loan_name);
-            det_location.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+            det_location.setHint(R.string.det_location_hint);
+            //det_location.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         }
 
         det_status.setSelection(status);
@@ -102,26 +98,26 @@ public class MatEditActivity extends AppCompatActivity {
         if (loanName != null && loanName.trim().length() > 0) {
             det_loan_name.setText(loanName);
         } else {
-            det_loan_name.setText(R.string.det_loan_name);
-            det_loan_name.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+            det_loan_name.setHint(R.string.det_loan_name_hint);
+            //det_loan_name.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         }
         if (loanContact != null && loanContact.trim().length() > 0) {
             det_loan_contact.setText(loanContact);
         } else {
-            det_loan_contact.setText(R.string.det_loan_contact);
-            det_loan_contact.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+            det_loan_contact.setHint(R.string.det_loan_contact_hint);
+            //det_loan_contact.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         }
         if (loanUntil != null && loanUntil.trim().length() > 0) {
             det_loan_until.setText(loanUntil);
         } else {
-            det_loan_until.setText(R.string.det_loan_until);
-            det_loan_until.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+            det_loan_until.setHint(R.string.det_loan_until_hint);
+            //det_loan_until.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         }
         if (loanNote != null && loanNote.trim().length() > 0) {
             det_loan_note.setText(loanNote);
         } else {
-            det_loan_note.setText(R.string.det_loan_note);
-            det_loan_note.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+            det_loan_note.setHint(R.string.det_loan_note_hint);
+            //det_loan_note.setTextColor(getResources().getColor(R.color.colorPlaceholder));
         }
 
         // add Image FAB
@@ -155,35 +151,13 @@ public class MatEditActivity extends AppCompatActivity {
         }
 
         description = det_desc.getText().toString();
-        if (description.equals(getText(R.string.det_desc).toString())) {
-            description = "";
-        }
         owner = det_owner.getText().toString();
-        if (owner.equals(getText(R.string.det_owner).toString())) {
-            owner = "";
-        }
         location = det_location.getText().toString();
-        if (location.equals(getText(R.string.det_location).toString())) {
-            location = "";
-        }
         status = det_status.getSelectedItemPosition();
-
         loanName = det_loan_name.getText().toString();
-        if (loanName.equals(getText(R.string.det_loan_name).toString())) {
-            loanName = "";
-        }
         loanContact = det_loan_contact.getText().toString();
-        if (loanContact.equals(getText(R.string.det_loan_contact).toString())) {
-            loanContact = "";
-        }
         loanUntil = det_loan_until.getText().toString();
-        if (loanUntil.equals(getText(R.string.det_loan_until).toString())) {
-            loanUntil = "";
-        }
         loanNote = det_loan_note.getText().toString();
-        if (loanNote.equals(getText(R.string.det_loan_note).toString())) {
-            loanNote = "";
-        }
 
         // TODO save changes of this material
         // important: item should keep the same uniqueId!
