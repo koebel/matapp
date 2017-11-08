@@ -38,6 +38,15 @@
     <string name="det_loan_until">voraussichtlich ausgeliehen bis </string>
     <string name="det_loan_note">Notiz zur Ausleihe hinzufügen</string>
 
+    <string name="det_title_hint">Bezeichnung des Gegenstands</string>
+    <string name="det_desc_hint">Kurzbeschrieb des Gegenstands</string>
+    <string name="det_owner_hint">Name Verantwortlicher</string>
+    <string name="det_location_hint">Standort des Gegenstands</string>
+    <string name="det_loan_name_hint">Ausgeliehen an</string>
+    <string name="det_loan_contact_hint">Kontaktdaten (Mail oder Mobile)</string>
+    <string name="det_loan_until_hint">voraussichtlich ausgeliehen bis </string>
+    <string name="det_loan_note_hint">Notiz zur Ausleihe hinzufügen</string>
+
     <string name="link_gps">GPS Position</string>
     <string name="link_barcode">Barcode hinzufügen</string>
 
