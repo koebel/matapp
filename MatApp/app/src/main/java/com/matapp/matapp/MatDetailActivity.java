@@ -13,11 +13,11 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
+import com.matapp.matapp.fragments.MatLoanAlertDialogFragment;
 import com.matapp.matapp.other.Material;
 
 
@@ -34,7 +34,7 @@ import com.matapp.matapp.other.Material;
 
 
 public class MatDetailActivity extends AppCompatActivity
-        implements MatDeleteAlertDialogFragment.MatDeleteDialogListener {
+        implements MatDeleteAlertDialogFragment.MatDeleteDialogListener, MatLoanAlertDialogFragment.LoanDialogListener {
 
     /* Variables for Mat Detail */
     TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode,
@@ -199,6 +199,13 @@ public class MatDetailActivity extends AppCompatActivity
             public void onClick(View v) {
                 // TODO implement borrow Item Popup
 
+                MatLoanAlertDialogFragment alertDialog = new MatLoanAlertDialogFragment();
+                Bundle args = new Bundle();
+                args.putInt("ID", itemId);
+                args.putString("TITLE", title);
+                alertDialog.setArguments(args);
+                alertDialog.show(fm, "MatLoanAlertDialogFragment");
+
                 Toast.makeText(getApplicationContext(), "Artikel ausleihen", Toast.LENGTH_SHORT).show();
             }
         });
@@ -244,6 +251,10 @@ public class MatDetailActivity extends AppCompatActivity
         // TODO delete Material with this id
         // deleteMaterial(id);
         dialog.dismiss();
+
+        // load MatListActivity
+        Intent intent = new Intent(this, MatListActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -251,4 +262,26 @@ public class MatDetailActivity extends AppCompatActivity
         dialog.dismiss();
     }
 
+    /* Implementation of MatDeleteDialogListener */
+    @Override
+    public void onFinishLoanDialog(String loanName, String loanContact, String loanUntil, String loanNote) {
+        
+        // refresh this view to display new/changed values
+        this.status = Material.STATUS_UNAVAILABLE;
+        this.loanName = loanName;
+        this.loanContact = loanContact;
+        this.loanUntil = loanUntil;
+        this.loanNote = loanNote;
+
+        // TODO save the changes into database
+
+        // reload this Activity
+        Intent intent = this.getIntent();
+        intent.putExtra("STATUS_KEY", this.status);
+        intent.putExtra("LOAN_NAME_KEY", this.loanName);
+        intent.putExtra("LOAN_CONTACT_KEY", this.loanContact);
+        intent.putExtra("LOAN_UNTIL_KEY", this.loanUntil);
+        intent.putExtra("LOAN_NOTE_KEY", this.loanNote);
+        startActivity(intent);
+    }
 }

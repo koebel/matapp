@@ -16,6 +16,7 @@ import com.matapp.matapp.R;
 
 public class MatDeleteAlertDialogFragment extends DialogFragment {
 
+    /* Listener Interface with method for passing back data result  */
     public interface MatDeleteDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog, int id);
         public void onDialogNegativeClick(DialogFragment dialog);
@@ -63,7 +64,6 @@ public class MatDeleteAlertDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(R.string.delete_item_title)
-                //.setTitle(getArguments().getString("TITLE") + " " + R.string.delete_item_title)
                 .setMessage(R.string.delete_item_text)
                 .setPositiveButton(R.string.btn_delete, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

@@ -44,7 +44,7 @@
     <string name="det_owner_hint">Name Verantwortlicher </string>
     <string name="det_location_hint">Standort des Gegenstands </string>
     <string name="det_loan_name_hint">Name des Ausleihers </string>
-    <string name="det_loan_contact_hint">Kontaktdaten (Mail oder Mobile)</string>
+    <string name="det_loan_contact_hint">Kontaktdaten (Mail/Tel)</string>
     <string name="det_loan_until_hint">voraussichtliche Rückgabe</string>
     <string name="det_loan_note_hint">Notiz zur Ausleihe</string>
 
@@ -58,7 +58,7 @@
 
 
     <!-- Loan Dialog -->
-    <string name="loan_dialog_title">Ausleihe</string>
+    <string name="loan_dialog_title">Material ausleihen</string>
     <string name="loan_dialog_text">Noch mehr Text zur Ausleihe...</string>
 
 
