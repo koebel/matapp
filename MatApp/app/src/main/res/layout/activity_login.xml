@@ -10,21 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="50dp"
+        android:paddingTop="48dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
+        <!-- displa App Logo -->
         <ImageView
             android:id="@+id/app_icon_login"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center_horizontal"
+            android:elevation="16dp"
             app:srcCompat="@mipmap/ic_launcher_round" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="26dp" />
+            android:layout_height="24dp" />
 
+        <!-- Input Fields for Login -->
         <TextView
             android:id="@+id/emailText"
             android:layout_width="wrap_content"
@@ -44,7 +47,7 @@
             android:id="@+id/passwordText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="6dp"
             android:text="@string/login_passwordText" />
 
         <EditText
@@ -55,14 +58,11 @@
             android:hint="******"
             android:inputType="textPassword" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
-
         <TextView
             android:id="@+id/dbNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
             android:text="@string/login_dbNameText" />
 
         <EditText
@@ -74,16 +74,13 @@
             android:digits="ABC"
             android:text="" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
-
+        <!-- Buttons -->
         <Button
             android:id="@+id/loginBtn"
             style="@style/matapp_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:text="@string/login_loginBtn" />
 
         <Button
@@ -93,9 +90,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/login_registerBtn" />
-
-
-
 
     </LinearLayout>
 
