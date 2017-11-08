@@ -10,9 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="100dp"
+        android:paddingTop="80dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
+
+        <ImageView
+            android:id="@+id/app_icon_login"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
 
         <TextView
             android:id="@+id/emailText"
@@ -33,6 +44,7 @@
             android:id="@+id/passwordText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:text="@string/login_passwordText" />
 
         <EditText
@@ -43,22 +55,28 @@
             android:hint="******"
             android:inputType="textPassword" />
 
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="16dp" />
 
         <Button
             android:id="@+id/loginBtn"
+            style="@style/matapp_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:text="@string/login_loginBtn" />
 
         <Button
             android:id="@+id/registerBtn"
+            style="@style/matapp_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="@string/login_registerBtn" />
+
+
+
 
     </LinearLayout>
 
