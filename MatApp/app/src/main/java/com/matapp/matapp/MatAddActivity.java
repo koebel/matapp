@@ -47,6 +47,12 @@ public class MatAddActivity extends AppCompatActivity {
         det_location = (EditText) findViewById(R.id.det_location_add);
         det_status = (Spinner) findViewById(R.id.det_status_add);
 
+        // change color of all "optional" attributes to Placeholder color
+        // det_title.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+        // det_desc.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+        // det_owner.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+        // det_location.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+
         btn_create = (Button) findViewById(R.id.btn_create);
         btn_delete = (Button) findViewById(R.id.btn_delete_material);
 

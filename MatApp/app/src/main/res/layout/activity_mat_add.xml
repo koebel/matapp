@@ -33,17 +33,6 @@ android:layout_height="match_parent">
             android:layout_margin="16dp"
             android:orientation="vertical">
 
-            <!--
-            <TextView
-                android:id="@+id/det_title_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:textIsSelectable="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Titel" />
-            -->
-
             <EditText
                 android:id="@+id/det_title_add"
                 android:layout_width="match_parent"
@@ -52,61 +41,28 @@ android:layout_height="match_parent">
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor ="?attr/colorPrimaryDark"
                 android:textStyle="bold"
-                android:text="@string/det_title" />
-
-            <!--
-            <TextView
-                android:id="@+id/det_desc_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:textIsSelectable="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Beschrieb" />
-                -->
+                android:hint="@string/det_title_hint" />
 
             <EditText
                 android:id="@+id/det_desc_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="@string/det_desc" />
-
-            <!--
-            <TextView
-                android:id="@+id/det_owner_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:textIsSelectable="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Verantwortlicher" />
-                -->
+                android:hint="@string/det_desc_hint" />
 
             <EditText
                 android:id="@+id/det_owner_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="@string/det_owner" />
-
-            <!--
-            <TextView
-                android:id="@+id/det_location_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:textIsSelectable="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Standort" />
-                -->
+                android:hint="@string/det_owner_hint" />
 
             <EditText
                 android:id="@+id/det_location_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="@string/det_location" />
+                android:hint="@string/det_location_hint" />
 
             <TextView
                 android:id="@+id/det_status_label"
@@ -134,20 +90,6 @@ android:layout_height="match_parent">
                 android:layout_marginTop="24dp"
                 android:onClick="onCreateItem"
                 android:text="@string/btn_create" />
-
-            <!--
-            <Button
-                android:id="@+id/btn_delete_material"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor ="?attr/colorPrimaryDark"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:gravity="left"
-                android:paddingLeft="3dp"
-                android:text="@string/link_cancel" />
-                -->
 
         </LinearLayout>
 

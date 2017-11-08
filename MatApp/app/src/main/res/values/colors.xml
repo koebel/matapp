@@ -4,5 +4,5 @@
     <color name="colorPrimary">#607d8b</color>
     <color name="colorPrimaryDark">#37474F</color>
     <color name="colorAccent">#CDDC39</color>
-    <color name="colorPlaceholder">#BCBCBC</color>
+    <color name="colorPlaceholder">?android:textColorHint</color>
 </resources>
