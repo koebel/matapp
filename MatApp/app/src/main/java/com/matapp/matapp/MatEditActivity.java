@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,12 +24,13 @@ import android.widget.Toast;
 public class MatEditActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Edit */
-    EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode, det_img,
+    EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode,
             det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Spinner det_status;
     int itemId, status;
     String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
     FloatingActionButton fabAddImg;
+    ImageView det_img;
 
     Intent intent;
 
@@ -49,6 +51,8 @@ public class MatEditActivity extends AppCompatActivity {
         det_loan_contact = (EditText) findViewById(R.id.det_loan_contact_edit);
         det_loan_until = (EditText) findViewById(R.id.det_loan_until_edit);
         det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
+
+        det_img = (ImageView) findViewById(R.id.img_mat_edit);
 
         // Get the Intent that started this activity and extract values
         intent = this.getIntent();
