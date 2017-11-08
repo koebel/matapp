@@ -84,6 +84,7 @@
     <!-- Login Fragment -->
     <string name="login_emailText">Email</string>
     <string name="login_passwordText">Password</string>
+    <string name="login_dbNameText">List Name</string>
     <string name="login_loginBtn">Login</string>
     <string name="login_registerBtn">Register</string>
     <string name="login_loginSuccessful">Login successful</string>

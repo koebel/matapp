@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="80dp"
+        android:paddingTop="50dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
@@ -23,7 +23,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="36dp" />
+            android:layout_height="26dp" />
 
         <TextView
             android:id="@+id/emailText"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="name@example.com"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:text="" />
 
         <TextView
@@ -54,6 +54,25 @@
             android:ems="10"
             android:hint="******"
             android:inputType="textPassword" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:id="@+id/dbNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_dbNameText" />
+
+        <EditText
+            android:id="@+id/dbNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:digits="ABC"
+            android:text="" />
 
         <Space
             android:layout_width="match_parent"
