@@ -61,21 +61,21 @@
                     android:hint="@string/det_desc_hint" />
 
                 <TextView
-                android:id="@+id/det_barcode_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="@string/det_barcode"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    android:id="@+id/det_barcode_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/det_barcode"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:id="@+id/barcode_result"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/barcode_result"/>
 
-            <EditText
+                <EditText
                     android:id="@+id/det_owner_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

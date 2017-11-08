@@ -1,14 +1,22 @@
 package com.matapp.matapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import static com.matapp.matapp.MatAddActivity.REQUEST_IMAGE_CAPTURE;
 
 
 /**
@@ -28,9 +36,10 @@ public class MatEditActivity extends AppCompatActivity {
             det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Spinner det_status;
     int itemId, status;
-    String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
-    FloatingActionButton fabAddImg;
+    String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote, codeContent;
+    FloatingActionButton fabAddImg, scanning;
     ImageView det_img;
+    TextView formatTxt, contentTxt;
 
     Intent intent;
 
@@ -53,6 +62,7 @@ public class MatEditActivity extends AppCompatActivity {
         det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
 
         det_img = (ImageView) findViewById(R.id.img_mat_edit);
+        contentTxt = (TextView)findViewById(R.id.barcode_result);
 
         // Get the Intent that started this activity and extract values
         intent = this.getIntent();
@@ -131,8 +141,23 @@ public class MatEditActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 // TODO add image
-                // same as adding image on Add Material?!?
+                // same as update image on Edit Material?!?
                 Toast.makeText(getApplicationContext(), "Bild hinzufügen", Toast.LENGTH_SHORT).show();
+                // take Picture
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+
+        });
+
+        scanning = (FloatingActionButton) findViewById(R.id.fab_add_barcode);
+        scanning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
+                addBarcode(scanning);
             }
         });
     }
@@ -210,5 +235,93 @@ public class MatEditActivity extends AppCompatActivity {
 
         // start Material Detail Activity
         startActivity(intent);
+    }
+
+    public void addBarcode(FloatingActionButton mi) {
+        Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
+
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setPrompt(this.getString(R.string.scan_bar_code));
+        integrator.setCaptureActivity(ScannerActivity.class);
+        integrator.setOrientationLocked(false);
+        //integrator.setResultDisplayDuration(0);
+        //integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
+        integrator.setCameraId(0);  // Use a specific camera of the device
+        integrator.setBarcodeImageEnabled(true);
+        // set turn the camera flash on by default
+        // integrator.addExtra(appConstants.CAMERA_FLASH_ON,true);
+        integrator.initiateScan();
+
+    }
+
+    // TODO save Image into DB!
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // super.onActivityResult(requestCode, resultCode, intent);
+
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (scanningResult != null) {
+            if(scanningResult.getContents() != null){
+                //we have a result
+                codeContent = scanningResult.getContents();
+                //codeFormat = scanningResult.getFormatName();
+
+                // formatTxt.setText("FORMAT: " + codeFormat);
+                contentTxt.setText(codeContent);
+            }else{
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            // TODO resize image, make it fit the full header area...
+            // more Info here: https://developer.android.com/training/camera/photobasics.html
+            det_img.setImageBitmap(imageBitmap);
+
+            // TODO convert Bitmap into String with Base64 and downsize it
+            // this not sure if this basic conversion is working...
+            img = imageBitmap.toString();
+
+            /*
+        Bitmap bitmap = (Bitmap)intent.getExtras().get("intent");
+        //imageView.setImageBitmap(bitmap);
+
+        //endcode the Bitmap Image to Base 64
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArry = byteArrayOutputStream.toByteArray();
+        String encodedImage = Base64.encodeToString(byteArry,Base64.DEFAULT); //comprimiertes und konvertiertes Bild. ev.
+
+        Toast.makeText(getApplicationContext(), "Bild: " +encodedImage, Toast.LENGTH_SHORT).show();
+
+        //decode the Image from Base64 to Bitmap
+        byte[] decodedString = Base64.decode(encodedImage,Base64.DEFAULT);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString,0,decodedString.length);*/
+
+            /*
+            maybe use this code for Base64 conversion:
+            https://stackoverflow.com/questions/4837110/how-to-convert-a-base64-string-into-a-bitmap-image-to-show-it-in-a-imageview
+
+            //encode image to base64 string
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] imageBytes = baos.toByteArray();
+            String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+            //decode base64 string to image
+            imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            image.setImageBitmap(decodedImage);
+             */
+        }
     }
 }

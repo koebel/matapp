@@ -127,7 +127,6 @@ public class MatAddActivity extends AppCompatActivity {
 
                 // formatTxt.setText("FORMAT: " + codeFormat);
                 contentTxt.setText(codeContent);
-
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
@@ -240,6 +239,7 @@ public class MatAddActivity extends AppCompatActivity {
         // create new Material Object
         Material newMat = new Material(title, description, owner, location, status);
         newMat.setImg(img);
+        newMat.setBarcode(codeContent);
 
         // TODO save newMat into DB!!!
 
