@@ -15,7 +15,7 @@ import com.journeyapps.barcodescanner.DecoratedBarcodeView;
  * Created by kathrinkoebel on 25.10.17.
  */
 
-public class ScannerActivity extends Activity {
+public class  ScannerActivity extends Activity {
     private CaptureManager capture;
     private DecoratedBarcodeView barcodeScannerView;
     private View turnflashOn, turnflashOff;

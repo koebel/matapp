@@ -31,6 +31,7 @@
     <string name="det_status_unavailable">Gegenstand nicht verfügbar</string>
     <string name="det_status_prompt">bitte Status wählen</string>
     <string name="det_position">Position des Elements</string>
+    <string name="det_barcode">Barcode Nummer</string>
 
     <string name="det_loan_sub">Informationen zur Ausleihe</string>
     <string name="det_loan_name">Ausgeliehen an</string>

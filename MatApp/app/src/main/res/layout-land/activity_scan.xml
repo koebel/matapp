@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
 
     <com.journeyapps.barcodescanner.DecoratedBarcodeView
         android:layout_alignParentLeft="true"
@@ -23,20 +24,30 @@
 
     <Button
         android:id="@+id/switch_flashlight_on"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/turn_on_flashlight"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:textAllCaps="true"
+        android:textSize="14dp"
+        android:textStyle="bold"
         android:visibility="visible"
         android:onClick="toggleFlash"/>
     <Button
         android:id="@+id/switch_flashlight_off"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/turn_off_flashlight"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:textAllCaps="true"
+        android:textSize="14dp"
+        android:textStyle="bold"
         android:visibility="gone"
         android:onClick="toggleFlash"/>
 

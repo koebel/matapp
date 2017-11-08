@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/miScanner"
-        android:icon="@drawable/ic_dashboard_white_24dp"
+        android:icon="@drawable/ic_barccode_scanner_white"
         android:onClick="onScannerAction"
         app:showAsAction="ifRoom"
         android:title="@string/mi_scanner">

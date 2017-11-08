@@ -2,6 +2,7 @@ package com.matapp.matapp;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.matapp.matapp.fragments.LogoutFragment;
@@ -202,11 +204,10 @@ public class MainActivity extends AppCompatActivity {
                 //we have a result
                 codeContent = scanningResult.getContents();
                 codeFormat = scanningResult.getFormatName();
-
                 Toast.makeText(this, "Scan: " + codeContent, Toast.LENGTH_LONG).show();
-                // display it on screen
-                //formatTxt.setText("FORMAT: " + codeFormat);
-                //contentTxt.setText("CONTENT: " + codeContent);
+
+                Intent intent2 = new Intent(this, MatAddActivity.class);
+                startActivity(intent2);
 
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
