@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -57,9 +58,9 @@ public class MatAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mat_add);
 
         //Get Firebase database instance
-        //database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         //Get reference to material
-        //itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+        itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
         Log.i("MATAPP", "Reference: " + "material/" + MatAppSession.getInstance().listKey + "/item");
 
         // binding of UI elements
@@ -216,32 +217,13 @@ public class MatAddActivity extends AppCompatActivity {
         // get Content from Input fields
         // if fields contain Helpertext reset to empty String
         title = det_title.getText().toString();
-
-        if (title.equals(getText(R.string.det_title).toString())) {
-            title = "";
+        if (TextUtils.isEmpty(title)) {
+            Toast.makeText(getApplicationContext(), R.string.det_title_error, Toast.LENGTH_SHORT).show();
+            return;
         }
-
-        if (title.trim().length() == 0) {
-            // TODO make certain fields (e.g. Title) required?
-            // do something, title shouldn't be empty!!!
-            // don't allow material to be saved unless there is a valid title
-            {
-                Toast.makeText(getApplicationContext(), R.string.det_title_error, Toast.LENGTH_SHORT).show();
-            }
-        }
-
         description = det_desc.getText().toString();
-        if (description.equals(getText(R.string.det_desc).toString())) {
-            description = "";
-        }
         owner = det_owner.getText().toString();
-        if (owner.equals(getText(R.string.det_owner).toString())) {
-            owner = "";
-        }
         location = det_location.getText().toString();
-        if (location.equals(getText(R.string.det_location).toString())) {
-            location = "";
-        }
         status = det_status.getSelectedItemPosition();
 
         // create new Material Object
@@ -249,19 +231,20 @@ public class MatAddActivity extends AppCompatActivity {
         newMat.setImg(img);
         newMat.setBarcode(codeContent);
 
-        // TODO save newMat into DB!!!
-        //String itemKey = itemReference.push().getKey();
-        //itemReference.child(itemKey).setValue(newMat);
+        //Save newMat into DB
+        String itemKey = itemReference.push().getKey();
+        itemReference.child(itemKey).setValue(newMat);
+        Log.i("MATAPP", "new item created with itemKey=" + itemKey);
 
         // load Mat Detail activity
         Intent intent = new Intent(this, MatDetailActivity.class);
-        intent.putExtra("ID_KEY", newMat.getUniqueId());
+        intent.putExtra("ID_KEY", 1);
         intent.putExtra("TITLE_KEY", newMat.getTitle());
         intent.putExtra("DESCRIPTION_KEY", newMat.getDescription());
         intent.putExtra("OWNER_KEY", newMat.getOwner());
         intent.putExtra("LOCATION_KEY", newMat.getLocation());
         intent.putExtra("STATUS_KEY", newMat.getStatus());
-        intent.putExtra("GPS_KEY", newMat.getGps());
+        intent.putExtra("GPS_KEY", "");
         intent.putExtra("BARCODE_KEY", newMat.getBarcode());
         intent.putExtra("IMAGE_KEY", newMat.getImg());
         intent.putExtra("LOAN_NAME_KEY", newMat.getLoanName());

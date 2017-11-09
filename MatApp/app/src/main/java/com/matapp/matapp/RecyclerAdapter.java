@@ -84,7 +84,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     intent.putExtra("OWNER_KEY", items.get(position).getOwner());
                     intent.putExtra("LOCATION_KEY", items.get(position).getLocation());
                     intent.putExtra("STATUS_KEY", items.get(position).getStatus());
-                    intent.putExtra("GPS_KEY", items.get(position).getGps());
+                    intent.putExtra("GPS_KEY", "");
                     intent.putExtra("BARCODE_KEY", items.get(position).getBarcode());
                     intent.putExtra("IMAGE_KEY", items.get(position).getImg());
                     intent.putExtra("LOAN_NAME_KEY", items.get(position).getLoanName());

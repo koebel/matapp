@@ -66,19 +66,19 @@ public class LoginActivity extends AppCompatActivity {
         //Get reference to material
         materialReference = database.getReference("material");
 
-
-        //Check if logged in
-        if (auth.getCurrentUser() != null) {
-            //Logout
-            auth.signOut();
-            Log.i("MATAPP", "listKey: " + MatAppSession.getInstance().listKey);
-        }
-
         loginBtn = (Button) findViewById(R.id.loginBtn);
         registerBtn = (Button) findViewById(R.id.registerBtn);
         emailInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
         listNameInput = (EditText) findViewById(R.id.listNameInput);
+
+        //Check if logged in
+        if (auth.getCurrentUser() != null) {
+            emailInput.setText(auth.getCurrentUser().getEmail());
+            //Logout
+            auth.signOut();
+            Log.i("MATAPP", "listKey: " + MatAppSession.getInstance().listKey);
+        }
 
         //Login Button
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                                         materialReference.child(listKey).child("listName").setValue(listName);
                                         materialReference.child(listKey).child("listUid").setValue(auth.getCurrentUser().getUid());
                                         listWriteable = true;
-                                        Log.i("MATAPP", "created new list with listKey: " + listKey);
+                                        Log.i("MATAPP", "created new list with listKey=" + listKey);
                                         Toast.makeText(view.getContext(), getString(R.string.login_listCreated), Toast.LENGTH_SHORT).show();
                                     }
                                     MatAppSession.getInstance().listKey = listKey;

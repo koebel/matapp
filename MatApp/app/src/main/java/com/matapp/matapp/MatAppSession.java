@@ -7,9 +7,9 @@ package com.matapp.matapp;
 public class MatAppSession {
     private static MatAppSession instance = null;
 
-    public String listKey;
-    public String listName;
-    public boolean listWriteable;
+    public String listKey = null;
+    public String listName = null;
+    public boolean listWriteable = false;
 
     protected MatAppSession() {
         //Exists only to defeat instantiation
