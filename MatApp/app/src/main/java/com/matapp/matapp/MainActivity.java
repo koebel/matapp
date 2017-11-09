@@ -1,6 +1,5 @@
 package com.matapp.matapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -88,18 +87,18 @@ public class MainActivity extends AppCompatActivity {
         if(menuItem.getItemId() != R.id.nav_logout) {
             // Create a new fragment and specify the fragment to show based on nav item clicked
             Fragment fragment = null;
-            Class fragmentClass = MatListActivity.class;
+            Class fragmentClass = MatListFragment.class;
             switch (menuItem.getItemId()) {
                 case R.id.nav_scanner:
                     onScannerAction(menuItem);
                     break;
                 case R.id.nav_matlist:
                     //onMatListAction(menuItem);
-                    fragmentClass = MatListActivity.class;
+                    fragmentClass = MatListFragment.class;
                     break;
 
                 default:
-                    fragmentClass = MatListActivity.class;
+                    fragmentClass = MatListFragment.class;
             }
 
             try {
@@ -219,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
-        Class fragmentClass = MatListActivity.class;
+        Class fragmentClass = MatListFragment.class;
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -237,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
         /*
         Context context = getApplicationContext();
-        Intent intent = new Intent(context, MatListActivity.class);
+        Intent intent = new Intent(context, MatListFragment.class);
         startActivity(intent);
         setTitle(R.string.mi_matlist);
         */

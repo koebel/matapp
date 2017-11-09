@@ -37,7 +37,7 @@ public class MatAddActivity extends AppCompatActivity {
     EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode;
     Spinner det_status;
     int status;
-    String title, description, owner, location, gps, barcode, img, codeFormat,codeContent;
+    String title, description, owner, location, gps, barcode, img, thumb, codeFormat,codeContent;
     Button btn_create, btn_delete;
     FloatingActionButton fabAddImg, scanning;
     ImageView imageView;
@@ -247,6 +247,7 @@ public class MatAddActivity extends AppCompatActivity {
         intent.putExtra("GPS_KEY", "");
         intent.putExtra("BARCODE_KEY", newMat.getBarcode());
         intent.putExtra("IMAGE_KEY", newMat.getImg());
+        intent.putExtra("Thumb_KEY", newMat.getThumb());
         intent.putExtra("LOAN_NAME_KEY", newMat.getLoanName());
         intent.putExtra("LOAN_CONTACT_KEY", newMat.getLoanContact());
         intent.putExtra("LOAN_UNTIL_KEY", newMat.getLoanUntil());

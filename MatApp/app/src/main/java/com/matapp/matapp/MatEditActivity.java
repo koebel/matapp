@@ -36,7 +36,7 @@ public class MatEditActivity extends AppCompatActivity {
             det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Spinner det_status;
     int itemId, status;
-    String title, description, owner, location, gps, img, loanName, loanContact, loanUntil, loanNote, barcode;
+    String title, description, owner, location, gps, img, thumb, loanName, loanContact, loanUntil, loanNote, barcode;
     FloatingActionButton fabAddImg, scanning;
     ImageView det_img;
     TextView formatTxt, contentTxt;
@@ -77,6 +77,7 @@ public class MatEditActivity extends AppCompatActivity {
         gps = intent.getExtras().getString("GPS_KEY");
         barcode = intent.getExtras().getString("BARCODE_KEY");
         img = intent.getExtras().getString("IMAGE_KEY");
+        thumb = intent.getExtras().getString("THUMB_KEY");
         loanName = intent.getExtras().getString("LOAN_NAME_KEY");
         loanContact = intent.getExtras().getString("LOAN_CONTACT_KEY");
         loanUntil = intent.getExtras().getString("LOAN_UNTIL_KEY");
@@ -203,6 +204,7 @@ public class MatEditActivity extends AppCompatActivity {
         intent.putExtra("GPS_KEY", gps);
         intent.putExtra("BARCODE_KEY", barcode);
         intent.putExtra("IMAGE_KEY", img);
+        intent.putExtra("THUMB_KEY", thumb);
         intent.putExtra("LOAN_NAME_KEY", loanName);
         intent.putExtra("LOAN_CONTACT_KEY", loanContact);
         intent.putExtra("LOAN_UNTIL_KEY", loanUntil);
@@ -228,6 +230,7 @@ public class MatEditActivity extends AppCompatActivity {
         intent.putExtra("GPS_KEY", this.gps);
         intent.putExtra("BARCODE_KEY", this.barcode);
         intent.putExtra("IMAGE_KEY", this.img);
+        intent.putExtra("IMAGE_KEY", this.thumb);
         intent.putExtra("LOAN_NAME_KEY", this.loanName);
         intent.putExtra("LOAN_CONTACT_KEY", this.loanContact);
         intent.putExtra("LOAN_UNTIL_KEY", this.loanUntil);

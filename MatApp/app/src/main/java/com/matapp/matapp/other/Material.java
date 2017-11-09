@@ -37,7 +37,7 @@ public class Material {
 
     /* basic Constructor */
     public Material(String title, String description){
-        //this.uniqueId = createUniqueId();
+        this.uniqueId = createUniqueId();
         this.title = title;
         this.description = description;
         this.owner = "";
@@ -55,7 +55,7 @@ public class Material {
 
     /* Constructor for initial creation of Materials in MatAddActivity */
     public Material(String title, String description, String owner, String location, int status){
-        //this.uniqueId = createUniqueId();
+        this.uniqueId = createUniqueId();
         this.title = title;
         this.description = description;
         this.owner = owner;
@@ -163,7 +163,17 @@ public class Material {
         this.img = img;
     }
 
-    public String getLoanName() { return loanName; }
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public String getLoanName() {
+        return loanName;
+    }
 
     public void setLoanName(String loan_name) { this.loanName = loan_name; }
 
