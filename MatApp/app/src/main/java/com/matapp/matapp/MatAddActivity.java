@@ -60,8 +60,9 @@ public class MatAddActivity extends AppCompatActivity {
 
         //formatTxt = (TextView)findViewById(R.id.scan_format);
         contentTxt = (TextView)findViewById(R.id.barcode_result);
-        String scannercontext = getIntent().getExtras().getString("codeContent",codeContent);
-        if(scannercontext != null){
+        //getIntent().hasExtra("barcode");
+        if(getIntent().hasExtra("barcode")){
+            String scannercontext = getIntent().getStringExtra("barcode");
             contentTxt.setText(scannercontext);
         }
 
@@ -142,7 +143,7 @@ public class MatAddActivity extends AppCompatActivity {
             // this not sure if this basic conversion is working...
             img = imageBitmap.toString();
 
-            /*
+        /*
         Bitmap bitmap = (Bitmap)intent.getExtras().get("intent");
         //imageView.setImageBitmap(bitmap);
 

@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Scan: " + codeContent, Toast.LENGTH_LONG).show();
 
                 Intent NewMatIntent = new Intent(this, MatAddActivity.class);
-                NewMatIntent.putExtra("codeContent",codeContent);
+                NewMatIntent.putExtra("barcode",codeContent);
                 startActivity(NewMatIntent);
 
             }else{

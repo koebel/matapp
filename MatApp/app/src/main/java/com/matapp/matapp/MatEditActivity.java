@@ -36,7 +36,7 @@ public class MatEditActivity extends AppCompatActivity {
             det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Spinner det_status;
     int itemId, status;
-    String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote, codeContent;
+    String title, description, owner, location, gps, img, loanName, loanContact, loanUntil, loanNote, barcode;
     FloatingActionButton fabAddImg, scanning;
     ImageView det_img;
     TextView formatTxt, contentTxt;
@@ -265,11 +265,11 @@ public class MatEditActivity extends AppCompatActivity {
         if (scanningResult != null) {
             if(scanningResult.getContents() != null){
                 //we have a result
-                codeContent = scanningResult.getContents();
+                barcode = scanningResult.getContents();
                 //codeFormat = scanningResult.getFormatName();
 
                 // formatTxt.setText("FORMAT: " + codeFormat);
-                contentTxt.setText(codeContent);
+                contentTxt.setText(barcode);
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
