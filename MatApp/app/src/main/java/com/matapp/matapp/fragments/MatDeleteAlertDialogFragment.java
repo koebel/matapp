@@ -3,15 +3,24 @@ package com.matapp.matapp.fragments;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
+import com.matapp.matapp.MainActivity;
 import com.matapp.matapp.R;
 
+
 /**
+ *
+ * This dialog fragment displays a mini dialog onDelete of an item
+ * to let the user confirm that a Material should get deleted for good.
+ *
  * Created by kathrinkoebel on 05.11.17.
+ *
  */
 
 public class MatDeleteAlertDialogFragment extends DialogFragment {
@@ -55,28 +64,21 @@ public class MatDeleteAlertDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        /*
-        this is for custom Layout of Alert Dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.xxx, null));
-        */
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(R.string.delete_item_title)
                 .setMessage(R.string.delete_item_text)
                 .setPositiveButton(R.string.btn_delete, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Delete Item & load MatList
-                        // needs some reference to uniqueID or position of item...
+
+                        // TODO Delete Item
+                        // this will provide reference to uniqueID of the item...
                         int mat_id = getArguments().getInt("ID");
+
                         matDeleteDialogListener.onDialogPositiveClick(MatDeleteAlertDialogFragment.this, mat_id);
-                        //dismiss();
                     }
                 })
                 .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        //dismiss();
                     }
                 });
         return builder.create();

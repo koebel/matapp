@@ -21,4 +21,8 @@ public class MatAppSession {
         }
         return instance;
     }
+
+    public String getListName() {
+        return listName;
+    }
 }

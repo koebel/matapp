@@ -6,7 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -250,13 +252,16 @@ public class MatDetailActivity extends AppCompatActivity
     /* Implementation of MatDeleteDialogListener */
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, int id) {
-        // TODO delete Material with this id
-        // deleteMaterial(id);
-        dialog.dismiss();
 
-        // load MatListFragment
-        Intent intent = new Intent(this, MatListFragment.class);
+        // TODO delete Material with the id transmitted though this function
+        Toast.makeText(getApplicationContext(), "Artikel löschen", Toast.LENGTH_SHORT).show();
+
+        // Load Main Activity
+        // TODO display Mat List in the Main Activity :)
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+
+        dialog.dismiss();
     }
 
     @Override

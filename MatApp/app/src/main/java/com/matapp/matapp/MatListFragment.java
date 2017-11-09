@@ -33,6 +33,17 @@ public class MatListFragment extends Fragment {
     public RecyclerView.Adapter recyclerViewAdapter;
     public RecyclerView.LayoutManager recyclerViewLayoutManager;
 
+    // Creates a new fragment given an int and title
+    // DemoFragment.newInstance(5, "Hello");
+    public static MatListFragment newInstance(int someInt, String someTitle) {
+        MatListFragment fragment = new MatListFragment();
+        Bundle args = new Bundle();
+        args.putInt("someInt", someInt);
+        args.putString("someTitle", someTitle);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     /* Lifecycle Methods */
 

@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                     onScannerAction(menuItem);
                     break;
                 case R.id.nav_matlist:
-                    //onMatListAction(menuItem);
                     fragmentClass = MatListFragment.class;
                     break;
 
@@ -111,7 +110,11 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
             // Set action bar title
+
+            // TODO: get List Name and Insert it here!
+            // setTitle(MatAppSession.getListName());
             setTitle(menuItem.getTitle());
+
         } else {
             // Start activity
             Intent intent = new Intent(this, LoginActivity.class);
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Highlight the selected item has been done by NavigationView
-        menuItem.setChecked(true);
+        // menuItem.setChecked(true);
         // Close the navigation drawer
         drawerLayout.closeDrawers();
     }
@@ -230,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
 
         // Highlight the selected item has been done by NavigationView
-        mi.setChecked(true);
+        //mi.setChecked(true);
         // Set action bar title
         setTitle(mi.getTitle());
 
