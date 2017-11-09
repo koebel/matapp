@@ -90,15 +90,17 @@
     <!-- Login Fragment -->
     <string name="login_emailText">Email</string>
     <string name="login_passwordText">Password</string>
-    <string name="login_dbNameText">List Name</string>
+    <string name="login_listNameText">List Name</string>
     <string name="login_loginBtn">Login</string>
     <string name="login_registerBtn">Register</string>
     <string name="login_loginSuccessful">Login successful</string>
     <string name="login_loginFailed">Login failed</string>
+    <string name="login_listCreated">New list created</string>
     <string name="login_registerSuccessful">New account created. You can login now.</string>
     <string name="login_registerFailed">Registration failed</string>
-    <string name="login_registerMissingEmail">Enter email address!</string>
-    <string name="login_registerShortPassword">Password too short, enter minimum 6 characters!</string>
+    <string name="login_missingList">Enter list name</string>
+    <string name="login_missingEmail">Enter email address!</string>
+    <string name="login_shortPassword">Password too short, enter minimum 6 characters!</string>
     <string name="login_backBtn">Press the back button once again to close the application.</string>
 
 </resources>

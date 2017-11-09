@@ -59,19 +59,19 @@
             android:inputType="textPassword" />
 
         <TextView
-            android:id="@+id/dbNameText"
+            android:id="@+id/listNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="@string/login_dbNameText" />
+            android:text="@string/login_listNameText" />
 
         <EditText
-            android:id="@+id/dbNameInput"
+            android:id="@+id/listNameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:digits="ABC"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
             android:text="" />
 
         <!-- Buttons -->

@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,14 +18,25 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private Button loginBtn, registerBtn;
-    private EditText emailInput, passwordInput;
+    private EditText emailInput, passwordInput, listNameInput;
 
     private int backButtonCount;
 
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
+    private DatabaseReference materialReference;
+
+    private String listKey;
+    private boolean listWriteable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +61,24 @@ public class LoginActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+        //Get Firebase database instance
+        database = FirebaseDatabase.getInstance();
+        //Get reference to material
+        materialReference = database.getReference("material");
+
+
         //Check if logged in
         if (auth.getCurrentUser() != null) {
-            //logout
+            //Logout
             auth.signOut();
+            Log.i("MATAPP", "listKey: " + MatAppSession.getInstance().listKey);
         }
 
         loginBtn = (Button) findViewById(R.id.loginBtn);
         registerBtn = (Button) findViewById(R.id.registerBtn);
         emailInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
+        listNameInput = (EditText) findViewById(R.id.listNameInput);
 
         //Login Button
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +87,15 @@ public class LoginActivity extends AppCompatActivity {
 
                 String email = emailInput.getText().toString();
                 final String password = passwordInput.getText().toString();
+                final String listName = listNameInput.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(view.getContext(), getString(R.string.login_missingEmail), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(listName)) {
+                    Toast.makeText(view.getContext(), getString(R.string.login_missingList), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -77,12 +104,48 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // success
+                            //Success
                             Toast.makeText(view.getContext(), getString(R.string.login_loginSuccessful), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(view.getContext(), "uid: " + auth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+                            Log.i("MATAPP", "uid: " + auth.getCurrentUser().getUid());
+                            //Select child where listName=listName
+                            Query query = materialReference.orderByChild("listName").equalTo(listName);
+                            //Add Listener for one read
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if(dataSnapshot.hasChildren()) {
+                                        //If list is found get listKey
+                                        for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+                                            listKey = childDataSnapshot.getKey();
+                                            break;
+                                        }
+                                        if(dataSnapshot.child(listKey).child("listUid").getValue(String.class).equals(auth.getCurrentUser().getUid())) {
+                                            listWriteable = true;
+                                        } else {
+                                            listWriteable = false;
+                                        }
+                                        Log.i("MATAPP", "found listKey: " + listKey + " writeable: " + listWriteable);
+                                    } else {
+                                        //Otherwise create new list
+                                        //TODO: dialog to confirm
+                                        listKey = materialReference.push().getKey();
+                                        materialReference.child(listKey).child("listName").setValue(listName);
+                                        materialReference.child(listKey).child("listUid").setValue(auth.getCurrentUser().getUid());
+                                        listWriteable = true;
+                                        Log.i("MATAPP", "created new list with listKey: " + listKey);
+                                        Toast.makeText(view.getContext(), getString(R.string.login_listCreated), Toast.LENGTH_SHORT).show();
+                                    }
+                                    MatAppSession.getInstance().listKey = listKey;
+                                    MatAppSession.getInstance().listWriteable = listWriteable;
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
                             finish();
                         } else {
-                            // there was an error
+                            //There was an error
                             Toast.makeText(view.getContext(), getString(R.string.login_loginFailed) + task.getException(), Toast.LENGTH_LONG).show();
                         }
                     }
@@ -100,17 +163,12 @@ public class LoginActivity extends AppCompatActivity {
                 String password = passwordInput.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(view.getContext(), getString(R.string.login_registerMissingEmail), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), getString(R.string.login_missingEmail), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                //if (TextUtils.isEmpty(password)) {
-                //    Toast.makeText(view.getContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-                //    return;
-                //}
-
                 if (password.length() < 6) {
-                    Toast.makeText(view.getContext(), getString(R.string.login_registerShortPassword), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), getString(R.string.login_shortPassword), Toast.LENGTH_SHORT).show();
                     return;
                 }
 

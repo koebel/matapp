@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "uid: " + auth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login: " + auth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
         }
     }
 
