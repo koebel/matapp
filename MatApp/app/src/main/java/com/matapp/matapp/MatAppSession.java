@@ -8,6 +8,7 @@ public class MatAppSession {
     private static MatAppSession instance = null;
 
     public String listKey;
+    public String listName;
     public boolean listWriteable;
 
     protected MatAppSession() {

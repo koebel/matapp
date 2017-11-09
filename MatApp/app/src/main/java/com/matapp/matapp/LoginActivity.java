@@ -136,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(view.getContext(), getString(R.string.login_listCreated), Toast.LENGTH_SHORT).show();
                                     }
                                     MatAppSession.getInstance().listKey = listKey;
+                                    MatAppSession.getInstance().listName = listName;
                                     MatAppSession.getInstance().listWriteable = listWriteable;
                                 }
 
