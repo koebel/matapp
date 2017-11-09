@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -37,7 +38,8 @@ public class MatEditActivity extends AppCompatActivity {
     Spinner det_status;
     int itemId, status;
     String title, description, owner, location, gps, img, thumb, loanName, loanContact, loanUntil, loanNote, barcode;
-    FloatingActionButton fabAddImg, scanning;
+    FloatingActionButton fabAddImg;
+    Button btn_add_barcode;
     ImageView det_img;
     TextView formatTxt, contentTxt;
 
@@ -153,12 +155,12 @@ public class MatEditActivity extends AppCompatActivity {
 
         });
 
-        scanning = (FloatingActionButton) findViewById(R.id.fab_add_barcode);
-        scanning.setOnClickListener(new View.OnClickListener() {
+        btn_add_barcode = (Button) findViewById(R.id.btn_add_barcode);
+        btn_add_barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
-                addBarcode(scanning);
+                addBarcode();
             }
         });
     }
@@ -240,8 +242,7 @@ public class MatEditActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void addBarcode(FloatingActionButton mi) {
-        Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
+    public void addBarcode() {
 
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -269,19 +270,11 @@ public class MatEditActivity extends AppCompatActivity {
             if(scanningResult.getContents() != null){
                 //we have a result
                 barcode = scanningResult.getContents();
-                //codeFormat = scanningResult.getFormatName();
-
-                // formatTxt.setText("FORMAT: " + codeFormat);
                 contentTxt.setText(barcode);
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
-        }else{
-            Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
@@ -292,23 +285,6 @@ public class MatEditActivity extends AppCompatActivity {
             // TODO convert Bitmap into String with Base64 and downsize it
             // this not sure if this basic conversion is working...
             img = imageBitmap.toString();
-
-            /*
-        Bitmap bitmap = (Bitmap)intent.getExtras().get("intent");
-        //imageView.setImageBitmap(bitmap);
-
-        //endcode the Bitmap Image to Base 64
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArry = byteArrayOutputStream.toByteArray();
-        String encodedImage = Base64.encodeToString(byteArry,Base64.DEFAULT); //comprimiertes und konvertiertes Bild. ev.
-
-        Toast.makeText(getApplicationContext(), "Bild: " +encodedImage, Toast.LENGTH_SHORT).show();
-
-        //decode the Image from Base64 to Bitmap
-        byte[] decodedString = Base64.decode(encodedImage,Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString,0,decodedString.length);*/
-
             /*
             maybe use this code for Base64 conversion:
             https://stackoverflow.com/questions/4837110/how-to-convert-a-base64-string-into-a-bitmap-image-to-show-it-in-a-imageview
@@ -325,6 +301,9 @@ public class MatEditActivity extends AppCompatActivity {
             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             image.setImageBitmap(decodedImage);
              */
+        }else {
+            Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 }

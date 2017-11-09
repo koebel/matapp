@@ -129,22 +129,17 @@ public class MatAddActivity extends AppCompatActivity {
 
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (scanningResult != null) {
-            if(scanningResult.getContents() != null){
+            if (scanningResult.getContents() != null) {
                 //we have a result
                 codeContent = scanningResult.getContents();
                 //codeFormat = scanningResult.getFormatName();
 
                 // formatTxt.setText("FORMAT: " + codeFormat);
                 contentTxt.setText(codeContent);
-            }else{
+            } else {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
-        }else{
-            Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        }else if ((requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)){
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
@@ -155,22 +150,6 @@ public class MatAddActivity extends AppCompatActivity {
             // TODO convert Bitmap into String with Base64 and downsize it
             // this not sure if this basic conversion is working...
             img = imageBitmap.toString();
-
-        /*
-        Bitmap bitmap = (Bitmap)intent.getExtras().get("intent");
-        //imageView.setImageBitmap(bitmap);
-
-        //endcode the Bitmap Image to Base 64
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArry = byteArrayOutputStream.toByteArray();
-        String encodedImage = Base64.encodeToString(byteArry,Base64.DEFAULT); //comprimiertes und konvertiertes Bild. ev.
-
-        Toast.makeText(getApplicationContext(), "Bild: " +encodedImage, Toast.LENGTH_SHORT).show();
-
-        //decode the Image from Base64 to Bitmap
-        byte[] decodedString = Base64.decode(encodedImage,Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(decodedString,0,decodedString.length);*/
 
             /*
             maybe use this code for Base64 conversion:
@@ -188,6 +167,10 @@ public class MatAddActivity extends AppCompatActivity {
             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             image.setImageBitmap(decodedImage);
              */
+
+        }else {
+            Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 
@@ -195,8 +178,6 @@ public class MatAddActivity extends AppCompatActivity {
     // TODO add this function to the new Button (not FAB),
     // looks like there are some dependencies... doesn't work for regular Button
     public void addBarcode() {
-        Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
-
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
         integrator.setPrompt(this.getString(R.string.scan_bar_code));

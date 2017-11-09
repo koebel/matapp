@@ -58,20 +58,41 @@
                     android:layout_marginTop="6dp"
                     android:id="@+id/det_desc_edit" />
 
-                <TextView
-                    android:id="@+id/det_barcode_edit"
+                <!-- Barcode Section -->
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/det_barcode"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/barcode_result"/>
+                    <TextView
+                        android:id="@+id/det_barcode_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/det_barcode_label"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/det_barcode_edit"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:id="@+id/barcode_result"
+                        android:hint="@string/det_barcode" />
+
+                    <Button
+                        android:id="@+id/btn_add_barcode"
+                        style="@style/matapp_button_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="6dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:onClick="addBarcode"
+                        android:text="@string/link_barcode" />
+
+                </RelativeLayout>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -175,17 +196,6 @@
         android:src="@drawable/ic_camera_alt_white_24dp"
         app:layout_anchor="@id/viewPic"
         app:layout_anchorGravity="bottom|right|end"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:onClick="addBarcode"
-        android:src="@drawable/ic_barccode_scanner_white"
-        app:layout_anchor="@id/viewPic"
-        app:layout_anchorGravity="bottom|left|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
 
