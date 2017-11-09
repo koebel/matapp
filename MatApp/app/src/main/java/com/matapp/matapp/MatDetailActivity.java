@@ -257,7 +257,6 @@ public class MatDetailActivity extends AppCompatActivity
         Toast.makeText(getApplicationContext(), "Artikel löschen", Toast.LENGTH_SHORT).show();
 
         // Load Main Activity
-        // TODO display Mat List in the Main Activity :)
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 

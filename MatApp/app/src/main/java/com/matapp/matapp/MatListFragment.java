@@ -57,8 +57,6 @@ public class MatListFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_matlist);
         initializeData();
         recyclerViewAdapter = new RecyclerAdapter(materials);
-        // if size of recycler view does not change add setHasFixedSize for better performance
-        // recyclerView.setHasFixedSize(true);
 
         recyclerViewLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(recyclerViewLayoutManager);

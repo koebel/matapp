@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,15 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+
+/**
+ *
+ * This activity is used to build the basic layout including
+ * navigation drawer & tolbar of this app.
+ *
+ * Created by kathrinkoebel on 25.10.17.
+ *
+ **/
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
         navigationDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(navigationDrawer);
+
+        // load MatListFragment on Start Screen
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        MatListFragment fragment = MatListFragment.newInstance(0, "");
+        ft.replace(R.id.flContent, fragment);
+        ft.commit();
+        setTitle(R.string.nav_matlist);
+
+        // TODO maybe set Title to Listname?!?
+        // setTitle(MatAppSession.getInstance().listName);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -111,9 +131,11 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
             // Set action bar title
 
-            // TODO: get List Name and Insert it here!
-            // setTitle(MatAppSession.getListName());
-            setTitle(menuItem.getTitle());
+            // TODO: maybe set Name of the Organisation into the Toolbar
+            // setTitle(MatAppSession.getInstance().listName);
+            // display name of current activity
+            // setTitle(menuItem.getTitle());
+            setTitle(R.string.nav_matlist);
 
         } else {
             // Start activity
@@ -121,8 +143,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        // Highlight the selected item has been done by NavigationView
-        // menuItem.setChecked(true);
         // Close the navigation drawer
         drawerLayout.closeDrawers();
     }
@@ -132,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        //return super.onOptionsItemSelected(item);
 
         // Handle presses on the action bar items
         switch (item.getItemId()) {
@@ -142,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 return true;
             case R.id.miMatList:
-                //onMatListAction(mi);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -174,8 +192,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
-    /* Implement Functions for Click on MenuItems */
+    /* Implement Functions for Click on MenuItems in Toolbar */
     public void onScannerAction(MenuItem mi) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -232,17 +249,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
 
-        // Highlight the selected item has been done by NavigationView
-        //mi.setChecked(true);
         // Set action bar title
         setTitle(mi.getTitle());
 
-        /*
-        Context context = getApplicationContext();
-        Intent intent = new Intent(context, MatListFragment.class);
-        startActivity(intent);
-        setTitle(R.string.mi_matlist);
-        */
+        // TODO: maybe set Name of the Organisation into the Toolbar
+        // setTitle(MatAppSession.getInstance().listName);
     }
 }
 
