@@ -160,8 +160,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "My toast 2",
                         Toast.LENGTH_LONG).show();
                 return true;
+            /* disabled in response to usability test feedback
+            until addional features are implemented in a later release of the app
             case R.id.miMatList:
                 return true;
+                */
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -234,6 +237,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    this Function is currently not in use because in response to Usability test feedback
+    we have decided to show only the barcode scannere in the toolbar as long as
+    additional features such as usermanagement are implemented this is not needed
+
     public void onMatListAction(MenuItem mi) {
 
         // Create a new fragment and specify the fragment to show based on nav item clicked
@@ -255,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO: maybe set Name of the Organisation into the Toolbar
         // setTitle(MatAppSession.getInstance().listName);
     }
+    */
 }
 
 
