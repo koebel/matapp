@@ -91,12 +91,12 @@ public class MatAddActivity extends AppCompatActivity {
 
 
 
-        scanning = (FloatingActionButton) findViewById(R.id.fab_add_barcode);
-        scanning.setOnClickListener(new View.OnClickListener() {
+        btn_add_barcode = (Button) findViewById(R.id.btn_add_barcode);
+        btn_add_barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
-                addBarcode(scanning);
+                addBarcode();
             }
         });
 
@@ -194,7 +194,7 @@ public class MatAddActivity extends AppCompatActivity {
     /* Implement Functions for Click on add Barcode Button */
     // TODO add this function to the new Button (not FAB),
     // looks like there are some dependencies... doesn't work for regular Button
-    public void addBarcode(FloatingActionButton mi) {
+    public void addBarcode() {
         Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
 
         IntentIntegrator integrator = new IntentIntegrator(this);

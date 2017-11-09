@@ -89,14 +89,14 @@
                         android:text="@string/det_barcode_label"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                    <TextView
+                    <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/det_barcode_edit"
-                        android:layout_marginTop="6dp"
-                        android:textSize="18dp"
+                        android:inputType="none"
+                        android:editable="false"
                         android:id="@+id/barcode_result"
-                        android:text="@string/det_barcode" />
+                        android:hint="@string/det_barcode" />
 
                     <Button
                         android:id="@+id/btn_add_barcode"
@@ -192,17 +192,6 @@
         android:src="@drawable/ic_camera_alt_white_24dp"
         app:layout_anchor="@id/viewPic"
         app:layout_anchorGravity="bottom|right|end"/>
-
-<android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:onClick="addBarcode"
-        android:src="@drawable/ic_barccode_scanner_white"
-        app:layout_anchor="@id/viewPic"
-        app:layout_anchorGravity="bottom|left|end"/>
 
 
 </android.support.design.widget.CoordinatorLayout>
