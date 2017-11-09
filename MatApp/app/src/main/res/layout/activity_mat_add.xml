@@ -77,25 +77,47 @@
                     android:hint="@string/det_desc_hint" />
 
                 <!-- Barcode Section -->
-                <TextView
-                    android:id="@+id/det_barcode_edit"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/det_barcode"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/barcode_result"/>
+                    <TextView
+                        android:id="@+id/det_barcode_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/det_barcode_label"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/det_barcode_edit"
+                        android:layout_marginTop="6dp"
+                        android:textSize="18dp"
+                        android:id="@+id/barcode_result"
+                        android:text="@string/det_barcode" />
+
+                    <Button
+                        android:id="@+id/btn_add_barcode"
+                        style="@style/matapp_button_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="3dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:onClick="addBarcode"
+                        android:text="@string/link_barcode" />
+
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/det_owner_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
                     android:lines="1"
                     android:textIsSelectable="true"
                     android:textAppearance="?android:attr/textAppearanceSmall"

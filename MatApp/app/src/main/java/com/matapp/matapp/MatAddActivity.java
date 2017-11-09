@@ -38,7 +38,7 @@ public class MatAddActivity extends AppCompatActivity {
     Spinner det_status;
     int status;
     String title, description, owner, location, gps, barcode, img = "", thumb, codeFormat,codeContent = "";
-    Button btn_create, btn_delete;
+    Button btn_create, btn_delete, btn_add_barcode;
     FloatingActionButton fabAddImg, scanning;
     ImageView imageView;
     TextView formatTxt, contentTxt;
@@ -191,8 +191,9 @@ public class MatAddActivity extends AppCompatActivity {
         }
     }
 
-    /* Implement Functions for Click on MenuItems */
-
+    /* Implement Functions for Click on add Barcode Button */
+    // TODO add this function to the new Button (not FAB),
+    // looks like there are some dependencies... doesn't work for regular Button
     public void addBarcode(FloatingActionButton mi) {
         Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
 
@@ -208,9 +209,7 @@ public class MatAddActivity extends AppCompatActivity {
         // set turn the camera flash on by default
         // integrator.addExtra(appConstants.CAMERA_FLASH_ON,true);
         integrator.initiateScan();
-
     }
-
 
     // create new Material
     public void onCreateItem (View view){
