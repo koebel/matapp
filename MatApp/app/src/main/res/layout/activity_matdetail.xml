@@ -61,20 +61,26 @@
                     android:id="@+id/det_desc"
                     android:text="@string/det_desc" />
 
-                <TextView
-                    android:id="@+id/det_barcode_edit"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/det_barcode"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/barcode_result"/>
+                    <TextView
+                        android:id="@+id/det_barcode_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/det_barcode_number"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/det_barcode_edit"
+                        android:id="@+id/barcode_result" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"

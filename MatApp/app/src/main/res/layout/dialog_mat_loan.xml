@@ -4,20 +4,13 @@
     android:id="@+id/loan_material"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="48dp"
+    android:layout_margin="64dp"
     android:padding="16dp"
+    android:paddingBottom="6dp"
     android:layout_gravity="center"
     android:orientation="vertical"  >
 
     <!--
-    <TextView
-        android:id="@+id/loan_dialog_title"
-        android:text="@string/loan_dialog_title"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textColor ="?attr/colorPrimaryDark"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/loan_dialog_text"
@@ -25,6 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
         -->
+    <TextView
+        android:id="@+id/loan_dialog_name_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:textIsSelectable="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/det_loan_name_label" />
 
     <EditText
         android:id="@+id/loan_dialog_name"
@@ -34,6 +35,15 @@
         android:hint="@string/det_loan_name_hint"
         android:imeOptions="actionDone" />
 
+    <TextView
+        android:id="@+id/loan_dialog_contact_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:textIsSelectable="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/det_loan_contact_label" />
+
     <EditText
         android:id="@+id/loan_dialog_contact"
         android:layout_width="match_parent"
@@ -42,6 +52,15 @@
         android:hint="@string/det_loan_contact_hint"
         android:imeOptions="actionDone" />
 
+    <TextView
+        android:id="@+id/loan_dialog_until_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:textIsSelectable="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/det_loan_until_label" />
+
     <EditText
         android:id="@+id/loan_dialog_until"
         android:layout_width="match_parent"
@@ -49,6 +68,15 @@
         android:inputType="text"
         android:hint="@string/det_loan_until_hint"
         android:imeOptions="actionDone" />
+
+    <TextView
+        android:id="@+id/loan_dialog_note_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:textIsSelectable="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/det_loan_note_label" />
 
     <EditText
         android:id="@+id/loan_dialog_note"
@@ -68,8 +96,6 @@
         android:onClick="onLoanItemSuccess"
         android:text="@string/btn_loan" />
 
-    <!--
-
     <Button
         style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/loan_cancel_btn"
@@ -81,6 +107,5 @@
         android:gravity="right"
         android:onClick="onLoanItemCancelled"
         android:text="@string/btn_cancel" />
-        -->
 
 </LinearLayout>

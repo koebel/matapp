@@ -39,7 +39,7 @@ public class MatDetailActivity extends AppCompatActivity
         implements MatDeleteAlertDialogFragment.MatDeleteDialogListener, MatLoanAlertDialogFragment.LoanDialogListener {
 
     /* Variables for Mat Detail */
-    TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode,
+    TextView det_title, det_desc, det_owner, det_location, det_gps, det_status, det_barcode, det_barcode_result,
             det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Button btn_loan, btn_return, btn_delete;
     FloatingActionButton fabEditItem;
@@ -70,6 +70,8 @@ public class MatDetailActivity extends AppCompatActivity
         det_loan_until = (TextView) findViewById(R.id.det_loan_until);
         det_loan_note = (TextView) findViewById(R.id.det_loan_note);
         det_img = (ImageView) findViewById(R.id.img_mat);
+        det_barcode = (TextView) findViewById(R.id.det_barcode_edit);
+        det_barcode_result = (TextView) findViewById(R.id.barcode_result);
 
         btn_loan = (Button) findViewById(R.id.btn_loan);
         btn_return = (Button) findViewById(R.id.btn_return);
@@ -97,6 +99,7 @@ public class MatDetailActivity extends AppCompatActivity
         // binding of extracted values to the UI elements
         det_title.setText(title);
         det_desc.setText(description);
+        det_barcode_result.setText(barcode);
         det_owner.setText(owner);
         det_location.setText(location);
         det_loan_name.setText(loanName);
@@ -105,6 +108,21 @@ public class MatDetailActivity extends AppCompatActivity
         det_loan_note.setText(loanNote);
 
         det_img.setImageBitmap(stringToBitmap(img));
+
+        // display only attributes that are not empty
+        if (description != null && description.trim().length() == 0){
+            det_desc.setVisibility(View.GONE);
+        }
+        if (barcode != null && barcode.trim().length() == 0){
+            det_barcode.setVisibility(View.GONE);
+            det_barcode_result.setVisibility(View.GONE);
+        }
+        if (owner != null && owner.trim().length() == 0){
+            det_owner.setVisibility(View.GONE);
+        }
+        if (location != null && location.trim().length() == 0){
+            det_location.setVisibility(View.GONE);
+        }
 
         // display loan subtitle only if any of the loan attributes contains a value
         // if (loanName.trim().length() == 0 && loanContact.trim().length() == 0 && loanUntil.trim().length() == 0 && loanNote.trim().length() == 0 )
