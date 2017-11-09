@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
                     onScannerAction(menuItem);
                     break;
                 case R.id.nav_matlist:
-                    onMatListAction(menuItem);
-                    //fragmentClass = MatListActivity.class;
+                    //onMatListAction(menuItem);
+                    fragmentClass = MatListActivity.class;
                     break;
 
                 default:
@@ -216,10 +216,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMatListAction(MenuItem mi) {
+
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        Class fragmentClass = MatListActivity.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
+
+        // Highlight the selected item has been done by NavigationView
+        mi.setChecked(true);
+        // Set action bar title
+        setTitle(mi.getTitle());
+
+        /*
         Context context = getApplicationContext();
         Intent intent = new Intent(context, MatListActivity.class);
         startActivity(intent);
         setTitle(R.string.mi_matlist);
+        */
     }
 }
 
