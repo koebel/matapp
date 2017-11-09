@@ -28,38 +28,55 @@
 
         </LinearLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scrollViewDetails"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4" >
-
-        <LinearLayout
-            android:id="@+id/viewDetails"
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollViewDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:layout_margin="16dp"
-            android:orientation="vertical">
+            android:layout_weight="0.4" >
+
+            <LinearLayout
+                android:id="@+id/viewDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
 
                 <!-- Input Fields -->
+                <TextView
+                    android:id="@+id/det_title_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_title_label" />
+
                 <EditText
                     android:id="@+id/det_title_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor ="?attr/colorPrimaryDark"
                     android:textStyle="bold"
                     android:hint="@string/det_title_hint" />
 
+                <TextView
+                    android:id="@+id/det_desc_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_desc_label" />
+
                 <EditText
                     android:id="@+id/det_desc_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:hint="@string/det_desc_hint" />
 
+                <!-- Barcode Section -->
                 <TextView
                     android:id="@+id/det_barcode_edit"
                     android:layout_width="match_parent"
@@ -75,18 +92,34 @@
                     android:layout_marginTop="6dp"
                     android:id="@+id/barcode_result"/>
 
+                <TextView
+                    android:id="@+id/det_owner_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_owner_label" />
+
                 <EditText
                     android:id="@+id/det_owner_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:hint="@string/det_owner_hint" />
+
+                <TextView
+                    android:id="@+id/det_location_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_location_label" />
 
                 <EditText
                     android:id="@+id/det_location_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:hint="@string/det_location_hint" />
 
                 <TextView
@@ -116,6 +149,10 @@
                     android:layout_marginTop="24dp"
                     android:onClick="onCreateItem"
                     android:text="@string/btn_create" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp" />
 
             </LinearLayout>
 

@@ -19,6 +19,13 @@
         -->
     </style>
 
+    <style name="matapp_button_light" parent="@android:style/Widget.Button">
+        <item name="android:background">@color/colorPrimaryLight</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
     <!-- Textlink Style -->
     <style name="matapp_textlink" parent="@android:style/Widget.Button">
         <item name="android:textColor">?attr/colorPrimary</item>

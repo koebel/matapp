@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
+    <!-- we are using Blue Grey Color Palette for primary color & Lime as accent color
+    from https://material.io/guidelines/style/color.html#color-color-palette -->
     <color name="colorPrimary">#607d8b</color>
     <color name="colorPrimaryDark">#37474F</color>
+    <color name="colorPrimaryLight">#CFD8DC</color>
     <color name="colorAccent">#CDDC39</color>
     <color name="colorPlaceholder">?android:textColorHint</color>
 </resources>
