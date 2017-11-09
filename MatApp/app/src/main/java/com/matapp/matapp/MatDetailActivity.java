@@ -46,7 +46,8 @@ public class MatDetailActivity extends AppCompatActivity
     int itemId, status;
     String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
 
-    FragmentManager fm = getSupportFragmentManager();
+    FragmentManager fm_loan = getSupportFragmentManager();
+    FragmentManager fm_delete = getSupportFragmentManager();
 
 
     /* Lifecycle Methods */
@@ -190,7 +191,7 @@ public class MatDetailActivity extends AppCompatActivity
                 args.putInt("ID", itemId);
                 args.putString("TITLE", title);
                 alertDialog.setArguments(args);
-                alertDialog.show(fm, "MatDeleteAlertDialogFragment");
+                alertDialog.show(fm_delete, "MatDeleteAlertDialogFragment");
             }
         });
 
@@ -204,7 +205,7 @@ public class MatDetailActivity extends AppCompatActivity
                 args.putInt("ID", itemId);
                 args.putString("TITLE", title);
                 alertDialog.setArguments(args);
-                alertDialog.show(fm, "MatLoanAlertDialogFragment");
+                alertDialog.show(fm_loan, "MatLoanAlertDialogFragment");
 
                 Toast.makeText(getApplicationContext(), "Artikel ausleihen", Toast.LENGTH_SHORT).show();
             }
@@ -264,7 +265,7 @@ public class MatDetailActivity extends AppCompatActivity
 
     /* Implementation of MatDeleteDialogListener */
     @Override
-    public void onFinishLoanDialog(String loanName, String loanContact, String loanUntil, String loanNote) {
+    public void onFinishLoanDialog(DialogFragment dialog, String loanName, String loanContact, String loanUntil, String loanNote) {
         
         // refresh this view to display new/changed values
         this.status = Material.STATUS_UNAVAILABLE;
