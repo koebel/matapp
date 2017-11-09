@@ -37,7 +37,7 @@ public class MatDeleteAlertDialogFragment extends DialogFragment {
         return frag;
     }
 
-    // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
+    // Override the Fragment.onAttach() method to instantiate the MatDeleteDialogListener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
