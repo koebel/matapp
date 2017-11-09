@@ -14,13 +14,9 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14dp</item>
-    </style>
-
-    <style name="matapp_button_light" parent="@android:style/Widget.Button">
-        <item name="android:background">@color/colorPrimaryLight</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">14dp</item>
+        <!--
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        -->
     </style>
 
     <!-- Textlink Style -->
