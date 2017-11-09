@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matapp.matapp.other.Material;
@@ -44,6 +46,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         holder.row_mat_title.setText(items.get(position).title);
         holder.row_mat_desc.setText(items.get(position).description);
+
+        // TODO thumb muss in Bitmap umgewandelt werden!!!
+        //holder.row_mat_thumb.setImageBitmap(items.get(position).thumb);
     }
 
     @Override
@@ -60,12 +65,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         TextView row_mat_title;
         TextView row_mat_desc;
+        ImageButton row_mat_thumb;
 
         /* Constructor */
         public RecyclerViewHolder(View view){
             super(view);
             row_mat_title = (TextView)view.findViewById(R.id.row_mat_title);
             row_mat_desc = (TextView)view.findViewById(R.id.row_mat_desc);
+            row_mat_thumb = (ImageButton)view.findViewById(R.id.row_mat_img);
 
             // set listener to each list item
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +94,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     intent.putExtra("GPS_KEY", items.get(position).getGps());
                     intent.putExtra("BARCODE_KEY", items.get(position).getBarcode());
                     intent.putExtra("IMAGE_KEY", items.get(position).getImg());
+                    intent.putExtra("THUMB_KEY", items.get(position).getThumb());
                     intent.putExtra("LOAN_NAME_KEY", items.get(position).getLoanName());
                     intent.putExtra("LOAN_CONTACT_KEY", items.get(position).getLoanContact());
                     intent.putExtra("LOAN_UNTIL_KEY", items.get(position).getLoanUntil());

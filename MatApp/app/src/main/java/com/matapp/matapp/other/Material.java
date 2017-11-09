@@ -163,6 +163,14 @@ public class Material {
         this.img = img;
     }
 
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
     public String getLoanName() {
         return loan_name;
     }

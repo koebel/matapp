@@ -44,7 +44,7 @@ public class MatDetailActivity extends AppCompatActivity
     ImageView det_img;
 
     int itemId, status;
-    String title, description, owner, location, gps, barcode, img, loanName, loanContact, loanUntil, loanNote;
+    String title, description, owner, location, gps, barcode, img, thumb, loanName, loanContact, loanUntil, loanNote;
 
     FragmentManager fm_delete = getSupportFragmentManager();
     FragmentManager fm_loan = getSupportFragmentManager();
@@ -86,6 +86,7 @@ public class MatDetailActivity extends AppCompatActivity
         gps = intent.getExtras().getString("GPS_KEY");
         barcode = intent.getExtras().getString("BARCODE_KEY");
         img = intent.getExtras().getString("IMAGE_KEY");
+        thumb = intent.getExtras().getString("THUMB_KEY");
         loanName = intent.getExtras().getString("LOAN_NAME_KEY");
         loanContact = intent.getExtras().getString("LOAN_CONTACT_KEY");
         loanUntil = intent.getExtras().getString("LOAN_UNTIL_KEY");
@@ -253,8 +254,8 @@ public class MatDetailActivity extends AppCompatActivity
         // deleteMaterial(id);
         dialog.dismiss();
 
-        // load MatListActivity
-        Intent intent = new Intent(this, MatListActivity.class);
+        // load MatListFragment
+        Intent intent = new Intent(this, MatListFragment.class);
         startActivity(intent);
     }
 
