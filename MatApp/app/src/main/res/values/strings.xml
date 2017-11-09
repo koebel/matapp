@@ -25,19 +25,29 @@
     <string name="det_owner">Name Verantwortlicher</string>
     <string name="det_location">Standort des Gegenstands</string>
     <string name="det_status">Ausleihstatus</string>
-    <string name="det_status_label">Ausleihstatus</string>
     <string name="det_status_available">Gegenstand verfügbar</string>
     <string name="det_status_lent">Gegenstand ausgeliehen</string>
     <string name="det_status_unavailable">Gegenstand nicht verfügbar</string>
     <string name="det_status_prompt">bitte Status wählen</string>
     <string name="det_position">Position des Elements</string>
-    <string name="det_barcode">Barcode Nummer</string>
+    <string name="det_barcode">keine Barcode Nummer</string>
 
     <string name="det_loan_sub">Informationen zur Ausleihe</string>
     <string name="det_loan_name">Ausgeliehen an</string>
     <string name="det_loan_contact">Kontaktdaten (Mail oder Mobile)</string>
     <string name="det_loan_until">voraussichtlich ausgeliehen bis </string>
     <string name="det_loan_note">Notiz zur Ausleihe hinzufügen</string>
+
+    <string name="det_title_label">Bezeichnung</string>
+    <string name="det_desc_label">Kurzbeschrieb</string>
+    <string name="det_owner_label">Verantwortlicher </string>
+    <string name="det_location_label">Standort</string>
+    <string name="det_barcode_label">Barcode</string>
+    <string name="det_status_label">Ausleihstatus</string>
+    <string name="det_loan_name_label">Ausleiher</string>
+    <string name="det_loan_contact_label">Kontaktdaten (Mail/Tel)</string>
+    <string name="det_loan_until_label">voraussichtliche Rückgabe</string>
+    <string name="det_loan_note_label">Notiz zur Ausleihe</string>
 
     <string name="det_title_hint">Bezeichnung des Gegenstands</string>
     <string name="det_desc_hint">Kurzbeschrieb des Gegenstands</string>
@@ -49,7 +59,7 @@
     <string name="det_loan_note_hint">Notiz zur Ausleihe</string>
 
     <string name="link_gps">GPS Position</string>
-    <string name="link_barcode">Barcode hinzufügen</string>
+    <string name="link_barcode">+ Barcode</string>
 
 
     <!-- Delete Alert Dialog -->

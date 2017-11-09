@@ -3,6 +3,7 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,65 +29,122 @@
 
         </LinearLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scrollViewDetails"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4" >
-
-        <LinearLayout
-            android:id="@+id/viewDetails"
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollViewDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:layout_margin="16dp"
-            android:orientation="vertical">
+            android:layout_weight="0.4" >
+
+            <LinearLayout
+                android:id="@+id/viewDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
 
                 <!-- Input Fields -->
+                <TextView
+                    android:id="@+id/det_title_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_title_label" />
+
                 <EditText
                     android:id="@+id/det_title_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor ="?attr/colorPrimaryDark"
                     android:textStyle="bold"
                     android:hint="@string/det_title_hint" />
 
+                <TextView
+                    android:id="@+id/det_desc_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_desc_label" />
+
                 <EditText
                     android:id="@+id/det_desc_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:hint="@string/det_desc_hint" />
 
-                <TextView
-                    android:id="@+id/det_barcode_edit"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/det_barcode"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/det_barcode_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/det_barcode_label" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/det_barcode_edit"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:textSize="18dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="3dp"
+                        android:textColor="@color/colorPlaceholder"
+                        android:id="@+id/barcode_result"
+                        android:text="@string/det_barcode"/>
+
+                    <Button
+                        android:id="@+id/btn_create"
+                        style="@style/matapp_button_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="3dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:onClick="addBarcode"
+                        android:text="@string/link_barcode"
+                        app:layout_constraintEnd_toStartOf="@+id/det_barcode_label" />
+
+                </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/det_owner_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/barcode_result"/>
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_owner_label" />
 
                 <EditText
                     android:id="@+id/det_owner_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:hint="@string/det_owner_hint" />
+
+                <TextView
+                    android:id="@+id/det_location_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_location_label" />
 
                 <EditText
                     android:id="@+id/det_location_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:hint="@string/det_location_hint" />
 
                 <TextView
@@ -102,7 +160,6 @@
                     android:id="@+id/det_status_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:entries="@array/det_status_dropdown"
                     android:prompt="@string/det_status_prompt"
                     android:spinnerMode="dropdown" />
