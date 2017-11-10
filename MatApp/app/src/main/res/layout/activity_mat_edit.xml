@@ -42,20 +42,37 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical">
 
-                <!-- Input Fields for Material -->
+                <!-- Input Fields & Labels for Material -->
+
+                <TextView
+                    android:id="@+id/det_title_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_title_label" />
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:id="@+id/det_title_edit"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor ="?attr/colorPrimaryDark"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/det_desc_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_desc_label" />
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:id="@+id/det_desc_edit" />
 
                 <!-- Barcode Section -->
@@ -94,16 +111,32 @@
 
                 </RelativeLayout>
 
-                <EditText
+                <TextView
+                    android:id="@+id/det_owner_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/det_owner_edit" />
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_owner_label" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:id="@+id/det_owner_edit" />
+
+                <TextView
+                    android:id="@+id/det_location_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_location_label" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/det_location_edit" />
 
                 <TextView
@@ -134,28 +167,60 @@
                     android:id="@+id/det_loan"
                     android:text="@string/det_loan_sub" />
 
+                <TextView
+                    android:id="@+id/loan_dialog_name_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_loan_name_label" />
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:id="@+id/det_loan_name_edit" />
 
+                <TextView
+                    android:id="@+id/loan_dialog_contact_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_loan_contact_label" />
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
                     android:id="@+id/det_loan_contact_edit" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/loan_dialog_until_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/det_loan_until_edit" />
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_loan_until_label" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:id="@+id/det_loan_until_edit" />
+
+                <TextView
+                    android:id="@+id/loan_dialog_note_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_loan_note_label" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/det_loan_note_edit" />
 
                 <!-- Buttons -->

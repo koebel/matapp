@@ -14,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.matapp.matapp.MatAddActivity;
 import com.matapp.matapp.R;
 
 /**
@@ -99,13 +101,32 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.dialog_mat_loan, null));
-        builder.setTitle(R.string.loan_dialog_title)
+        builder.setTitle(R.string.loan_dialog_title);
+
+        Button loan_cancel_btn = (Button) getActivity().findViewById(R.id.loan_cancel_btn);
+        Button loan_success_btn = (Button) getActivity().findViewById(R.id.loan_success_btn);
+
+        loan_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        loan_success_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Data received", Toast.LENGTH_SHORT).show();
+
+                dismiss();
+            }
+        });
+
 
         //loan_dialog_contact.getText();
                 /*
                 .setPositiveButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Delete Item & load MatList
                         //loan_dialog_name = (EditText) view.findViewById(R.id.loan_dialog_name);
 
                         //loan_dialog_name
@@ -117,13 +138,15 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
                         //dismiss();
                     }
                 })
-                */
+
                 .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dismiss();
                     }
                 });
+                */
 
         return builder.create();
     }
+
 }

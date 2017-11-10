@@ -43,7 +43,7 @@ public class MatDetailActivity extends AppCompatActivity
         implements MatDeleteAlertDialogFragment.MatDeleteDialogListener, MatLoanAlertDialogFragment.LoanDialogListener {
 
     /* Variables for Mat Detail */
-    TextView det_title, det_desc, det_owner, det_location, det_status, det_barcode,
+    TextView det_title, det_desc, det_owner, det_location, det_status, det_barcode, det_barcode_result,
             det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Button btn_loan, btn_return, btn_delete;
     FloatingActionButton fabEditItem;
@@ -68,7 +68,6 @@ public class MatDetailActivity extends AppCompatActivity
         // binding of UI elements
         det_title = (TextView) findViewById(R.id.det_title);
         det_desc = (TextView) findViewById(R.id.det_desc);
-        det_barcode = (TextView) findViewById(R.id.det_barcode);
         det_owner = (TextView) findViewById(R.id.det_owner);
         det_location = (TextView) findViewById(R.id.det_location);
         det_status = (TextView) findViewById(R.id.det_status);
@@ -78,6 +77,8 @@ public class MatDetailActivity extends AppCompatActivity
         det_loan_until = (TextView) findViewById(R.id.det_loan_until);
         det_loan_note = (TextView) findViewById(R.id.det_loan_note);
         det_img = (ImageView) findViewById(R.id.img_mat);
+        det_barcode = (TextView) findViewById(R.id.det_barcode);
+        det_barcode_result = (TextView) findViewById(R.id.barcode_result);
 
         btn_loan = (Button) findViewById(R.id.btn_loan);
         btn_return = (Button) findViewById(R.id.btn_return);
@@ -119,6 +120,48 @@ public class MatDetailActivity extends AppCompatActivity
                     det_barcode.setText(getString(R.string.det_barcode));
                 }
 
+        // display only attributes that are not empty
+        if (description != null && description.trim().length() == 0){
+            det_desc.setVisibility(View.GONE);
+        }
+        if (barcode != null && barcode.trim().length() == 0){
+            det_barcode.setVisibility(View.GONE);
+            det_barcode_result.setVisibility(View.GONE);
+        }
+        if (owner != null && owner.trim().length() == 0){
+            det_owner.setVisibility(View.GONE);
+        }
+        if (location != null && location.trim().length() == 0){
+            det_location.setVisibility(View.GONE);
+        }
+
+        // display loan subtitle only if any of the loan attributes contains a value
+        // if (loanName.trim().length() == 0 && loanContact.trim().length() == 0 && loanUntil.trim().length() == 0 && loanNote.trim().length() == 0 )
+        String loanDetails = loanName + loanContact + loanUntil + loanNote;
+        if (loanDetails.trim().length() == 0) {
+            det_loan.setVisibility(View.GONE);
+        }
+        // hide empty fields
+        if (loanName != null && loanName.trim().length() > 0) {
+            det_loan_name.setVisibility(View.VISIBLE);
+        } else {
+            det_loan_name.setVisibility(View.GONE);
+        }
+        if (loanContact != null && loanContact.trim().length() > 0) {
+            det_loan_contact.setVisibility(View.VISIBLE);
+        } else {
+            det_loan_contact.setVisibility(View.GONE);
+        }
+        if (loanUntil != null && loanUntil.trim().length() > 0) {
+            det_loan_until.setVisibility(View.VISIBLE);
+        } else {
+            det_loan_until.setVisibility(View.GONE);
+        }
+        if (loanNote != null && loanNote.trim().length() > 0) {
+            det_loan_note.setVisibility(View.VISIBLE);
+        } else {
+            det_loan_note.setVisibility(View.GONE);
+        }
                 // display loan subtitle only if any of the loan attributes contains a value
                 // if (loanName.trim().length() == 0 && loanContact.trim().length() == 0 && loanUntil.trim().length() == 0 && loanNote.trim().length() == 0 )
                 String loanDetails = item.getLoanName() + item.getLoanContact() + item.getLoanUntil() + item.getLoanNote();

@@ -42,7 +42,7 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical">
 
-                <!-- Input Fields -->
+                <!-- Input Fields & Labels -->
                 <TextView
                     android:id="@+id/det_title_label"
                     android:layout_width="match_parent"
