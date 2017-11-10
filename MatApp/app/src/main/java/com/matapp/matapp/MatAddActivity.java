@@ -1,13 +1,24 @@
 package com.matapp.matapp;
 
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Camera;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,11 +27,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.matapp.matapp.other.Material;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DatabaseReference;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.Calendar;
 
 
 /**
@@ -37,15 +61,19 @@ public class MatAddActivity extends AppCompatActivity {
     EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode;
     Spinner det_status;
     int status;
-    String title, description, owner, location, gps, barcode, img = "", thumb, codeFormat,codeContent = "";
+    String title, description, owner, location, gps, barcode, img = "", thumb, codeFormat,codeContent = "", mCurrentPhotoPath;
     Button btn_create, btn_delete, btn_add_barcode;
     FloatingActionButton fabAddImg, scanning;
     ImageView imageView;
     TextView formatTxt, contentTxt;
     ImageView det_img;
+    Bitmap mBitmapPhoto;
 
     private FirebaseDatabase database;
     private DatabaseReference itemReference;
+    private StorageReference mStorage;
+    private Uri uriFilePath;
+    private ProgressDialog mProgress;
 
     /* static Variables */
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -57,8 +85,11 @@ public class MatAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mat_add);
 
+
         //Get Firebase database instance
         database = FirebaseDatabase.getInstance();
+        mStorage = FirebaseStorage .getInstance().getReference();
+        mProgress = new ProgressDialog(this);
         //Get reference to material
         itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
         Log.i("MatAddActivity", "Reference: " + "material/" + MatAppSession.getInstance().listKey + "/item");
@@ -89,8 +120,6 @@ public class MatAddActivity extends AppCompatActivity {
         final Intent intent = this.getIntent();
 
 
-
-
         btn_add_barcode = (Button) findViewById(R.id.btn_add_barcode);
         btn_add_barcode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,22 +133,17 @@ public class MatAddActivity extends AppCompatActivity {
         fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
         fabAddImg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                // TODO add image
-                // same as update image on Edit Material?!?
-                Toast.makeText(getApplicationContext(), "Bild hinzufügen", Toast.LENGTH_SHORT).show();
-                // take Picture
+            public void onClick(View v) {
+                uriFilePath =getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new ContentValues());
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriFilePath);
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
             }
-
         });
-
-
     }
+
 
     // TODO save Image into DB!
     @Override
@@ -140,6 +164,25 @@ public class MatAddActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
         }else if ((requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)){
+            /*
+            //add Image to firebase
+            mProgress.setMessage("Uploading Image ...");
+            mProgress.show();
+            StorageReference filepath = mStorage.child("Foto").child("222");
+            filepath.putFile(uriFilePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    mProgress.dismiss();
+                    Toast.makeText(MatAddActivity.this, "Uploading finshed...", Toast.LENGTH_LONG).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MatAddActivity.this, "Uploading failed...", Toast.LENGTH_LONG).show();
+                    //do something
+                }
+            });*/
+
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
@@ -167,7 +210,6 @@ public class MatAddActivity extends AppCompatActivity {
             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             image.setImageBitmap(decodedImage);
              */
-
         }else {
             Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
             toast.show();
@@ -215,6 +257,25 @@ public class MatAddActivity extends AppCompatActivity {
         String itemKey = itemReference.push().getKey();
         itemReference.child(itemKey).setValue(newMat);
         Log.i("MatAddActivity", "new item created with itemKey=" + itemKey);
+
+        /*
+        //add Image to firebase
+        mProgress.setMessage("Uploading Image ...");
+        mProgress.show();
+        StorageReference filepath = mStorage.child("Foto").child(itemKey);
+        filepath.putFile(uriFilePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                mProgress.dismiss();
+                Toast.makeText(MatAddActivity.this, "Uploading finshed...", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MatAddActivity.this, "Uploading failed...", Toast.LENGTH_LONG).show();
+                //do something
+            }
+        });*/
 
         // load Mat Detail activity
         Intent intent = new Intent(this, MatDetailActivity.class);
