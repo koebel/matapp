@@ -16,6 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     String codeFormat,codeContent;
 
     private FirebaseAuth auth;
+
+    private FirebaseDatabase database;
+    private DatabaseReference itemReference;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -233,9 +242,42 @@ public class MainActivity extends AppCompatActivity {
                 codeFormat = scanningResult.getFormatName();
                 Toast.makeText(this, "Scan: " + codeContent, Toast.LENGTH_LONG).show();
 
-                Intent NewMatIntent = new Intent(this, MatAddActivity.class);
-                NewMatIntent.putExtra("barcode",codeContent);
-                startActivity(NewMatIntent);
+                //TODO find codeContent in database or start add otherwise
+
+                //Get Firebase database instance
+                database = FirebaseDatabase.getInstance();
+                //Get reference to material
+                itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+                //Select child where barcode=codeContent
+                Query query = itemReference.orderByChild("barcode").equalTo(codeContent);
+                //Add Listener for one read
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChildren()) {
+                            //If list is found get itemKey
+                            String itemKey = "";
+                            for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+                                itemKey = childDataSnapshot.getKey();
+                                break;
+                            }
+                            //Intent for Detail
+                            Intent NewMatIntent = new Intent(MainActivity.this, MatDetailActivity.class);
+                            NewMatIntent.putExtra("ITEM_KEY", itemKey);
+                            startActivity(NewMatIntent);
+                        } else {
+                            //Intent for Add
+                            Intent NewMatIntent = new Intent(MainActivity.this, MatAddActivity.class);
+                            NewMatIntent.putExtra("barcode",codeContent);
+                            startActivity(NewMatIntent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
