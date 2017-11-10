@@ -120,48 +120,21 @@ public class MatDetailActivity extends AppCompatActivity
                     det_barcode.setText(getString(R.string.det_barcode));
                 }
 
-        // display only attributes that are not empty
-        if (description != null && description.trim().length() == 0){
-            det_desc.setVisibility(View.GONE);
-        }
-        if (barcode != null && barcode.trim().length() == 0){
-            det_barcode.setVisibility(View.GONE);
-            det_barcode_result.setVisibility(View.GONE);
-        }
-        if (owner != null && owner.trim().length() == 0){
-            det_owner.setVisibility(View.GONE);
-        }
-        if (location != null && location.trim().length() == 0){
-            det_location.setVisibility(View.GONE);
-        }
+                // display only attributes that are not empty
+                if (item.getDescription() != null && item.getDescription().trim().length() == 0){
+                    det_desc.setVisibility(View.GONE);
+                }
+                if (item.getBarcode() != null && item.getBarcode().trim().length() == 0){
+                    det_barcode.setVisibility(View.GONE);
+                    det_barcode_result.setVisibility(View.GONE);
+                }
+                if (item.getOwner() != null && item.getOwner().trim().length() == 0){
+                    det_owner.setVisibility(View.GONE);
+                }
+                if (item.getLocation() != null && item.getLocation().trim().length() == 0){
+                    det_location.setVisibility(View.GONE);
+                }
 
-        // display loan subtitle only if any of the loan attributes contains a value
-        // if (loanName.trim().length() == 0 && loanContact.trim().length() == 0 && loanUntil.trim().length() == 0 && loanNote.trim().length() == 0 )
-        String loanDetails = loanName + loanContact + loanUntil + loanNote;
-        if (loanDetails.trim().length() == 0) {
-            det_loan.setVisibility(View.GONE);
-        }
-        // hide empty fields
-        if (loanName != null && loanName.trim().length() > 0) {
-            det_loan_name.setVisibility(View.VISIBLE);
-        } else {
-            det_loan_name.setVisibility(View.GONE);
-        }
-        if (loanContact != null && loanContact.trim().length() > 0) {
-            det_loan_contact.setVisibility(View.VISIBLE);
-        } else {
-            det_loan_contact.setVisibility(View.GONE);
-        }
-        if (loanUntil != null && loanUntil.trim().length() > 0) {
-            det_loan_until.setVisibility(View.VISIBLE);
-        } else {
-            det_loan_until.setVisibility(View.GONE);
-        }
-        if (loanNote != null && loanNote.trim().length() > 0) {
-            det_loan_note.setVisibility(View.VISIBLE);
-        } else {
-            det_loan_note.setVisibility(View.GONE);
-        }
                 // display loan subtitle only if any of the loan attributes contains a value
                 // if (loanName.trim().length() == 0 && loanContact.trim().length() == 0 && loanUntil.trim().length() == 0 && loanNote.trim().length() == 0 )
                 String loanDetails = item.getLoanName() + item.getLoanContact() + item.getLoanUntil() + item.getLoanNote();
