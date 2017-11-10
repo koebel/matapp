@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +16,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.matapp.matapp.other.Material;
 
 import static com.matapp.matapp.MatAddActivity.REQUEST_IMAGE_CAPTURE;
 
@@ -33,17 +41,23 @@ import static com.matapp.matapp.MatAddActivity.REQUEST_IMAGE_CAPTURE;
 public class MatEditActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Edit */
-    EditText det_title, det_desc, det_owner, det_location, det_gps, det_barcode,
+    EditText det_title, det_desc, det_owner, det_location, det_barcode,
             det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Spinner det_status;
-    int itemId, status;
-    String title, description, owner, location, gps, img, thumb, loanName, loanContact, loanUntil, loanNote, barcode;
+    //int itemId, status;
+    //String title, description, owner, location, gps, img, thumb, loanName, loanContact, loanUntil, loanNote, barcode;
     FloatingActionButton fabAddImg;
     Button btn_add_barcode;
     ImageView det_img;
     TextView formatTxt, contentTxt;
 
     Intent intent;
+
+    private String itemKey;
+    private Material item;
+
+    private FirebaseDatabase database;
+    private DatabaseReference itemReference;
 
     /* Lifecycle Methods */
     @Override
@@ -70,72 +84,77 @@ public class MatEditActivity extends AppCompatActivity {
         intent = this.getIntent();
 
         // receive Extras
-        itemId = intent.getExtras().getInt("ID_KEY");
-        title = intent.getExtras().getString("TITLE_KEY");
-        description = intent.getExtras().getString("DESCRIPTION_KEY");
-        owner = intent.getExtras().getString("OWNER_KEY");
-        location = intent.getExtras().getString("LOCATION_KEY");
-        status = intent.getExtras().getInt("STATUS_KEY");
-        gps = intent.getExtras().getString("GPS_KEY");
-        barcode = intent.getExtras().getString("BARCODE_KEY");
-        img = intent.getExtras().getString("IMAGE_KEY");
-        thumb = intent.getExtras().getString("THUMB_KEY");
-        loanName = intent.getExtras().getString("LOAN_NAME_KEY");
-        loanContact = intent.getExtras().getString("LOAN_CONTACT_KEY");
-        loanUntil = intent.getExtras().getString("LOAN_UNTIL_KEY");
-        loanNote = intent.getExtras().getString("LOAN_NOTE_KEY");
+        itemKey = intent.getExtras().getString("ITEM_KEY");
 
-        // binding of extracted values to the UI elements
-        // if no value is stored for attributes show default value for that field
-        det_title.setText(title);
+        //Get Firebase database instance
+        database = FirebaseDatabase.getInstance();
+        //Get reference to material
+        itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+        //Read from database
+        itemReference.child(itemKey).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                item = dataSnapshot.getValue(Material.class);
+                Log.i("MatEditActivity", "item: " + item);
 
-        if (description != null && description.trim().length() > 0) {
-            det_desc.setText(description);
-        } else {
-            det_desc.setHint(R.string.det_desc_hint);
-            //det_desc.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        }
+                // binding of extracted values to the UI elements
+                // if no value is stored for attributes show default value for that field
+                det_title.setText(item.getTitle());
 
-        if (owner != null && owner.trim().length() > 0) {
-            det_owner.setText(owner);
-        } else {
-            det_owner.setHint(R.string.det_owner_hint);
-            //det_owner.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        }
+                if (item.getDescription() != null && item.getDescription().trim().length() > 0) {
+                    det_desc.setText(item.getDescription());
+                } else {
+                    det_desc.setHint(R.string.det_desc_hint);
+                    //det_desc.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+                }
 
-        if (location != null && location.trim().length() > 0) {
-            det_location.setText(location);
-        } else {
-            det_location.setHint(R.string.det_location_hint);
-            //det_location.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        }
+                if (item.getOwner() != null && item.getOwner().trim().length() > 0) {
+                    det_owner.setText(item.getOwner());
+                } else {
+                    det_owner.setHint(R.string.det_owner_hint);
+                    //det_owner.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+                }
 
-        det_status.setSelection(status);
+                if (item.getLocation() != null && item.getLocation().trim().length() > 0) {
+                    det_location.setText(item.getLocation());
+                } else {
+                    det_location.setHint(R.string.det_location_hint);
+                    //det_location.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+                }
 
-        if (loanName != null && loanName.trim().length() > 0) {
-            det_loan_name.setText(loanName);
-        } else {
-            det_loan_name.setHint(R.string.det_loan_name_hint);
-            //det_loan_name.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        }
-        if (loanContact != null && loanContact.trim().length() > 0) {
-            det_loan_contact.setText(loanContact);
-        } else {
-            det_loan_contact.setHint(R.string.det_loan_contact_hint);
-            //det_loan_contact.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        }
-        if (loanUntil != null && loanUntil.trim().length() > 0) {
-            det_loan_until.setText(loanUntil);
-        } else {
-            det_loan_until.setHint(R.string.det_loan_until_hint);
-            //det_loan_until.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        }
-        if (loanNote != null && loanNote.trim().length() > 0) {
-            det_loan_note.setText(loanNote);
-        } else {
-            det_loan_note.setHint(R.string.det_loan_note_hint);
-            //det_loan_note.setTextColor(getResources().getColor(R.color.colorPlaceholder));
-        }
+                det_status.setSelection(item.getStatus());
+
+                if (item.getLoanName() != null && item.getLoanName().trim().length() > 0) {
+                    det_loan_name.setText(item.getLoanName());
+                } else {
+                    det_loan_name.setHint(R.string.det_loan_name_hint);
+                    //det_loan_name.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+                }
+                if (item.getLoanContact() != null && item.getLoanContact().trim().length() > 0) {
+                    det_loan_contact.setText(item.getLoanContact());
+                } else {
+                    det_loan_contact.setHint(R.string.det_loan_contact_hint);
+                    //det_loan_contact.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+                }
+                if (item.getLoanUntil() != null && item.getLoanUntil().trim().length() > 0) {
+                    det_loan_until.setText(item.getLoanUntil());
+                } else {
+                    det_loan_until.setHint(R.string.det_loan_until_hint);
+                    //det_loan_until.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+                }
+                if (item.getLoanNote() != null && item.getLoanNote().trim().length() > 0) {
+                    det_loan_note.setText(item.getLoanNote());
+                } else {
+                    det_loan_note.setHint(R.string.det_loan_note_hint);
+                    //det_loan_note.setTextColor(getResources().getColor(R.color.colorPlaceholder));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         // add Image FAB
         fabAddImg = (FloatingActionButton) findViewById(R.id.fab_add_img);
@@ -170,50 +189,34 @@ public class MatEditActivity extends AppCompatActivity {
     public void onEditItem(View v) {
         // get Content from Input fields
         // if fields contain Helpertext reset to empty String
-        title = det_title.getText().toString();
-
-        if (title.equals(getText(R.string.det_title).toString())) {
-            title = "";
+        String title = det_title.getText().toString();
+        if (TextUtils.isEmpty(title)) {
+            Toast.makeText(getApplicationContext(), R.string.det_title_error, Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        if (title.trim().length() == 0) {
-            // TODO: to something, title shouldn't be empty!!!
-            // don't allow material to be saved unless there is a valid title
-            // see add material for implementation of this
-        }
+        item.setTitle(title);
+        item.setDescription(det_desc.getText().toString());
+        item.setOwner(det_owner.getText().toString());
+        item.setLocation(det_location.getText().toString());
+        item.setStatus(det_status.getSelectedItemPosition());
+        item.setLoanName(det_loan_name.getText().toString());
+        item.setLoanContact(det_loan_contact.getText().toString());
+        item.setLoanUntil(det_loan_until.getText().toString());
+        item.setLoanNote(det_loan_note.getText().toString());
 
-        description = det_desc.getText().toString();
-        owner = det_owner.getText().toString();
-        location = det_location.getText().toString();
-        status = det_status.getSelectedItemPosition();
-        loanName = det_loan_name.getText().toString();
-        loanContact = det_loan_contact.getText().toString();
-        loanUntil = det_loan_until.getText().toString();
-        loanNote = det_loan_note.getText().toString();
-
-        // TODO save changes of this material
-        // important: item should keep the same uniqueId!
-        // Toast.makeText(getApplicationContext(), "Änderungen wurde gespeichert", Toast.LENGTH_SHORT).show();
+        //Save changes in database
+        itemReference.child(itemKey).setValue(item);
+        Log.i("MatAddActivity", "saved modified item with itemKey=" + itemKey);
+        Toast.makeText(getApplicationContext(), getString(R.string.edit_saved), Toast.LENGTH_SHORT).show();
 
         // put extras into intent to pass them on to the Material Detail
-        Intent intent = new Intent(this, MatDetailActivity.class);
-        intent.putExtra("ID_KEY", itemId);
-        intent.putExtra("TITLE_KEY", title);
-        intent.putExtra("DESCRIPTION_KEY", description);
-        intent.putExtra("OWNER_KEY", owner);
-        intent.putExtra("LOCATION_KEY", location);
-        intent.putExtra("STATUS_KEY", status);
-        intent.putExtra("GPS_KEY", gps);
-        intent.putExtra("BARCODE_KEY", barcode);
-        intent.putExtra("IMAGE_KEY", img);
-        intent.putExtra("THUMB_KEY", thumb);
-        intent.putExtra("LOAN_NAME_KEY", loanName);
-        intent.putExtra("LOAN_CONTACT_KEY", loanContact);
-        intent.putExtra("LOAN_UNTIL_KEY", loanUntil);
-        intent.putExtra("LOAN_NOTE_KEY", loanNote);
+        //Intent intent = new Intent(this, MatDetailActivity.class);
+        //intent.putExtra("ITEM_KEY", itemKey);
 
         // start Material Detail Activity
-        startActivity(intent);
+        //startActivity(intent);
+        finish();
     }
 
     // Cancel Button:
@@ -222,24 +225,12 @@ public class MatEditActivity extends AppCompatActivity {
 
         // create intent with original values passed on to this view
         // and load Mat Detail activity
-        Intent intent = new Intent(this, MatDetailActivity.class);
-        intent.putExtra("ID_KEY", this.itemId);
-        intent.putExtra("TITLE_KEY", this.title);
-        intent.putExtra("DESCRIPTION_KEY", this.description);
-        intent.putExtra("OWNER_KEY", this.owner);
-        intent.putExtra("LOCATION_KEY", this.location);
-        intent.putExtra("STATUS_KEY", this.status);
-        intent.putExtra("GPS_KEY", this.gps);
-        intent.putExtra("BARCODE_KEY", this.barcode);
-        intent.putExtra("IMAGE_KEY", this.img);
-        intent.putExtra("IMAGE_KEY", this.thumb);
-        intent.putExtra("LOAN_NAME_KEY", this.loanName);
-        intent.putExtra("LOAN_CONTACT_KEY", this.loanContact);
-        intent.putExtra("LOAN_UNTIL_KEY", this.loanUntil);
-        intent.putExtra("LOAN_NOTE_KEY", this.loanNote);
+        //Intent intent = new Intent(this, MatDetailActivity.class);
+        //intent.putExtra("ITEM_KEY", itemKey);
 
         // start Material Detail Activity
-        startActivity(intent);
+        //startActivity(intent);
+        finish();
     }
 
     public void addBarcode() {
@@ -269,7 +260,8 @@ public class MatEditActivity extends AppCompatActivity {
         if (scanningResult != null) {
             if(scanningResult.getContents() != null){
                 //we have a result
-                barcode = scanningResult.getContents();
+                String barcode = scanningResult.getContents();
+                item.setBarcode(barcode);
                 contentTxt.setText(barcode);
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
@@ -284,7 +276,7 @@ public class MatEditActivity extends AppCompatActivity {
 
             // TODO convert Bitmap into String with Base64 and downsize it
             // this not sure if this basic conversion is working...
-            img = imageBitmap.toString();
+            //item.setImg(imageBitmap.toString());
             /*
             maybe use this code for Base64 conversion:
             https://stackoverflow.com/questions/4837110/how-to-convert-a-base64-string-into-a-bitmap-image-to-show-it-in-a-imageview

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.matapp.matapp.other.Material;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -28,8 +29,9 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
 
     /* Attributes */
-    List<Material> items;
-    public RecyclerAdapter (List<Material> items){
+    //List<Material> items;
+    public List<Map<String,String>> items;
+    public RecyclerAdapter (List<Map<String,String>> items){
         this.items = items;
     }
 
@@ -44,16 +46,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        holder.row_mat_title.setText(items.get(position).title);
-        holder.row_mat_desc.setText(items.get(position).description);
+        holder.row_mat_title.setText(items.get(position).get("title"));
+        holder.row_mat_desc.setText(items.get(position).get("description"));
 
         // TODO thumb muss in Bitmap umgewandelt werden!!!
-        //holder.row_mat_thumb.setImageBitmap(items.get(position).thumb);
+        //holder.row_mat_thumb.setImageBitmap(items.get(position).get("thumb"));
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        if(items != null) {
+            return items.size();
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -85,20 +91,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
                     // put extras into intent to pass them on to the Material Detail
                     Intent intent = new Intent(context, MatDetailActivity.class);
-                    intent.putExtra("ID_KEY", items.get(position).getUniqueId());
-                    intent.putExtra("TITLE_KEY", items.get(position).getTitle());
-                    intent.putExtra("DESCRIPTION_KEY", items.get(position).getDescription());
-                    intent.putExtra("OWNER_KEY", items.get(position).getOwner());
-                    intent.putExtra("LOCATION_KEY", items.get(position).getLocation());
-                    intent.putExtra("STATUS_KEY", items.get(position).getStatus());
-                    intent.putExtra("GPS_KEY", "");
-                    intent.putExtra("BARCODE_KEY", items.get(position).getBarcode());
-                    intent.putExtra("IMAGE_KEY", items.get(position).getImg());
-                    intent.putExtra("THUMB_KEY", items.get(position).getThumb());
-                    intent.putExtra("LOAN_NAME_KEY", items.get(position).getLoanName());
-                    intent.putExtra("LOAN_CONTACT_KEY", items.get(position).getLoanContact());
-                    intent.putExtra("LOAN_UNTIL_KEY", items.get(position).getLoanUntil());
-                    intent.putExtra("LOAN_NOTE_KEY", items.get(position).getLoanNote());
+                    intent.putExtra("ITEM_KEY", items.get(position).get("itemKey"));
 
                     // start Material Detail Activity
                     context.startActivity(intent);

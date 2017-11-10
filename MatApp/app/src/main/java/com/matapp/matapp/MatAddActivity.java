@@ -61,7 +61,7 @@ public class MatAddActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         //Get reference to material
         itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
-        Log.i("MATAPP", "Reference: " + "material/" + MatAppSession.getInstance().listKey + "/item");
+        Log.i("MatAddActivity", "Reference: " + "material/" + MatAppSession.getInstance().listKey + "/item");
 
         // binding of UI elements
         det_title = (EditText) findViewById(R.id.det_title_add);
@@ -214,26 +214,14 @@ public class MatAddActivity extends AppCompatActivity {
         //Save newMat into DB
         String itemKey = itemReference.push().getKey();
         itemReference.child(itemKey).setValue(newMat);
-        Log.i("MATAPP", "new item created with itemKey=" + itemKey);
+        Log.i("MatAddActivity", "new item created with itemKey=" + itemKey);
 
         // load Mat Detail activity
         Intent intent = new Intent(this, MatDetailActivity.class);
-        intent.putExtra("ID_KEY", 1);
-        intent.putExtra("TITLE_KEY", newMat.getTitle());
-        intent.putExtra("DESCRIPTION_KEY", newMat.getDescription());
-        intent.putExtra("OWNER_KEY", newMat.getOwner());
-        intent.putExtra("LOCATION_KEY", newMat.getLocation());
-        intent.putExtra("STATUS_KEY", newMat.getStatus());
-        intent.putExtra("GPS_KEY", "");
-        intent.putExtra("BARCODE_KEY", newMat.getBarcode());
-        intent.putExtra("IMAGE_KEY", newMat.getImg());
-        intent.putExtra("Thumb_KEY", newMat.getThumb());
-        intent.putExtra("LOAN_NAME_KEY", newMat.getLoanName());
-        intent.putExtra("LOAN_CONTACT_KEY", newMat.getLoanContact());
-        intent.putExtra("LOAN_UNTIL_KEY", newMat.getLoanUntil());
-        intent.putExtra("LOAN_NOTE_KEY", newMat.getLoanNote());
+        intent.putExtra("ITEM_KEY", itemKey);
 
         // start Material Detail Activity
         startActivity(intent);
+        finish();
     }
 }

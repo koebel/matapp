@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             emailInput.setText(auth.getCurrentUser().getEmail());
             //Logout
             auth.signOut();
-            Log.i("MATAPP", "listKey: " + MatAppSession.getInstance().listKey);
+            Log.i("LoginActivity", "listKey: " + MatAppSession.getInstance().listKey);
         }
 
         //Login Button
@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //Success
                             Toast.makeText(view.getContext(), getString(R.string.login_loginSuccessful), Toast.LENGTH_SHORT).show();
-                            Log.i("MATAPP", "uid: " + auth.getCurrentUser().getUid());
+                            Log.i("LoginActivity", "uid: " + auth.getCurrentUser().getUid());
                             //Select child where listName=listName
                             Query query = materialReference.orderByChild("listName").equalTo(listName);
                             //Add Listener for one read
@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                                         } else {
                                             listWriteable = false;
                                         }
-                                        Log.i("MATAPP", "found listKey: " + listKey + " writeable: " + listWriteable);
+                                        Log.i("LoginActivity", "found listKey: " + listKey + " writeable: " + listWriteable);
                                     } else {
                                         //Otherwise create new list
                                         //TODO: dialog to confirm
@@ -132,19 +132,19 @@ public class LoginActivity extends AppCompatActivity {
                                         materialReference.child(listKey).child("listName").setValue(listName);
                                         materialReference.child(listKey).child("listUid").setValue(auth.getCurrentUser().getUid());
                                         listWriteable = true;
-                                        Log.i("MATAPP", "created new list with listKey=" + listKey);
+                                        Log.i("LoginActivity", "created new list with listKey=" + listKey);
                                         Toast.makeText(view.getContext(), getString(R.string.login_listCreated), Toast.LENGTH_SHORT).show();
                                     }
                                     MatAppSession.getInstance().listKey = listKey;
                                     MatAppSession.getInstance().listName = listName;
                                     MatAppSession.getInstance().listWriteable = listWriteable;
+                                    finish();
                                 }
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
                                 }
                             });
-                            finish();
                         } else {
                             //There was an error
                             Toast.makeText(view.getContext(), getString(R.string.login_loginFailed) + task.getException(), Toast.LENGTH_LONG).show();

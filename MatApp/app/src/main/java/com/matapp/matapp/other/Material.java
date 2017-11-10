@@ -35,6 +35,24 @@ public class Material {
     public String loanNote;
 
 
+    /* Constructor with no arguments */
+    public Material(){
+        this.uniqueId = createUniqueId();
+        this.title = "";
+        this.description = "";
+        this.owner = "";
+        this.location = "";
+        //this.gps = "";
+        this.status = STATUS_AVAILABLE;
+        this.barcode = "";
+        this.img = "";
+        this.thumb = "";
+        this.loanName = "";
+        this.loanContact = "";
+        this.loanUntil = "";
+        this.loanNote = "";
+    }
+
     /* basic Constructor */
     public Material(String title, String description){
         this.uniqueId = createUniqueId();

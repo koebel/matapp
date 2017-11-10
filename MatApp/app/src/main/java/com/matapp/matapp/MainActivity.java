@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -63,16 +64,6 @@ public class MainActivity extends AppCompatActivity {
         // Setup drawer view
         setupDrawerContent(navigationDrawer);
 
-        // load MatListFragment on Start Screen
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        MatListFragment fragment = MatListFragment.newInstance(0, "");
-        ft.replace(R.id.flContent, fragment);
-        ft.commit();
-        setTitle(R.string.nav_matlist);
-
-        // TODO maybe set Title to Listname?!?
-        // setTitle(MatAppSession.getInstance().listName);
-
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         //Check if logged in
@@ -83,6 +74,24 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             Toast.makeText(this, "Login: " + auth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        Log.i("MainActivity", "listKey: " + MatAppSession.getInstance().listKey);
+        if(MatAppSession.getInstance().listKey != null) {
+            // load MatListFragment on Start Screen
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            MatListFragment fragment = MatListFragment.newInstance(0, "");
+            ft.replace(R.id.flContent, fragment);
+            ft.commit();
+            //setTitle(R.string.nav_matlist);
+
+            //Set Title to Listname
+            setTitle(MatAppSession.getInstance().listName);
         }
     }
 
@@ -135,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             // setTitle(MatAppSession.getInstance().listName);
             // display name of current activity
             // setTitle(menuItem.getTitle());
-            setTitle(R.string.nav_matlist);
+            //setTitle(R.string.nav_matlist);
 
         } else {
             // Start activity

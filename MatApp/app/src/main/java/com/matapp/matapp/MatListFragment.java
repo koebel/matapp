@@ -7,14 +7,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.matapp.matapp.other.Material;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -27,11 +34,14 @@ import java.util.List;
 
 public class MatListFragment extends Fragment {
 
-    public List<Material> materials;
+    public List<Map<String,String>> materials;
 
     public RecyclerView recyclerView;
     public RecyclerView.Adapter recyclerViewAdapter;
     public RecyclerView.LayoutManager recyclerViewLayoutManager;
+
+    private FirebaseDatabase database;
+    private DatabaseReference itemReference;
 
     // Creates a new fragment given an int and title
     // DemoFragment.newInstance(5, "Hello");
@@ -55,12 +65,39 @@ public class MatListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mat_list, parent, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_matlist);
-        initializeData();
-        recyclerViewAdapter = new RecyclerAdapter(materials);
 
-        recyclerViewLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(recyclerViewLayoutManager);
-        recyclerView.setAdapter(recyclerViewAdapter);
+        //Get Firebase database instance
+        database = FirebaseDatabase.getInstance();
+        //Get reference to material
+        itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+        //Read at reference
+        itemReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                materials = new ArrayList<Map<String,String>>();
+                for(DataSnapshot item: dataSnapshot.getChildren()) {
+                    //Add a HashMap to ArrayList for each item
+                    Map<String,String> map = new HashMap<String,String>();
+                    map.put("itemKey", item.getKey());
+                    map.put("title", item.child("title").getValue(String.class));
+                    map.put("description", item.child("description").getValue(String.class));
+                    map.put("thumb", item.child("thumb").getValue(String.class));
+                    materials.add(map);
+                }
+                Log.i("MatListFragment", "items in list: " + materials);
+
+                //Pass ArrayList to RecyclerView
+                recyclerViewAdapter = new RecyclerAdapter(materials);
+                recyclerViewLayoutManager = new LinearLayoutManager(MatListFragment.this.getContext());
+                recyclerView.setLayoutManager(recyclerViewLayoutManager);
+                recyclerView.setAdapter(recyclerViewAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         return view;
     }
@@ -83,50 +120,4 @@ public class MatListFragment extends Fragment {
         });
     }
 
-    // This method creates an ArrayList that contains some Dummy Material objects
-    public void initializeData(){
-        materials = new ArrayList<>();
-        materials.add(new Material("Digital Camera", "lorem ipsum", "Kathrin Koebel", "5.2A14", Material.STATUS_AVAILABLE ));
-        materials.add(new Material("VR Headset", "dolor sit amet", "Rafael Reimann", "5.2A14", Material.STATUS_AVAILABLE));
-        materials.add(new Material("portable Beamer", "consetetur sadipscing elitr", "Christoph Meyer", "5.2A14", Material.STATUS_LENT));
-        materials.add(new Material("Android Book", "sed diam nonumy", "Kathrin Koebel", "5.2A14", Material.STATUS_LENT, "gps placeholder", "barcode placeholder", "img placeholder",
-                "Name Ausleiher", "Telefonnummer oder Email Ausleiher", "Ausleihe bis Datum", "ggf Notiz zur Ausleihe... Bsp für langer Text: " +
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. "));
-        materials.add(new Material("3D Printer", "eirmod tempor invidunt ut", "Rafael Reimann", "5.2A14", Material.STATUS_UNAVAILABLE));
-        materials.add(new Material("Coffee Machine", "labore et dolore", "Christoph Meyer", "5.2A14", Material.STATUS_AVAILABLE));
-        materials.add(new Material("GoPro", "magna aliquyam erat", "Kathrin Koebel", "5.2A14", Material.STATUS_AVAILABLE));
-        materials.add(new Material("Pixel Phone", "sed diam voluptua", "Rafael Reimann", "5.2A14", Material.STATUS_LENT));
-        materials.add(new Material("Adapterset", "at vero eos et accusam", "Christoph Meyer", "5.2A14", Material.STATUS_LENT));
-        materials.add(new Material("Screen", "et justo duo dolores", "Kathrin Koebel", "5.2A14", Material.STATUS_UNAVAILABLE));
-        materials.add(new Material("Powerboard", "et ea rebum", "Rafael Reimann", "5.2A14", Material.STATUS_AVAILABLE));
-        materials.add(new Material("Tripod", "stet clita kasd gubergren", "Christoph Meyer", "5.2A14", Material.STATUS_AVAILABLE));
-        materials.add(new Material("Spotlight", "no sea takimata sanctus", "Kathrin Koebel", "5.2A14", Material.STATUS_AVAILABLE ));
-    }
-
-    /* Helper Methods */
-    public Material getMaterialAtPosition (int index) {
-        return materials.get(index);
-    }
-
-    public int getMaterialIndex (int uniqueId) {
-        int index = -1;
-        int count = 0;
-        for(Material m : materials){
-            if (m.getUniqueId() == uniqueId){ return index = count; }
-            count++;
-        }
-        return index;
-    }
-
-    public void addMaterial (Material m) {
-        int index = materials.size();
-        materials.add(index, m);
-    }
-
-    public void deleteMaterial (int uniqueId) {
-        int index = getMaterialIndex(uniqueId);
-        if (index >= 0 && index < materials.size()) {
-            materials.remove(index);
-        }
-    }
 }

@@ -62,7 +62,7 @@
                     android:text="@string/det_desc" />
 
                 <TextView
-                    android:id="@+id/det_barcode_edit"
+                    android:id="@+id/det_barcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
