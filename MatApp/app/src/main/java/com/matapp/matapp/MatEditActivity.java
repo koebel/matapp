@@ -3,6 +3,7 @@ package com.matapp.matapp;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -49,7 +50,7 @@ public class MatEditActivity extends AppCompatActivity {
     FloatingActionButton fabAddImg;
     Button btn_add_barcode;
     ImageView det_img;
-    TextView formatTxt, contentTxt;
+    TextView formatTxt, textViewBarcode;
 
     Intent intent;
 
@@ -65,6 +66,9 @@ public class MatEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mat_edit);
 
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         // binding of UI elements
         det_title = (EditText) findViewById(R.id.det_title_edit);
         det_desc = (EditText) findViewById(R.id.det_desc_edit);
@@ -78,7 +82,7 @@ public class MatEditActivity extends AppCompatActivity {
         det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
 
         det_img = (ImageView) findViewById(R.id.img_mat_edit);
-        contentTxt = (TextView)findViewById(R.id.barcode_result);
+        textViewBarcode = (TextView)findViewById(R.id.barcode_result);
 
         // Get the Intent that started this activity and extract values
         intent = this.getIntent();
@@ -262,7 +266,7 @@ public class MatEditActivity extends AppCompatActivity {
                 //we have a result
                 String barcode = scanningResult.getContents();
                 item.setBarcode(barcode);
-                contentTxt.setText(barcode);
+                textViewBarcode.setText(barcode);
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }

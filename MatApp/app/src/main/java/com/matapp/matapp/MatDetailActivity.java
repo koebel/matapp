@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -17,14 +19,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
 import com.matapp.matapp.fragments.MatLoanAlertDialogFragment;
 import com.matapp.matapp.other.Material;
+
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -112,6 +122,7 @@ public class MatDetailActivity extends AppCompatActivity
                 det_loan_until.setText(item.getLoanUntil());
                 det_loan_note.setText(item.getLoanNote());
 
+                //TODO get Full Image from storage.
                 det_img.setImageBitmap(stringToBitmap(item.getImg()));
 
                 if(item.getBarcode().trim().length() > 0) {
