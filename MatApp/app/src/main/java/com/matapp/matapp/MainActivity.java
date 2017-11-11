@@ -266,10 +266,14 @@ public class MainActivity extends AppCompatActivity {
                             NewMatIntent.putExtra("ITEM_KEY", itemKey);
                             startActivity(NewMatIntent);
                         } else {
-                            //Intent for Add
-                            Intent NewMatIntent = new Intent(MainActivity.this, MatAddActivity.class);
-                            NewMatIntent.putExtra("barcode",codeContent);
-                            startActivity(NewMatIntent);
+                            if(MatAppSession.getInstance().listWriteable) {
+                                //Intent for Add
+                                Intent NewMatIntent = new Intent(MainActivity.this, MatAddActivity.class);
+                                NewMatIntent.putExtra("barcode", codeContent);
+                                startActivity(NewMatIntent);
+                            } else {
+                                Toast.makeText(MainActivity.this, getString(R.string.item_notFound), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
 
