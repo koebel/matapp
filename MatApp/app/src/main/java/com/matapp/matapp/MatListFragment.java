@@ -118,6 +118,10 @@ public class MatListFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        if(MatAppSession.getInstance().listWriteable == false) {
+            fabAddItem.setVisibility(View.GONE);
+        }
     }
 
 }

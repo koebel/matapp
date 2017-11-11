@@ -195,6 +195,11 @@ public class MatDetailActivity extends AppCompatActivity
                     btn_loan.setVisibility(View.GONE);
                     btn_return.setVisibility(View.GONE);
                 }
+
+                if(MatAppSession.getInstance().listWriteable == false) {
+                    btn_loan.setVisibility(View.GONE);
+                    btn_return.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -214,24 +219,15 @@ public class MatDetailActivity extends AppCompatActivity
                 // put extras into intent to pass them on to the Material Detail
                 Intent intent = new Intent(context, MatEditActivity.class);
                 intent.putExtra("ITEM_KEY", itemKey);
-                /*intent.putExtra("ID_KEY", itemId);
-                intent.putExtra("TITLE_KEY", title);
-                intent.putExtra("DESCRIPTION_KEY", description);
-                intent.putExtra("OWNER_KEY", owner);
-                intent.putExtra("LOCATION_KEY", location);
-                intent.putExtra("STATUS_KEY", status);
-                intent.putExtra("GPS_KEY", gps);
-                intent.putExtra("BARCODE_KEY", barcode);
-                intent.putExtra("IMAGE_KEY", img);
-                intent.putExtra("LOAN_NAME_KEY", loanName);
-                intent.putExtra("LOAN_CONTACT_KEY", loanContact);
-                intent.putExtra("LOAN_UNTIL_KEY", loanUntil);
-                intent.putExtra("LOAN_NOTE_KEY", loanNote);*/
-
                 // start Material Edit Activity
                 context.startActivity(intent);
             }
         });
+
+        if(MatAppSession.getInstance().listWriteable == false) {
+            fabEditItem.setVisibility(View.GONE);
+            btn_delete.setVisibility(View.GONE);
+        }
 
         // attach AlertDialog to Delete Button
         // and pass the item's uniqueId and title on to the AlertDialog
