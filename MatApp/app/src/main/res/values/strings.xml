@@ -47,7 +47,7 @@
     <string name="det_barcode_label">Barcode</string>
     <string name="det_status_label">Ausleihstatus</string>
     <string name="det_loan_name_label">Ausleiher</string>
-    <string name="det_loan_contact_label">Kontaktdaten (Mail/Tel)</string>
+    <string name="det_loan_contact_label">Kontaktdaten</string>
     <string name="det_loan_until_label">voraussichtliche Rückgabe</string>
     <string name="det_loan_note_label">Notiz zur Ausleihe</string>
 
@@ -75,6 +75,7 @@
     <!-- Loan Dialog -->
     <string name="loan_dialog_title">Material ausleihen</string>
     <string name="loan_dialog_text">Noch mehr Text zur Ausleihe...</string>
+    <string name="loan_txt">ausleihen</string>
 
 
     <!-- Scan menu labels -->
@@ -118,5 +119,9 @@
     <string name="login_missingEmail">Email fehlt</string>
     <string name="login_shortPassword">Passwort zu kurz (min. 6 Zeichen)</string>
     <string name="login_backBtn">Klicken Sie ein zweites Mal auf Zurück, um die App zu schliessen.</string>
+
+    <!-- List View first Use -->
+    <string name="first_use_title">Herzlich willkommen bei MatApp! </string>
+    <string name="first_use_text">MatApp hilft Ihnen beim Verwalten von Gegenständen. Fügen Sie mit dem Button rechts unten Gegenstände zu Ihrer Liste hinzu.</string>
 
 </resources>

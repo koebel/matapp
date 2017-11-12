@@ -238,18 +238,7 @@ public class MatDetailActivity extends AppCompatActivity
         // attach AlertDialog to Loan Button
         btn_loan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // TODO implement borrow Item Popup
                 showLoanAlertDialog();
-
-                /*
-                MatLoanAlertDialogFragment alertDialog = new MatLoanAlertDialogFragment();
-                Bundle args = new Bundle();
-                args.putString("ID", itemKey);
-                args.putString("TITLE", item.getTitle());
-                alertDialog.setArguments(args);
-                alertDialog.show(fm_loan, "MatLoanAlertDialogFragment");
-                */
-
             }
         });
     }
@@ -277,11 +266,9 @@ public class MatDetailActivity extends AppCompatActivity
 
     public void showLoanAlertDialog() {
         // Create an instance of the dialog fragment and show it
-        //DialogFragment dialog = new MatLoanAlertDialogFragment();
         DialogFragment dialog = MatLoanAlertDialogFragment.newInstance(item.getTitle(), item.getUniqueId());
-        dialog.show(getSupportFragmentManager(), "MatLoanAlertDialogFragment");
+        dialog.show(fm_loan, "MatLoanAlertDialogFragment");
     }
-
 
     // TODO check this function
     // https://stackoverflow.com/questions/23005948/convert-string-to-bitmap
@@ -319,7 +306,7 @@ public class MatDetailActivity extends AppCompatActivity
 
     @Override
     public void onLoanDialogPositiveClick(DialogFragment dialog, String loanName, String loanContact, String loanUntil, String loanNote) {
-        Toast.makeText(this, loanName + ", " + loanContact + ", " + loanUntil + ", " + loanNote, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Name: " + loanName + ", Kontakt: " + loanContact + ", Zeitraum: " + loanUntil + ", Notiz: " + loanNote, Toast.LENGTH_SHORT).show();
 
         dialog.dismiss();
 

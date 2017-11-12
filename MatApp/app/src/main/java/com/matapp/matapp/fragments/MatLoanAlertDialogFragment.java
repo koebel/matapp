@@ -8,9 +8,11 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -70,6 +72,13 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        // convert px to dp
+        float paddingPxBig = 24f;
+        int paddingDpBig = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingPxBig, getActivity().getResources().getDisplayMetrics());
+
+        float paddingPxSmall = 12f;
+        int paddingDpSmall = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingPxSmall, getActivity().getResources().getDisplayMetrics());
+
         // Fetch arguments from bundle and set title
         title = getArguments().getString("TITLE", "Material Title");
         uniqueId = getArguments().getInt("ID", 0);
@@ -80,33 +89,38 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
 
         LinearLayout layout = new LinearLayout(getActivity());
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(16, 0, 16, 0);
+        layoutParams.setMargins(paddingDpBig, paddingDpBig, paddingDpBig, paddingDpSmall);
         layout.setLayoutParams(layoutParams);
         layout.setOrientation(LinearLayout.VERTICAL);
-
-        // TODO: fix Layout
 
         // create Input Fields & labels
         final TextView label_name = new TextView(getActivity());
         label_name.setText(R.string.det_loan_name_label);
+        label_name.setPadding(paddingDpBig, paddingDpBig, paddingDpBig, 0);
         final EditText loan_dialog_name = new EditText(getActivity());
         loan_dialog_name.setHint(R.string.det_loan_name_hint);
+        loan_dialog_name.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
 
         final TextView label_contact = new TextView(getActivity());
         label_contact.setText(R.string.det_loan_contact_label);
+        label_contact.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
         final EditText loan_dialog_contact = new EditText(getActivity());
         loan_dialog_contact.setHint(R.string.det_loan_contact_hint);
+        loan_dialog_contact.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
 
         final TextView label_until = new TextView(getActivity());
         label_until.setText(R.string.det_loan_until_label);
+        label_until.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
         final EditText loan_dialog_until = new EditText(getActivity());
         loan_dialog_until.setHint(R.string.det_loan_until_hint);
+        loan_dialog_until.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
 
         final TextView label_note = new TextView(getActivity());
         label_note.setText(R.string.det_loan_note_label);
+        label_note.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
         final EditText loan_dialog_note = new EditText(getActivity());
         loan_dialog_note.setHint(R.string.det_loan_note_hint);
-
+        loan_dialog_note.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
 
         // add them to layout
         layout.addView(label_name);
@@ -130,8 +144,9 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
         */
 
         //builder.setTitle(R.string.loan_dialog_title)
-        builder.setTitle(title)
-        //builder.setTitle(title + " ausleihen")
+        String loan = getText(R.string.loan_txt).toString();
+        builder.setTitle(title+ " " + loan)
+
                 // Add action buttons
                 .setPositiveButton(R.string.btn_loan, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -163,64 +178,4 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
                 });
         return builder.create();
     }
-
-
-
-
-    /*
-
-    // Fires whenever the textfield has an action performed
-    // In this case, when the "Done" button is pressed
-    // REQUIRES a 'soft keyboard' (virtual keyboard)
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (EditorInfo.IME_ACTION_DONE == actionId) {
-            // Return input text back to activity through the implemented listener
-            LoanDialogListener listener = (LoanDialogListener) getActivity();
-            listener.onFinishLoanDialog(loan_dialog_name.getText().toString(), "Contact", "Until", "Note");
-            // Close the dialog and return back to the parent activity
-            dismiss();
-            return true;
-        }
-        return false;
-    }
-
-*/
-
-        /*
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dialog_mat_loan, container);
-    }
-    */
-
-    /*
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // Get fields from view
-        loan_dialog_name = (EditText) getActivity().findViewById(R.id.loan_dialog_name);
-
-        loan_dialog_contact = (EditText) getActivity().findViewById(R.id.loan_dialog_contact);
-        loan_dialog_until = (EditText) getActivity().findViewById(R.id.loan_dialog_until);
-        loan_dialog_note = (EditText) getActivity().findViewById(R.id.loan_dialog_note);
-
-
-        //loan_dialog_name.setOnEditorActionListener(this);
-
-        // Fetch arguments from bundle and set title
-        title = getArguments().getString("TITLE", "Material Title");
-        uniqueId = getArguments().getInt("ID", 0);
-        //getDialog().setTitle(title + " Ausleihen");
-        getDialog().setTitle(title);
-
-        // Show soft keyboard automatically and request focus to field
-        loan_dialog_name.requestFocus();
-        getDialog().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-    }
-    */
-
-
 }
