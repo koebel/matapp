@@ -1,13 +1,18 @@
 package com.matapp.matapp;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +31,9 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.matapp.matapp.other.Material;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
 import static com.matapp.matapp.MatAddActivity.REQUEST_IMAGE_CAPTURE;
 
 
@@ -42,7 +50,7 @@ import static com.matapp.matapp.MatAddActivity.REQUEST_IMAGE_CAPTURE;
 public class MatEditActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Edit */
-    EditText det_title, det_desc, det_owner, det_location, det_barcode,
+    EditText det_title, det_desc, det_owner, det_location,
             det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Spinner det_status;
     //int itemId, status;
@@ -50,7 +58,10 @@ public class MatEditActivity extends AppCompatActivity {
     FloatingActionButton fabAddImg;
     Button btn_add_barcode;
     ImageView det_img;
-    TextView formatTxt, textViewBarcode;
+    TextView det_barcode;
+    private Uri UriImagePath;
+    Bitmap smallPicture, bigPicture;
+    String thumb, img, barcode;
 
     Intent intent;
 
@@ -82,7 +93,7 @@ public class MatEditActivity extends AppCompatActivity {
         det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
 
         det_img = (ImageView) findViewById(R.id.img_mat_edit);
-        textViewBarcode = (TextView)findViewById(R.id.barcode_result);
+        det_barcode = (TextView)findViewById(R.id.barcode_result);
 
         // Get the Intent that started this activity and extract values
         intent = this.getIntent();
@@ -145,6 +156,16 @@ public class MatEditActivity extends AppCompatActivity {
                 } else {
                     det_loan_note.setHint(R.string.det_loan_note_hint);
                 }
+                if (item.getBarcode() != null && item.getBarcode().trim().length() > 0) {
+                    det_barcode.setText(item.getBarcode());
+                } else {
+                    det_barcode.setHint(R.string.det_barcode);
+                }
+                if (item.getImg() != null && item.getImg().trim().length() > 0) {
+                    det_img.setImageBitmap(stringToBitmap(item.getImg()));
+                } else {
+                    //do nothing?
+                }
             }
 
             @Override
@@ -159,13 +180,20 @@ public class MatEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // TODO add image
-                // same as update image on Edit Material?!?
-                Toast.makeText(getApplicationContext(), "Bild hinzufügen", Toast.LENGTH_SHORT).show();
-                // take Picture
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                try {
+                    // use standard intent to capture an image
+                    Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    File direct = new File(Environment.getExternalStorageDirectory() + "/MatAppImage");
+                    if (!direct.exists()) {
+                        File wallpaperDirectory = new File(Environment.getExternalStorageDirectory() + "/MatAppImage");
+                        wallpaperDirectory.mkdirs();
+                    }
+                    UriImagePath = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/MatAppImage", "temp.png"));
+                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, UriImagePath);
+                    startActivityForResult(captureIntent, 1);
+                } catch (ActivityNotFoundException anfe) {
+                    //Do Something...
                 }
             }
 
@@ -201,6 +229,9 @@ public class MatEditActivity extends AppCompatActivity {
         item.setLoanContact(det_loan_contact.getText().toString());
         item.setLoanUntil(det_loan_until.getText().toString());
         item.setLoanNote(det_loan_note.getText().toString());
+        item.setThumb(thumb);
+        item.setImg(img);
+        item.setBarcode(barcode);
 
         //Save changes in database
         itemReference.child(itemKey).setValue(item);
@@ -247,6 +278,19 @@ public class MatEditActivity extends AppCompatActivity {
 
     }
 
+    // TODO check this function
+    // https://stackoverflow.com/questions/23005948/convert-string-to-bitmap
+    public Bitmap stringToBitmap(String imgString){
+        try{
+            byte[] encode = Base64.decode(imgString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(Base64.decode(imgString,Base64.DEFAULT), 0, encode.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
     // TODO save Image into DB!
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -257,39 +301,58 @@ public class MatEditActivity extends AppCompatActivity {
         if (scanningResult != null) {
             if(scanningResult.getContents() != null){
                 //we have a result
-                String barcode = scanningResult.getContents();
-                item.setBarcode(barcode);
-                textViewBarcode.setText(barcode);
+                barcode = scanningResult.getContents();
+                det_barcode.setText(barcode);
             }else{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
         }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Bitmap FullSizeImage = BitmapFactory.decodeFile(UriImagePath.getPath());
+            int ImageWidth = FullSizeImage.getHeight();
+            int ImageHeight = FullSizeImage.getWidth();
 
-            // TODO resize image, make it fit the full header area...
-            // more Info here: https://developer.android.com/training/camera/photobasics.html
-            det_img.setImageBitmap(imageBitmap);
+            //Scale for BigPicture
+            //int maxWidth = Math.round(Width/4);
+            //int maxHeight = Math.round(Height/4);
+            int maxWidth = 500;
+            int maxHeight = 500;
 
-            // TODO convert Bitmap into String with Base64 and downsize it
-            // this not sure if this basic conversion is working...
-            //item.setImg(imageBitmap.toString());
-            /*
-            maybe use this code for Base64 conversion:
-            https://stackoverflow.com/questions/4837110/how-to-convert-a-base64-string-into-a-bitmap-image-to-show-it-in-a-imageview
+            int newImageWidth = 0;
+            int newImageHeight = 0;
 
-            //encode image to base64 string
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] imageBytes = baos.toByteArray();
-            String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+            if (ImageWidth > ImageHeight) {
+                // landscape
+                float ratio = (float) ImageHeight / ImageWidth;
+                newImageWidth = maxWidth;
+                newImageHeight = (int)(maxWidth * ratio);
+            } else if (ImageHeight > ImageWidth) {
+                // portrait
+                float ratio = (float) ImageWidth / ImageHeight;
+                newImageHeight = maxHeight;
+                newImageWidth = (int)(maxHeight * ratio);
+            } else {
+                // square
+                newImageHeight = maxHeight;
+                newImageWidth = maxWidth;
+            }
+            bigPicture = Bitmap.createScaledBitmap(FullSizeImage,newImageWidth,newImageHeight,false);
+            //Convert to Base 64
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bigPicture.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            String imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            img = imageString;
+            det_img.setImageBitmap(bigPicture);
 
-            //decode base64 string to image
-            imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            image.setImageBitmap(decodedImage);
-             */
+            //Scale for small Picture;
+            //int length = Math.round(64*getResources().getDisplayMetrics().density);
+            int length = 25;
+            smallPicture = Bitmap.createScaledBitmap(bigPicture,length,length,false);
+            //Convert to Base64
+            smallPicture.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+            byteArray = byteArrayOutputStream .toByteArray();
+            imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            thumb = imageString;
         }else {
             Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_SHORT);
             toast.show();
