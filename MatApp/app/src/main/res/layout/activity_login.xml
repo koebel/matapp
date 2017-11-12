@@ -14,7 +14,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
-        <!-- displa App Logo -->
+        <!-- display App Logo -->
         <ImageView
             android:id="@+id/app_icon_login"
             android:layout_width="128dp"
