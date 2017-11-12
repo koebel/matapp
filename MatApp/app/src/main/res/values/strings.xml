@@ -78,45 +78,45 @@
 
 
     <!-- Scan menu labels -->
-    <string name="turn_on_flashlight">flash on</string>
-    <string name="turn_off_flashlight">flash off</string>
-    <string name="scan_bar_code">Scan a Bar Code</string>
+    <string name="turn_on_flashlight">Licht an</string>
+    <string name="turn_off_flashlight">Licht aus</string>
+    <string name="scan_bar_code">Scane einen Strichcode</string>
     <string name="item_notFound">Artikel nicht gefunden</string>
 
 
     <!-- Navigation Drawer menu labels -->
-    <string name="nav_app_name">MatApp Menu</string>
+    <string name="nav_app_name">MatApp Menü</string>
     <string name="nav_home">MatApp Home</string>
-    <string name="nav_scanner">Barcode Scanner</string>
+    <string name="nav_scanner">Strichcode-Scanner</string>
     <string name="nav_matlist">Materialübersicht</string>
     <string name="nav_subtitle">weitere Funktionen</string>
     <string name="nav_users">Benutzerverwaltung</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_settings">Einstellungen</string>
     <string name="nav_logout">Abmelden</string>
 
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_open">Öffne Navigation</string>
+    <string name="drawer_close">Schliesse Navigation</string>
 
 
     <!-- Menu Item labels -->
-    <string name="mi_scanner">Barcode Scanner</string>
+    <string name="mi_scanner">Strichcode-Scanner</string>
     <string name="mi_matlist">Materialübersicht</string>
 
 
     <!-- Login Fragment -->
     <string name="login_emailText">Email</string>
-    <string name="login_passwordText">Password</string>
-    <string name="login_listNameText">List Name</string>
-    <string name="login_loginBtn">Login</string>
-    <string name="login_registerBtn">Register</string>
-    <string name="login_loginSuccessful">Login successful</string>
-    <string name="login_loginFailed">Login failed</string>
-    <string name="login_listCreated">New list created</string>
-    <string name="login_registerSuccessful">New account created. You can login now.</string>
-    <string name="login_registerFailed">Registration failed</string>
-    <string name="login_missingList">Enter list name</string>
-    <string name="login_missingEmail">Enter email address!</string>
-    <string name="login_shortPassword">Password too short, enter minimum 6 characters!</string>
-    <string name="login_backBtn">Press the back button once again to close the application.</string>
+    <string name="login_passwordText">Passwort</string>
+    <string name="login_listNameText">Verzeichnis-Name</string>
+    <string name="login_loginBtn">Anmelden</string>
+    <string name="login_registerBtn">Registrieren</string>
+    <string name="login_loginSuccessful">Anmeldung erfolgreich</string>
+    <string name="login_loginFailed">Anmeldung nicht möglich</string>
+    <string name="login_listCreated">Neues Verzeichnis erstellt</string>
+    <string name="login_registerSuccessful">Neues Konto erstellt. Sie können sich jetzt anmelden.</string>
+    <string name="login_registerFailed">Registrierung nicht möglich</string>
+    <string name="login_missingList">Verzeichnis-Name fehlt</string>
+    <string name="login_missingEmail">Email fehlt</string>
+    <string name="login_shortPassword">Passwort zu kurz (min. 6 Zeichen)</string>
+    <string name="login_backBtn">Klicken Sie ein zweites Mal auf Zurück, um die App zu schliessen.</string>
 
 </resources>
