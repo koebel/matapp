@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -85,6 +86,12 @@ public class MatListFragment extends Fragment {
                     materials.add(map);
                 }
                 Log.i("MatListFragment", "items in list: " + materials);
+
+                // check if list is empty (first use)
+                if (materials.size() == 0) {
+                    Toast.makeText(getContext(), getResources().getString(R.string.first_use_title) + getResources().getString(R.string.first_use_text), Toast.LENGTH_SHORT).show();
+                    // TODO add some Text for first use case
+                }
 
                 //Pass ArrayList to RecyclerView
                 recyclerViewAdapter = new RecyclerAdapter(materials);
