@@ -35,6 +35,7 @@
 
     <string name="det_loan_sub">Informationen zur Ausleihe</string>
     <string name="det_loan_name">Ausgeliehen an</string>
+    <string name="det_loan_name_error">Bitte Name eingeben</string>
     <string name="det_loan_contact">Kontaktdaten (Mail oder Mobile)</string>
     <string name="det_loan_until">voraussichtlich ausgeliehen bis </string>
     <string name="det_loan_note">Notiz zur Ausleihe hinzufügen</string>

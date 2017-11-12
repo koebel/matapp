@@ -27,8 +27,8 @@ public class MatDeleteAlertDialogFragment extends DialogFragment {
 
     /* Listener Interface with method for passing back data result  */
     public interface MatDeleteDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog, int id);
-        public void onDialogNegativeClick(DialogFragment dialog);
+        public void onDeleteDialogPositiveClick(DialogFragment dialog, int id);
+        public void onDeleteDialogNegativeClick(DialogFragment dialog);
     }
 
     // Use this instance of the interface to deliver action events
@@ -74,7 +74,7 @@ public class MatDeleteAlertDialogFragment extends DialogFragment {
                         // this will provide reference to uniqueID of the item...
                         int mat_id = getArguments().getInt("ID");
 
-                        matDeleteDialogListener.onDialogPositiveClick(MatDeleteAlertDialogFragment.this, mat_id);
+                        matDeleteDialogListener.onDeleteDialogPositiveClick(MatDeleteAlertDialogFragment.this, mat_id);
                     }
                 })
                 .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {

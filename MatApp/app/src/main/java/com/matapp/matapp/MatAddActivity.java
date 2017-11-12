@@ -233,7 +233,6 @@ public class MatAddActivity extends AppCompatActivity {
     // create new Material
     public void onCreateItem (View view){
         // get Content from Input fields
-        // if fields contain Helpertext reset to empty String
         title = det_title.getText().toString();
         if (TextUtils.isEmpty(title)) {
             Toast.makeText(getApplicationContext(), R.string.det_title_error, Toast.LENGTH_SHORT).show();

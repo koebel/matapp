@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -19,16 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
 import com.matapp.matapp.fragments.MatLoanAlertDialogFragment;
 import com.matapp.matapp.other.Material;
@@ -246,15 +239,17 @@ public class MatDetailActivity extends AppCompatActivity
         btn_loan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO implement borrow Item Popup
+                showLoanAlertDialog();
 
+                /*
                 MatLoanAlertDialogFragment alertDialog = new MatLoanAlertDialogFragment();
                 Bundle args = new Bundle();
                 args.putString("ID", itemKey);
                 args.putString("TITLE", item.getTitle());
                 alertDialog.setArguments(args);
                 alertDialog.show(fm_loan, "MatLoanAlertDialogFragment");
+                */
 
-                Toast.makeText(getApplicationContext(), "Artikel ausleihen", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -280,6 +275,14 @@ public class MatDetailActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void showLoanAlertDialog() {
+        // Create an instance of the dialog fragment and show it
+        //DialogFragment dialog = new MatLoanAlertDialogFragment();
+        DialogFragment dialog = MatLoanAlertDialogFragment.newInstance(item.getTitle(), item.getUniqueId());
+        dialog.show(getSupportFragmentManager(), "MatLoanAlertDialogFragment");
+    }
+
+
     // TODO check this function
     // https://stackoverflow.com/questions/23005948/convert-string-to-bitmap
     public Bitmap stringToBitmap(String imgString){
@@ -295,7 +298,7 @@ public class MatDetailActivity extends AppCompatActivity
 
     /* Implementation of MatDeleteDialogListener */
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog, int id) {
+    public void onDeleteDialogPositiveClick(DialogFragment dialog, int id) {
 
         // TODO delete Material with the id transmitted though this function
         Toast.makeText(getApplicationContext(), "Artikel löschen", Toast.LENGTH_SHORT).show();
@@ -308,30 +311,41 @@ public class MatDetailActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
+    public void onDeleteDialogNegativeClick(DialogFragment dialog) {
         dialog.dismiss();
     }
 
-    /* Implementation of MatDeleteDialogListener */
+    /* Implementation of MatLoanAlertDialogListener */
+
     @Override
-    public void onFinishLoanDialog(DialogFragment dialog, String loanName, String loanContact, String loanUntil, String loanNote) {
-        
-        // refresh this view to display new/changed values
+    public void onLoanDialogPositiveClick(DialogFragment dialog, String loanName, String loanContact, String loanUntil, String loanNote) {
+        Toast.makeText(this, loanName + ", " + loanContact + ", " + loanUntil + ", " + loanNote, Toast.LENGTH_SHORT).show();
+
+        dialog.dismiss();
+
+        // update item
         item.setStatus(Material.STATUS_UNAVAILABLE);
         item.setLoanName(loanName);
         item.setLoanContact(loanContact);
         item.setLoanUntil(loanUntil);
         item.setLoanNote(loanNote);
-
         // TODO save the changes into database
 
-        // reload this Activity
+        // reload this Activity to display new/changed values
+        // TODO find out why updated information doesn't get displayed
         Intent intent = this.getIntent();
-        intent.putExtra("STATUS_KEY", item.getStatus());
-        intent.putExtra("LOAN_NAME_KEY", item.getLoanName());
-        intent.putExtra("LOAN_CONTACT_KEY", item.getLoanContact());
-        intent.putExtra("LOAN_UNTIL_KEY", item.getLoanUntil());
-        intent.putExtra("LOAN_NOTE_KEY", item.getLoanNote());
+
+        intent.putExtra("STATUS_KEY", Material.STATUS_UNAVAILABLE);
+        intent.putExtra("LOAN_NAME_KEY", loanName);
+        intent.putExtra("LOAN_CONTACT_KEY", loanContact);
+        intent.putExtra("LOAN_UNTIL_KEY", loanUntil);
+        intent.putExtra("LOAN_NOTE_KEY", loanNote);
         startActivity(intent);
     }
+
+    @Override
+    public void onLoanDialogNegativeClick(DialogFragment dialog) {
+        dialog.dismiss();
+    }
+
 }

@@ -109,21 +109,18 @@ public class MatEditActivity extends AppCompatActivity {
                     det_desc.setText(item.getDescription());
                 } else {
                     det_desc.setHint(R.string.det_desc_hint);
-                    //det_desc.setTextColor(getResources().getColor(R.color.colorPlaceholder));
                 }
 
                 if (item.getOwner() != null && item.getOwner().trim().length() > 0) {
                     det_owner.setText(item.getOwner());
                 } else {
                     det_owner.setHint(R.string.det_owner_hint);
-                    //det_owner.setTextColor(getResources().getColor(R.color.colorPlaceholder));
                 }
 
                 if (item.getLocation() != null && item.getLocation().trim().length() > 0) {
                     det_location.setText(item.getLocation());
                 } else {
                     det_location.setHint(R.string.det_location_hint);
-                    //det_location.setTextColor(getResources().getColor(R.color.colorPlaceholder));
                 }
 
                 det_status.setSelection(item.getStatus());
@@ -132,25 +129,21 @@ public class MatEditActivity extends AppCompatActivity {
                     det_loan_name.setText(item.getLoanName());
                 } else {
                     det_loan_name.setHint(R.string.det_loan_name_hint);
-                    //det_loan_name.setTextColor(getResources().getColor(R.color.colorPlaceholder));
                 }
                 if (item.getLoanContact() != null && item.getLoanContact().trim().length() > 0) {
                     det_loan_contact.setText(item.getLoanContact());
                 } else {
                     det_loan_contact.setHint(R.string.det_loan_contact_hint);
-                    //det_loan_contact.setTextColor(getResources().getColor(R.color.colorPlaceholder));
                 }
                 if (item.getLoanUntil() != null && item.getLoanUntil().trim().length() > 0) {
                     det_loan_until.setText(item.getLoanUntil());
                 } else {
                     det_loan_until.setHint(R.string.det_loan_until_hint);
-                    //det_loan_until.setTextColor(getResources().getColor(R.color.colorPlaceholder));
                 }
                 if (item.getLoanNote() != null && item.getLoanNote().trim().length() > 0) {
                     det_loan_note.setText(item.getLoanNote());
                 } else {
                     det_loan_note.setHint(R.string.det_loan_note_hint);
-                    //det_loan_note.setTextColor(getResources().getColor(R.color.colorPlaceholder));
                 }
             }
 

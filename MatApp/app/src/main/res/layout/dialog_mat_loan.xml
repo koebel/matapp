@@ -86,6 +86,7 @@
         android:hint="@string/det_loan_note_hint"
         android:imeOptions="actionDone" />
 
+    <!--
     <Button
         style="@style/matapp_button"
         android:id="@+id/loan_success_btn"
@@ -107,5 +108,6 @@
         android:gravity="right"
         android:onClick="onLoanItemCancelled"
         android:text="@string/btn_cancel" />
+        -->
 
 </LinearLayout>
