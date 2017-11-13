@@ -166,6 +166,10 @@ public class MatEditActivity extends AppCompatActivity {
                 } else {
                     //do nothing?
                 }
+
+                thumb = item.getThumb();
+                img = item.getImg();
+                barcode = item.getBarcode();
             }
 
             @Override

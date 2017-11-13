@@ -70,6 +70,7 @@
     <!-- Delete Alert Dialog -->
     <string name="delete_item_title">Artikel löschen?</string>
     <string name="delete_item_text">Wollen Sie diesen Artikel wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="delete_item_deleted">Artikel gelöscht</string>
 
 
     <!-- Loan Dialog -->
