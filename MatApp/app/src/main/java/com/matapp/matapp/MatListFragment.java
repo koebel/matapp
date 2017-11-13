@@ -89,7 +89,7 @@ public class MatListFragment extends Fragment {
 
                 // check if list is empty (first use)
                 if (materials.size() == 0) {
-                    Toast.makeText(getContext(), getResources().getString(R.string.first_use_title) + getResources().getString(R.string.first_use_text), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.first_use_title) + getResources().getString(R.string.first_use_text), Toast.LENGTH_LONG).show();
                     // TODO add some Text for first use case
                 }
 

@@ -22,18 +22,19 @@ import android.widget.Toast;
 import com.matapp.matapp.R;
 
 /**
+ *
+ * This dialog fragment displays an alert dialog when a user requests to loan an item.
+ *
  * Created by kathrinkoebel on 08.11.17.
+ *
  */
 
 
 public class MatLoanAlertDialogFragment extends DialogFragment {
-    private EditText loan_dialog_name, loan_dialog_contact, loan_dialog_until, loan_dialog_note;
     private String title, loanName, loanContact, loanUntil, loanNote;
-    private int uniqueId;
 
     /* Listener Interface with method for passing back data result */
     public interface LoanDialogListener {
-        //public void onFinishLoanDialog(String loanName, String loanContact, String loanUntil, String loanNote);
         public void onLoanDialogPositiveClick(DialogFragment dialog, String loanName, String loanContact, String loanUntil, String loanNote);
         public void onLoanDialogNegativeClick(DialogFragment dialog);
     }
@@ -81,7 +82,7 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
 
         // Fetch arguments from bundle and set title
         title = getArguments().getString("TITLE", "Material Title");
-        uniqueId = getArguments().getInt("ID", 0);
+        // uniqueId = getArguments().getInt("ID", 0);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();

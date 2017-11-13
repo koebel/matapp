@@ -142,7 +142,6 @@ public class MatDetailActivity extends AppCompatActivity
                     }
 
                     // display loan subtitle only if any of the loan attributes contains a value
-                    // if (loanName.trim().length() == 0 && loanContact.trim().length() == 0 && loanUntil.trim().length() == 0 && loanNote.trim().length() == 0 )
                     String loanDetails = item.getLoanName() + item.getLoanContact() + item.getLoanUntil() + item.getLoanNote();
                     if (loanDetails.trim().length() == 0) {
                         det_loan.setVisibility(View.GONE);
@@ -303,7 +302,6 @@ public class MatDetailActivity extends AppCompatActivity
 
     @Override
     public void onLoanDialogPositiveClick(DialogFragment dialog, String loanName, String loanContact, String loanUntil, String loanNote) {
-        //Toast.makeText(this, "Name: " + loanName + ", Kontakt: " + loanContact + ", Zeitraum: " + loanUntil + ", Notiz: " + loanNote, Toast.LENGTH_SHORT).show();
 
         // update item
         item.setStatus(Material.STATUS_LENT);

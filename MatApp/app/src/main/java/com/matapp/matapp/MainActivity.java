@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
             MatListFragment fragment = MatListFragment.newInstance(0, "");
             ft.replace(R.id.flContent, fragment);
             ft.commit();
-            //setTitle(R.string.nav_matlist);
 
             //Set Title to Listname
-            setTitle(MatAppSession.getInstance().listName);
+            String title = MatAppSession.getInstance().listName + " " + getResources().getText(R.string.nav_matlist);
+            setTitle(title);
         }
     }
 
@@ -147,13 +147,6 @@ public class MainActivity extends AppCompatActivity {
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
-            // Set action bar title
-
-            // TODO: maybe set Name of the Organisation into the Toolbar
-            // setTitle(MatAppSession.getInstance().listName);
-            // display name of current activity
-            // setTitle(menuItem.getTitle());
-            //setTitle(R.string.nav_matlist);
 
         } else {
             // Start activity
@@ -163,29 +156,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Close the navigation drawer
         drawerLayout.closeDrawers();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.miScanner:
-                // do something
-                Toast.makeText(MainActivity.this, "My toast 2",
-                        Toast.LENGTH_LONG).show();
-                return true;
-            /* disabled in response to usability test feedback
-            until addional features are implemented in a later release of the app
-            case R.id.miMatList:
-                return true;
-                */
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     // `onPostCreate` called when activity start-up is complete after `onStart()`
@@ -231,8 +201,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         //retrieve scan result
-        /*Toast.makeText(MainActivity.this, "scan done",
-                Toast.LENGTH_LONG).show();*/
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 
         if (scanningResult != null) {

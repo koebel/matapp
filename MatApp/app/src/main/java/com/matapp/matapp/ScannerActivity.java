@@ -54,7 +54,6 @@ public class  ScannerActivity extends Activity {
      */
     protected DecoratedBarcodeView initializeContent() {
         setContentView(R.layout.activity_scan);
-        //setContentView(com.google.zxing.client.android.R.layout.zxing_capture);
         return (DecoratedBarcodeView)findViewById(com.google.zxing.client.android.R.id.zxing_barcode_scanner);
     }
 
