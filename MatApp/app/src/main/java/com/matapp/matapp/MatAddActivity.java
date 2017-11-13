@@ -48,7 +48,7 @@ public class MatAddActivity extends AppCompatActivity {
     EditText det_title, det_desc, det_owner, det_location;
     Spinner det_status;
     int status;
-    String title, description, owner, location, img = "", thumb, codeContent = "";
+    String title, description, owner, location, img = "", thumb = "", codeContent = "";
     Button btn_create, btn_delete, btn_add_barcode;
     FloatingActionButton fabAddImg;
     TextView textViewBarcode;

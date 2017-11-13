@@ -45,11 +45,11 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
     public MatLoanAlertDialogFragment(){
     }
 
-    public static MatLoanAlertDialogFragment newInstance(String title, int id) {
+    public static MatLoanAlertDialogFragment newInstance(String title) { // removed: int id
         MatLoanAlertDialogFragment frag = new MatLoanAlertDialogFragment();
         Bundle args = new Bundle();
         args.putString("TITLE", title);
-        args.putInt("ID", id);
+        //args.putInt("ID", id);
         frag.setArguments(args);
         return frag;
     }

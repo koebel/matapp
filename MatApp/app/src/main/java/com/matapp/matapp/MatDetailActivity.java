@@ -264,7 +264,7 @@ public class MatDetailActivity extends AppCompatActivity
 
     public void showLoanAlertDialog() {
         // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = MatLoanAlertDialogFragment.newInstance(item.getTitle(), item.getUniqueId());
+        DialogFragment dialog = MatLoanAlertDialogFragment.newInstance(item.getTitle());
         dialog.show(fm_loan, "MatLoanAlertDialogFragment");
     }
 
