@@ -53,12 +53,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         holder.row_mat_desc.setText(items.get(position).get("description"));
 
         // TODO thumb muss in Bitmap umgewandelt werden!!!
-        byte [] imageBytes = Base64.decode(items.get(position).get("thumb"), Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        int height = holder.row_mat_thumb.getLayoutParams().height;
-        //int length = Math.round(64*getResources().getDisplayMetrics().density);
-        Bitmap smallProfile = Bitmap.createScaledBitmap(decodedImage,height,height,false);
-        holder.row_mat_thumb.setImageBitmap(smallProfile);
+        if(items.get(position).get("thumb").length() > 0) {
+            byte[] imageBytes = Base64.decode(items.get(position).get("thumb"), Base64.DEFAULT);
+            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            int height = holder.row_mat_thumb.getLayoutParams().height;
+            //int length = Math.round(64*getResources().getDisplayMetrics().density);
+            Bitmap smallProfile = Bitmap.createScaledBitmap(decodedImage, height, height, false);
+            holder.row_mat_thumb.setImageBitmap(smallProfile);
+        }
     }
 
     @Override
