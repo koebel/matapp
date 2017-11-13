@@ -79,6 +79,7 @@ public class MatDeleteAlertDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        // evoque dismiss dialog which is declared in the implementation of this interface
                     }
                 });
         return builder.create();

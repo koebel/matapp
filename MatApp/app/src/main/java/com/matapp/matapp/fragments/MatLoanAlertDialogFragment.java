@@ -31,7 +31,12 @@ import com.matapp.matapp.R;
 
 
 public class MatLoanAlertDialogFragment extends DialogFragment {
+
+    /* Variables */
     private String title, loanName, loanContact, loanUntil, loanNote;
+
+    /* static Variables */
+    public static final String ALERT_DIALOG = "AlertDialog";
 
     /* Listener Interface with method for passing back data result */
     public interface LoanDialogListener {
@@ -152,10 +157,10 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.btn_loan, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Log.i("AlertDialog","Name: "+loan_dialog_name.getText().toString());
-                        Log.i("AlertDialog","Contact: "+loan_dialog_contact.getText().toString());
-                        Log.i("AlertDialog","Until: "+loan_dialog_until.getText().toString());
-                        Log.i("AlertDialog","Note: "+loan_dialog_note.getText().toString());
+                        Log.i(ALERT_DIALOG,"Name: "+loan_dialog_name.getText().toString());
+                        Log.i(ALERT_DIALOG,"Contact: "+loan_dialog_contact.getText().toString());
+                        Log.i(ALERT_DIALOG,"Until: "+loan_dialog_until.getText().toString());
+                        Log.i(ALERT_DIALOG,"Note: "+loan_dialog_note.getText().toString());
 
                         // Send the positive button event back to the host activity
                         loanName = loan_dialog_name.getText().toString();
