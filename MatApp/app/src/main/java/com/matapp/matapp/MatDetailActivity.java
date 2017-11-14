@@ -65,7 +65,6 @@ public class MatDetailActivity extends AppCompatActivity
     private String itemKey;
     private Material item;
 
-    private FirebaseDatabase database;
     private DatabaseReference itemReference;
 
     FragmentManager fragmentManagerDelete = getSupportFragmentManager();
@@ -104,10 +103,15 @@ public class MatDetailActivity extends AppCompatActivity
         Intent intent = this.getIntent();
 
         // receive Extras
-        itemKey = intent.getExtras().getString("ITEM_KEY");
+        if(intent.hasExtra("ITEM_KEY")) {
+            itemKey = intent.getExtras().getString("ITEM_KEY");
+        } else {
+            finish();
+            return;
+        }
 
         //Get Firebase database instance
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         //Get reference to material
         itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
         //Read from database
@@ -130,7 +134,6 @@ public class MatDetailActivity extends AppCompatActivity
                     detLoanUntil.setText(item.getLoanUntil());
                     detLoanNote.setText(item.getLoanNote());
 
-                    //TODO get Full Image from storage.
                     detImg.setImageBitmap(stringToBitmap(item.getImg()));
 
                     if (item.getBarcode().trim().length() > 0) {
@@ -213,7 +216,7 @@ public class MatDetailActivity extends AppCompatActivity
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), getString(R.string.db_error), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -280,13 +283,11 @@ public class MatDetailActivity extends AppCompatActivity
         dialog.show(fragmentManagerLoan, "MatLoanAlertDialogFragment");
     }
 
-    // TODO check this function
     // https://stackoverflow.com/questions/23005948/convert-string-to-bitmap
     public Bitmap stringToBitmap(String imgString){
         try{
             byte[] encode = Base64.decode(imgString,Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(Base64.decode(imgString,Base64.DEFAULT), 0, encode.length);
-            return bitmap;
+            return BitmapFactory.decodeByteArray(Base64.decode(imgString,Base64.DEFAULT), 0, encode.length);
         } catch (Exception e) {
             e.getMessage();
             return null;

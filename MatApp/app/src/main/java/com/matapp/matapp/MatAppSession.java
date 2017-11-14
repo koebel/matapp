@@ -1,6 +1,9 @@
 package com.matapp.matapp;
 
 /**
+ *
+ * This class is used to store session data.
+ *
  * Created by rafael on 08.11.17.
  */
 
