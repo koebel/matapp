@@ -12,6 +12,9 @@ import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
 /**
+ *
+ * This activity provides a barcode scanner.
+ *
  * Created by kathrinkoebel on 25.10.17.
  */
 
