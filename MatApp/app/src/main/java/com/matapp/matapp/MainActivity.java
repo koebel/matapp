@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private NavigationView navigationDrawer;
 
-    String codeFormat,codeContent;
+    String codeFormat;
+    String codeContent;
 
     private FirebaseAuth auth;
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         // Tie DrawerLayout events to the ActionBarToggle
         drawerLayout.addDrawerListener(drawerToggle);
 
-        navigationDrawer = (NavigationView) findViewById(R.id.nvView);
+        NavigationView navigationDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(navigationDrawer);
 
@@ -207,15 +207,15 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             }
                             //Intent for Detail
-                            Intent NewMatIntent = new Intent(MainActivity.this, MatDetailActivity.class);
-                            NewMatIntent.putExtra("ITEM_KEY", itemKey);
-                            startActivity(NewMatIntent);
+                            Intent newMatIntent = new Intent(MainActivity.this, MatDetailActivity.class);
+                            newMatIntent.putExtra("ITEM_KEY", itemKey);
+                            startActivity(newMatIntent);
                         } else {
                             if(MatAppSession.getInstance().listWriteable) {
                                 //Intent for Add
-                                Intent NewMatIntent = new Intent(MainActivity.this, MatAddActivity.class);
-                                NewMatIntent.putExtra("barcode", codeContent);
-                                startActivity(NewMatIntent);
+                                Intent newMatIntent = new Intent(MainActivity.this, MatAddActivity.class);
+                                newMatIntent.putExtra("barcode", codeContent);
+                                startActivity(newMatIntent);
                             } else {
                                 Toast.makeText(MainActivity.this, getString(R.string.item_notFound), Toast.LENGTH_LONG).show();
                             }

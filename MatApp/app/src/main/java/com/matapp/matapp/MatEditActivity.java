@@ -51,19 +51,35 @@ import static com.matapp.matapp.MatAddActivity.REQUEST_IMAGE_CAPTURE;
 public class MatEditActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Edit */
-    EditText det_title, det_desc, det_owner, det_location,
-            det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
+    EditText det_title;
+    EditText det_desc;
+    EditText det_owner;
+    EditText det_location;
+    EditText det_loan_name;
+    EditText det_loan_contact;
+    EditText det_loan_until;
+    EditText det_loan_note;
+
     Spinner det_status;
     //int itemId, status;
     //String title, description, owner, location, gps, img, thumb, loanName, loanContact, loanUntil, loanNote, barcode;
     FloatingActionButton fabAddImg;
-    Button btn_add_barcode;
+    Button btnAddBarcode;
     ImageView det_img;
     TextView det_barcode;
-    TextView det_loan, det_loan_name_label, det_loan_contact_label, det_loan_until_label, det_loan_note_label;
-    private Uri UriImagePath;
-    Bitmap smallPicture, bigPicture;
-    String thumb, img, barcode;
+    TextView det_loan;
+    TextView det_loan_name_label;
+    TextView det_loan_contact_label;
+    TextView det_loan_until_label;
+    TextView det_loan_note_label;
+    private Uri uriImagePath;
+
+    Bitmap smallPicture;
+    Bitmap bigPicture;
+
+    String thumb;
+    String img;
+    String barcode;
 
     Intent intent;
 
@@ -194,8 +210,8 @@ public class MatEditActivity extends AppCompatActivity {
                         File wallpaperDirectory = new File(Environment.getExternalStorageDirectory() + "/MatAppImage");
                         wallpaperDirectory.mkdirs();
                     }
-                    UriImagePath = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/MatAppImage", "temp.png"));
-                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, UriImagePath);
+                    uriImagePath = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/MatAppImage", "temp.png"));
+                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriImagePath);
                     startActivityForResult(captureIntent, 1);
                 } catch (ActivityNotFoundException anfe) {
                     //Do Something...
@@ -204,8 +220,8 @@ public class MatEditActivity extends AppCompatActivity {
 
         });
 
-        btn_add_barcode = (Button) findViewById(R.id.btn_add_barcode);
-        btn_add_barcode.setOnClickListener(new View.OnClickListener() {
+        btnAddBarcode = (Button) findViewById(R.id.btn_add_barcode);
+        btnAddBarcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
@@ -344,9 +360,9 @@ public class MatEditActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
         }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            Bitmap FullSizeImage = BitmapFactory.decodeFile(UriImagePath.getPath());
-            int ImageWidth = FullSizeImage.getHeight();
-            int ImageHeight = FullSizeImage.getWidth();
+            Bitmap fullSizeImage = BitmapFactory.decodeFile(uriImagePath.getPath());
+            int imageWidth = fullSizeImage.getHeight();
+            int imageHeight = fullSizeImage.getWidth();
 
             //Scale for BigPicture
             //int maxWidth = Math.round(Width/4);
@@ -357,14 +373,14 @@ public class MatEditActivity extends AppCompatActivity {
             int newImageWidth = 0;
             int newImageHeight = 0;
 
-            if (ImageWidth > ImageHeight) {
+            if (imageWidth > imageHeight) {
                 // landscape
-                float ratio = (float) ImageHeight / ImageWidth;
+                float ratio = (float) imageHeight / imageWidth;
                 newImageWidth = maxWidth;
                 newImageHeight = (int)(maxWidth * ratio);
-            } else if (ImageHeight > ImageWidth) {
+            } else if (imageHeight > imageWidth) {
                 // portrait
-                float ratio = (float) ImageWidth / ImageHeight;
+                float ratio = (float) imageWidth / imageHeight;
                 newImageHeight = maxHeight;
                 newImageWidth = (int)(maxHeight * ratio);
             } else {
@@ -372,7 +388,7 @@ public class MatEditActivity extends AppCompatActivity {
                 newImageHeight = maxHeight;
                 newImageWidth = maxWidth;
             }
-            bigPicture = Bitmap.createScaledBitmap(FullSizeImage,newImageWidth,newImageHeight,false);
+            bigPicture = Bitmap.createScaledBitmap(fullSizeImage,newImageWidth,newImageHeight,false);
             //Convert to Base 64
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bigPicture.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);

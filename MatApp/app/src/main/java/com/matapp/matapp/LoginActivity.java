@@ -29,8 +29,12 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     /* Variables */
-    private Button loginBtn, registerBtn;
-    private EditText emailInput, passwordInput, listNameInput;
+    private Button loginBtn;
+    private Button registerBtn;
+
+    private EditText emailInput;
+    private EditText passwordInput;
+    private EditText listNameInput;
 
     private int backButtonCount;
 
@@ -44,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     /* static Variables */
-    public static final String LOGIN_ACTIVITY = "LoginActivity";
+    public static final String LOG_LOGIN_ACTIVITY = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             emailInput.setText(auth.getCurrentUser().getEmail());
             //Logout
             auth.signOut();
-            Log.i(LOGIN_ACTIVITY, "listKey: " + MatAppSession.getInstance().listKey);
+            Log.i(LOG_LOGIN_ACTIVITY, "listKey: " + MatAppSession.getInstance().listKey);
         }
 
         //Login Button
@@ -124,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.i(LOGIN_ACTIVITY, "uid: " + auth.getCurrentUser().getUid());
+                            Log.i(LOG_LOGIN_ACTIVITY, "uid: " + auth.getCurrentUser().getUid());
                             //Select child where listName=listName
                             Query query = materialReference.orderByChild("listName").equalTo(listName);
                             //Add Listener for one read
@@ -142,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                                         } else {
                                             listWriteable = false;
                                         }
-                                        Log.i(LOGIN_ACTIVITY, "found listKey: " + listKey + " writeable: " + listWriteable);
+                                        Log.i(LOG_LOGIN_ACTIVITY, "found listKey: " + listKey + " writeable: " + listWriteable);
                                     } else {
                                         //Otherwise create new list
                                         //TODO: dialog to confirm
@@ -150,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                                         materialReference.child(listKey).child("listName").setValue(listName);
                                         materialReference.child(listKey).child("listUid").setValue(auth.getCurrentUser().getUid());
                                         listWriteable = true;
-                                        Log.i(LOGIN_ACTIVITY, "created new list with listKey=" + listKey);
+                                        Log.i(LOG_LOGIN_ACTIVITY, "created new list with listKey=" + listKey);
                                         Toast.makeText(view.getContext(), getString(R.string.login_listCreated), Toast.LENGTH_SHORT).show();
                                     }
                                     MatAppSession.getInstance().listKey = listKey;

@@ -3,14 +3,10 @@ package com.matapp.matapp.fragments;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.widget.Toast;
 
-import com.matapp.matapp.MainActivity;
 import com.matapp.matapp.R;
 
 
@@ -72,9 +68,9 @@ public class MatDeleteAlertDialogFragment extends DialogFragment {
 
                         // TODO Delete Item
                         // this will provide reference to uniqueID of the item...
-                        int mat_id = getArguments().getInt("ID");
+                        int matId = getArguments().getInt("ID");
 
-                        matDeleteDialogListener.onDeleteDialogPositiveClick(MatDeleteAlertDialogFragment.this, mat_id);
+                        matDeleteDialogListener.onDeleteDialogPositiveClick(MatDeleteAlertDialogFragment.this, matId);
                     }
                 })
                 .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {

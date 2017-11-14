@@ -10,10 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.matapp.matapp.other.Material;
 
 import java.util.List;
 import java.util.Map;
@@ -49,17 +46,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        holder.row_mat_title.setText(items.get(position).get("title"));
-        holder.row_mat_desc.setText(items.get(position).get("description"));
+        holder.rowMatTitle.setText(items.get(position).get("title"));
+        holder.rowMatDesc.setText(items.get(position).get("description"));
 
         // TODO thumb muss in Bitmap umgewandelt werden!!!
         if(items.get(position).get("thumb").length() > 0) {
             byte[] imageBytes = Base64.decode(items.get(position).get("thumb"), Base64.DEFAULT);
             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            int height = holder.row_mat_thumb.getLayoutParams().height;
+            int height = holder.rowMatThumb.getLayoutParams().height;
             //int length = Math.round(64*getResources().getDisplayMetrics().density);
             Bitmap smallProfile = Bitmap.createScaledBitmap(decodedImage, height, height, false);
-            holder.row_mat_thumb.setImageBitmap(smallProfile);
+            holder.rowMatThumb.setImageBitmap(smallProfile);
         }
     }
 
@@ -79,16 +76,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     /* RecyclerViewHolder implementation */
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{
-        TextView row_mat_title;
-        TextView row_mat_desc;
-        ImageButton row_mat_thumb;
+        TextView rowMatTitle;
+        TextView rowMatDesc;
+        ImageButton rowMatThumb;
 
         /* Constructor */
         public RecyclerViewHolder(View view){
             super(view);
-            row_mat_title = (TextView)view.findViewById(R.id.row_mat_title);
-            row_mat_desc = (TextView)view.findViewById(R.id.row_mat_desc);
-            row_mat_thumb = (ImageButton)view.findViewById(R.id.row_mat_img);
+            rowMatTitle = (TextView)view.findViewById(R.id.row_mat_title);
+            rowMatDesc = (TextView)view.findViewById(R.id.row_mat_desc);
+            rowMatThumb = (ImageButton)view.findViewById(R.id.row_mat_img);
 
             // set listener to each list item
             itemView.setOnClickListener(new View.OnClickListener() {

@@ -19,18 +19,18 @@ public class Material {
     public static final int STATUS_UNAVAILABLE = 2;
 
     /* Material Attributes */
-    public String title;
-    public String description;
-    public String owner;
-    public String location;
-    public int status;
-    public String barcode;
-    public String img;
-    public String thumb;
-    public String loanName;
-    public String loanContact;
-    public String loanUntil;
-    public String loanNote;
+    private String title;
+    private String description;
+    private String owner;
+    private String location;
+    private int status;
+    private String barcode;
+    private String img;
+    private String thumb;
+    private String loanName;
+    private String loanContact;
+    private String loanUntil;
+    private String loanNote;
 
 
     /* Constructor with no arguments */
@@ -83,7 +83,7 @@ public class Material {
 
     /* full Constructor for creation of Material with all attributes */
     public Material(String title, String description, String owner, String location, int status,
-                    String barcode, String img, String loan_name, String loan_contact, String loan_until, String loan_note){
+                    String barcode, String img, String loanName, String loanContact, String loanUntil, String loanNote){
         this.title = title;
         this.description = description;
         this.owner = owner;
@@ -92,10 +92,10 @@ public class Material {
         this.barcode = barcode;
         this.img = img;
         //this.thumb = makeThumb(img);
-        this.loanName = loan_name;
-        this.loanContact = loan_contact;
-        this.loanUntil = loan_until;
-        this.loanNote = loan_note;
+        this.loanName = loanName;
+        this.loanContact = loanContact;
+        this.loanUntil = loanUntil;
+        this.loanNote = loanNote;
     }
 
 

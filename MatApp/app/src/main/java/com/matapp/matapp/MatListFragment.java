@@ -88,9 +88,9 @@ public class MatListFragment extends Fragment {
                 Log.i("MatListFragment", "items in list: " + materials);
 
                 // check if list is empty (first use)
-                if (materials.size() == 0) {
-                    Toast.makeText(getContext(), getResources().getString(R.string.first_use_title) + getResources().getString(R.string.first_use_text), Toast.LENGTH_LONG).show();
+                if (materials.isEmpty()) {
                     // TODO add some Text for first use case
+                    Toast.makeText(getContext(), getResources().getString(R.string.first_use_title) + getResources().getString(R.string.first_use_text), Toast.LENGTH_LONG).show();
                 }
 
                 //Pass ArrayList to RecyclerView

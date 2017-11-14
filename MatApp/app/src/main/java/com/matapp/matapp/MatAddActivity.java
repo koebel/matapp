@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.matapp.matapp.other.Material;
@@ -46,23 +45,47 @@ import java.io.File;
 public class MatAddActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Add */
-    EditText det_title, det_desc, det_owner, det_location, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
-    Spinner det_status;
-    TextView det_loan, det_loan_name_label, det_loan_contact_label, det_loan_until_label, det_loan_note_label;
+    EditText detTitle;
+    EditText detDesc;
+    EditText detOwner;
+    EditText detLocation;
+    EditText detLoanName;
+    EditText detLoanContact;
+    EditText detLoanUntil;
+    EditText detLoanNote;
+    Spinner detStatus;
+    TextView detLoan;
+    TextView detLoanNameLabel;
+    TextView detLoanContactLabel;
+    TextView detLoanUntilLabel;
+    TextView detLoanNoteLabel;
     int status;
-    String title, description, owner, location, img = "", thumb = "", codeContent = "";
-    Button btn_create, btn_delete, btn_add_barcode;
+
+    String title;
+    String description;
+    String owner;
+    String location;
+    String img = "";
+    String thumb = "";
+    String codeContent = "";
+
+    Button btnCreate;
+    Button btnDelete;
+    Button btnAddBarcode;
+
     FloatingActionButton fabAddImg;
     TextView textViewBarcode;
-    ImageView det_img;
-    Bitmap smallPicture, bigPicture;
+    ImageView detImg;
+    Bitmap smallPicture;
+    Bitmap bigPicture;
+
 
     private FirebaseDatabase database;
     private DatabaseReference itemReference;
-    private Uri UriImagePath;
+    private Uri uriImagePath;
 
     /* static Variables */
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
     /* Lifecycle Methods */
@@ -83,21 +106,21 @@ public class MatAddActivity extends AppCompatActivity {
         Log.i("MatAddActivity", "Reference: " + "material/" + MatAppSession.getInstance().listKey + "/item");
 
         // binding of UI elements
-        det_title = (EditText) findViewById(R.id.det_title_add);
-        det_desc = (EditText) findViewById(R.id.det_desc_add);
-        det_owner = (EditText) findViewById(R.id.det_owner_add);
-        det_location = (EditText) findViewById(R.id.det_location_add);
-        det_status = (Spinner) findViewById(R.id.det_status_add);
+        detTitle = (EditText) findViewById(R.id.det_title_add);
+        detDesc = (EditText) findViewById(R.id.det_desc_add);
+        detOwner = (EditText) findViewById(R.id.det_owner_add);
+        detLocation = (EditText) findViewById(R.id.det_location_add);
+        detStatus = (Spinner) findViewById(R.id.det_status_add);
 
-        det_loan = (TextView) findViewById(R.id.det_loan);
-        det_loan_name_label = (TextView) findViewById(R.id.det_loan_name_label);
-        det_loan_contact_label = (TextView) findViewById(R.id.det_loan_contact_label);
-        det_loan_until_label = (TextView) findViewById(R.id.det_loan_until_label);
-        det_loan_note_label = (TextView) findViewById(R.id.det_loan_note_label);
-        det_loan_name = (EditText) findViewById(R.id.det_loan_name_edit);
-        det_loan_contact = (EditText) findViewById(R.id.det_loan_contact_edit);
-        det_loan_until = (EditText) findViewById(R.id.det_loan_until_edit);
-        det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
+        detLoan = (TextView) findViewById(R.id.det_loan);
+        detLoanNameLabel = (TextView) findViewById(R.id.det_loan_name_label);
+        detLoanContactLabel = (TextView) findViewById(R.id.det_loan_contact_label);
+        detLoanUntilLabel = (TextView) findViewById(R.id.det_loan_until_label);
+        detLoanNoteLabel = (TextView) findViewById(R.id.det_loan_note_label);
+        detLoanName = (EditText) findViewById(R.id.det_loan_name_edit);
+        detLoanContact = (EditText) findViewById(R.id.det_loan_contact_edit);
+        detLoanUntil = (EditText) findViewById(R.id.det_loan_until_edit);
+        detLoanNote = (EditText) findViewById(R.id.det_loan_note_edit);
         //imageView = (ImageView) findViewById(R.id.showPic);
 
         //formatTxt = (TextView)findViewById(R.id.scan_format);
@@ -108,18 +131,18 @@ public class MatAddActivity extends AppCompatActivity {
             textViewBarcode.setText(scannercontext);
         }
 
-        det_img = (ImageView) findViewById(R.id.img_mat_add);
+        detImg = (ImageView) findViewById(R.id.img_mat_add);
 
-        btn_create = (Button) findViewById(R.id.btn_create);
-        btn_delete = (Button) findViewById(R.id.btn_delete_material);
+        btnCreate = (Button) findViewById(R.id.btn_create);
+        btnDelete = (Button) findViewById(R.id.btn_delete_material);
 
         // Get the Intent that started this activity (and extract values)
         // there are no values passed into this activity
         final Intent intent = this.getIntent();
 
 
-        btn_add_barcode = (Button) findViewById(R.id.btn_add_barcode);
-        btn_add_barcode.setOnClickListener(new View.OnClickListener() {
+        btnAddBarcode = (Button) findViewById(R.id.btn_add_barcode);
+        btnAddBarcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
@@ -142,8 +165,8 @@ public class MatAddActivity extends AppCompatActivity {
                         File wallpaperDirectory = new File(Environment.getExternalStorageDirectory() + "/MatAppImage");
                         wallpaperDirectory.mkdirs();
                     }
-                    UriImagePath = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/MatAppImage", "temp.png"));
-                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, UriImagePath);
+                    uriImagePath = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/MatAppImage", "temp.png"));
+                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriImagePath);
                     startActivityForResult(captureIntent, 1);
                 } catch (ActivityNotFoundException anfe) {
                     //Do Something...
@@ -152,39 +175,39 @@ public class MatAddActivity extends AppCompatActivity {
         });
 
         //Hide Loan section
-        det_loan.setVisibility(View.GONE);
-        det_loan_name_label.setVisibility(View.GONE);
-        det_loan_contact_label.setVisibility(View.GONE);
-        det_loan_until_label.setVisibility(View.GONE);
-        det_loan_note_label.setVisibility(View.GONE);
-        det_loan_name.setVisibility(View.GONE);
-        det_loan_contact.setVisibility(View.GONE);
-        det_loan_until.setVisibility(View.GONE);
-        det_loan_note.setVisibility(View.GONE);
+        detLoan.setVisibility(View.GONE);
+        detLoanNameLabel.setVisibility(View.GONE);
+        detLoanContactLabel.setVisibility(View.GONE);
+        detLoanUntilLabel.setVisibility(View.GONE);
+        detLoanNoteLabel.setVisibility(View.GONE);
+        detLoanName.setVisibility(View.GONE);
+        detLoanContact.setVisibility(View.GONE);
+        detLoanUntil.setVisibility(View.GONE);
+        detLoanNote.setVisibility(View.GONE);
 
-        det_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        detStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (det_status.getSelectedItemPosition() == Material.STATUS_LENT) {
-                    det_loan.setVisibility(View.VISIBLE);
-                    det_loan_name_label.setVisibility(View.VISIBLE);
-                    det_loan_contact_label.setVisibility(View.VISIBLE);
-                    det_loan_until_label.setVisibility(View.VISIBLE);
-                    det_loan_note_label.setVisibility(View.VISIBLE);
-                    det_loan_name.setVisibility(View.VISIBLE);
-                    det_loan_contact.setVisibility(View.VISIBLE);
-                    det_loan_until.setVisibility(View.VISIBLE);
-                    det_loan_note.setVisibility(View.VISIBLE);
+                if (detStatus.getSelectedItemPosition() == Material.STATUS_LENT) {
+                    detLoan.setVisibility(View.VISIBLE);
+                    detLoanNameLabel.setVisibility(View.VISIBLE);
+                    detLoanContactLabel.setVisibility(View.VISIBLE);
+                    detLoanUntilLabel.setVisibility(View.VISIBLE);
+                    detLoanNoteLabel.setVisibility(View.VISIBLE);
+                    detLoanName.setVisibility(View.VISIBLE);
+                    detLoanContact.setVisibility(View.VISIBLE);
+                    detLoanUntil.setVisibility(View.VISIBLE);
+                    detLoanNote.setVisibility(View.VISIBLE);
                 } else {
-                    det_loan.setVisibility(View.GONE);
-                    det_loan_name_label.setVisibility(View.GONE);
-                    det_loan_contact_label.setVisibility(View.GONE);
-                    det_loan_until_label.setVisibility(View.GONE);
-                    det_loan_note_label.setVisibility(View.GONE);
-                    det_loan_name.setVisibility(View.GONE);
-                    det_loan_contact.setVisibility(View.GONE);
-                    det_loan_until.setVisibility(View.GONE);
-                    det_loan_note.setVisibility(View.GONE);
+                    detLoan.setVisibility(View.GONE);
+                    detLoanNameLabel.setVisibility(View.GONE);
+                    detLoanContactLabel.setVisibility(View.GONE);
+                    detLoanUntilLabel.setVisibility(View.GONE);
+                    detLoanNoteLabel.setVisibility(View.GONE);
+                    detLoanName.setVisibility(View.GONE);
+                    detLoanContact.setVisibility(View.GONE);
+                    detLoanUntil.setVisibility(View.GONE);
+                    detLoanNote.setVisibility(View.GONE);
                 }
             }
 
@@ -215,9 +238,9 @@ public class MatAddActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
         }else if ((requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)){
-            Bitmap FullSizeImage = BitmapFactory.decodeFile(UriImagePath.getPath());
-            int ImageWidth = FullSizeImage.getHeight();
-            int ImageHeight = FullSizeImage.getWidth();
+            Bitmap fullSizeImage = BitmapFactory.decodeFile(uriImagePath.getPath());
+            int imageWidth = fullSizeImage.getHeight();
+            int imageHeight = fullSizeImage.getWidth();
 
             //Scale for BigPicture
             //int maxWidth = Math.round(Width/4);
@@ -228,14 +251,14 @@ public class MatAddActivity extends AppCompatActivity {
             int newImageWidth = 0;
             int newImageHeight = 0;
 
-            if (ImageWidth > ImageHeight) {
+            if (imageWidth > imageHeight) {
                 // landscape
-                float ratio = (float) ImageHeight / ImageWidth;
+                float ratio = (float) imageHeight / imageWidth;
                 newImageWidth = maxWidth;
                 newImageHeight = (int)(maxWidth * ratio);
-            } else if (ImageHeight > ImageWidth) {
+            } else if (imageHeight > imageWidth) {
                 // portrait
-                float ratio = (float) ImageWidth / ImageHeight;
+                float ratio = (float) imageWidth / imageHeight;
                 newImageHeight = maxHeight;
                 newImageWidth = (int)(maxHeight * ratio);
             } else {
@@ -243,14 +266,14 @@ public class MatAddActivity extends AppCompatActivity {
                 newImageHeight = maxHeight;
                 newImageWidth = maxWidth;
             }
-            bigPicture = Bitmap.createScaledBitmap(FullSizeImage,newImageWidth,newImageHeight,false);
+            bigPicture = Bitmap.createScaledBitmap(fullSizeImage,newImageWidth,newImageHeight,false);
             //Convert to Base 64
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bigPicture.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream .toByteArray();
             String imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
             img = imageString;
-            det_img.setImageBitmap(bigPicture);
+            detImg.setImageBitmap(bigPicture);
 
             //Scale for small Picture;
             //int length = Math.round(64*getResources().getDisplayMetrics().density);
@@ -288,15 +311,15 @@ public class MatAddActivity extends AppCompatActivity {
     // create new Material
     public void onCreateItem (View view){
         // get Content from Input fields
-        title = det_title.getText().toString();
+        title = detTitle.getText().toString();
         if (TextUtils.isEmpty(title)) {
             Toast.makeText(getApplicationContext(), R.string.det_title_error, Toast.LENGTH_SHORT).show();
             return;
         }
-        description = det_desc.getText().toString();
-        owner = det_owner.getText().toString();
-        location = det_location.getText().toString();
-        status = det_status.getSelectedItemPosition();
+        description = detDesc.getText().toString();
+        owner = detOwner.getText().toString();
+        location = detLocation.getText().toString();
+        status = detStatus.getSelectedItemPosition();
 
         // create new Material Object
         Material newMat = new Material(title, description, owner, location, status);
@@ -304,10 +327,10 @@ public class MatAddActivity extends AppCompatActivity {
         newMat.setThumb(thumb);
         newMat.setBarcode(codeContent);
         if (status == Material.STATUS_LENT) {
-            newMat.setLoanName(det_loan_name.getText().toString());
-            newMat.setLoanContact(det_loan_contact.getText().toString());
-            newMat.setLoanUntil(det_loan_until.getText().toString());
-            newMat.setLoanNote(det_loan_note.getText().toString());
+            newMat.setLoanName(detLoanName.getText().toString());
+            newMat.setLoanContact(detLoanContact.getText().toString());
+            newMat.setLoanUntil(detLoanUntil.getText().toString());
+            newMat.setLoanNote(detLoanNote.getText().toString());
         }
 
         //Save newMat into DB

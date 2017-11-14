@@ -9,11 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,10 +29,14 @@ import com.matapp.matapp.R;
 public class MatLoanAlertDialogFragment extends DialogFragment {
 
     /* Variables */
-    private String title, loanName, loanContact, loanUntil, loanNote;
+    private String title;
+    private String loanName;
+    private String loanContact;
+    private String loanUntil;
+    private String loanNote;
 
     /* static Variables */
-    public static final String ALERT_DIALOG = "AlertDialog";
+    public static final String LOG_ALERT_DIALOG = "AlertDialog";
 
     /* Listener Interface with method for passing back data result */
     public interface LoanDialogListener {
@@ -100,43 +100,43 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
         layout.setOrientation(LinearLayout.VERTICAL);
 
         // create Input Fields & labels
-        final TextView label_name = new TextView(getActivity());
-        label_name.setText(R.string.det_loan_name_label);
-        label_name.setPadding(paddingDpBig, paddingDpBig, paddingDpBig, 0);
-        final EditText loan_dialog_name = new EditText(getActivity());
-        loan_dialog_name.setHint(R.string.det_loan_name_hint);
-        loan_dialog_name.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
+        final TextView labelName = new TextView(getActivity());
+        labelName.setText(R.string.det_loan_name_label);
+        labelName.setPadding(paddingDpBig, paddingDpBig, paddingDpBig, 0);
+        final EditText loanDialogName = new EditText(getActivity());
+        loanDialogName.setHint(R.string.det_loan_name_hint);
+        loanDialogName.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
 
-        final TextView label_contact = new TextView(getActivity());
-        label_contact.setText(R.string.det_loan_contact_label);
-        label_contact.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
-        final EditText loan_dialog_contact = new EditText(getActivity());
-        loan_dialog_contact.setHint(R.string.det_loan_contact_hint);
-        loan_dialog_contact.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
+        final TextView labelContact = new TextView(getActivity());
+        labelContact.setText(R.string.det_loan_contact_label);
+        labelContact.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
+        final EditText loanDialogContact = new EditText(getActivity());
+        loanDialogContact.setHint(R.string.det_loan_contact_hint);
+        loanDialogContact.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
 
-        final TextView label_until = new TextView(getActivity());
-        label_until.setText(R.string.det_loan_until_label);
-        label_until.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
-        final EditText loan_dialog_until = new EditText(getActivity());
-        loan_dialog_until.setHint(R.string.det_loan_until_hint);
-        loan_dialog_until.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
+        final TextView labelUntil = new TextView(getActivity());
+        labelUntil.setText(R.string.det_loan_until_label);
+        labelUntil.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
+        final EditText loanDialogUntil = new EditText(getActivity());
+        loanDialogUntil.setHint(R.string.det_loan_until_hint);
+        loanDialogUntil.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
 
-        final TextView label_note = new TextView(getActivity());
-        label_note.setText(R.string.det_loan_note_label);
-        label_note.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
-        final EditText loan_dialog_note = new EditText(getActivity());
-        loan_dialog_note.setHint(R.string.det_loan_note_hint);
-        loan_dialog_note.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
+        final TextView labelNote = new TextView(getActivity());
+        labelNote.setText(R.string.det_loan_note_label);
+        labelNote.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, 0);
+        final EditText loanDialogNote = new EditText(getActivity());
+        loanDialogNote.setHint(R.string.det_loan_note_hint);
+        loanDialogNote.setPadding(paddingDpBig, paddingDpSmall, paddingDpBig, paddingDpSmall);
 
         // add them to layout
-        layout.addView(label_name);
-        layout.addView(loan_dialog_name);
-        layout.addView(label_contact);
-        layout.addView(loan_dialog_contact);
-        layout.addView(label_until);
-        layout.addView(loan_dialog_until);
-        layout.addView(label_note);
-        layout.addView(loan_dialog_note);
+        layout.addView(labelName);
+        layout.addView(loanDialogName);
+        layout.addView(labelContact);
+        layout.addView(loanDialogContact);
+        layout.addView(labelUntil);
+        layout.addView(loanDialogUntil);
+        layout.addView(labelNote);
+        layout.addView(loanDialogNote);
 
         builder.setView(layout);
 
@@ -157,21 +157,21 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.btn_loan, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Log.i(ALERT_DIALOG,"Name: "+loan_dialog_name.getText().toString());
-                        Log.i(ALERT_DIALOG,"Contact: "+loan_dialog_contact.getText().toString());
-                        Log.i(ALERT_DIALOG,"Until: "+loan_dialog_until.getText().toString());
-                        Log.i(ALERT_DIALOG,"Note: "+loan_dialog_note.getText().toString());
+                        Log.i(LOG_ALERT_DIALOG,"Name: "+loanDialogName.getText().toString());
+                        Log.i(LOG_ALERT_DIALOG,"Contact: "+loanDialogContact.getText().toString());
+                        Log.i(LOG_ALERT_DIALOG,"Until: "+loanDialogUntil.getText().toString());
+                        Log.i(LOG_ALERT_DIALOG,"Note: "+loanDialogNote.getText().toString());
 
                         // Send the positive button event back to the host activity
-                        loanName = loan_dialog_name.getText().toString();
+                        loanName = loanDialogName.getText().toString();
 
                         // check if Name has been entered
                             if (TextUtils.isEmpty(loanName)) {
                                 Toast.makeText(getContext(), R.string.det_loan_name_error, Toast.LENGTH_SHORT).show();
                             }
-                        loanContact = loan_dialog_contact.getText().toString();
-                        loanUntil = loan_dialog_until.getText().toString();
-                        loanNote = loan_dialog_note.getText().toString();
+                        loanContact = loanDialogContact.getText().toString();
+                        loanUntil = loanDialogUntil.getText().toString();
+                        loanNote = loanDialogNote.getText().toString();
 
                         loanDialogListener.onLoanDialogPositiveClick(MatLoanAlertDialogFragment.this, loanName, loanContact, loanUntil, loanNote);
                     }
