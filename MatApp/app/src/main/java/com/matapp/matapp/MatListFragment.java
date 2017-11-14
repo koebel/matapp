@@ -35,17 +35,18 @@ import java.util.Map;
 
 public class MatListFragment extends Fragment {
 
-    public List<Map<String,String>> materials;
-
-    public RecyclerView recyclerView;
-    public RecyclerView.Adapter recyclerViewAdapter;
-    public RecyclerView.LayoutManager recyclerViewLayoutManager;
+    /* Variables */
+    private List<Map<String,String>> materials;
 
     private FirebaseDatabase database;
     private DatabaseReference itemReference;
 
+    /* static Variables */
+    public static final String LOG_MAT_LIST_FRAGMENT = "MatListFragment";
+
+
+    /* Constructor */
     // Creates a new fragment given an int and title
-    // DemoFragment.newInstance(5, "Hello");
     public static MatListFragment newInstance(int someInt, String someTitle) {
         MatListFragment fragment = new MatListFragment();
         Bundle args = new Bundle();
@@ -54,6 +55,8 @@ public class MatListFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
 
     /* Lifecycle Methods */
@@ -65,7 +68,7 @@ public class MatListFragment extends Fragment {
         // Defines the xml file for the fragment
         View view = inflater.inflate(R.layout.fragment_mat_list, parent, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_matlist);
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_matlist);
 
         //Get Firebase database instance
         database = FirebaseDatabase.getInstance();
@@ -85,7 +88,7 @@ public class MatListFragment extends Fragment {
                     map.put("thumb", item.child("thumb").getValue(String.class));
                     materials.add(map);
                 }
-                Log.i("MatListFragment", "items in list: " + materials);
+                Log.i(LOG_MAT_LIST_FRAGMENT, "items in list: " + materials);
 
                 // check if list is empty (first use)
                 if (materials.isEmpty()) {
@@ -94,8 +97,8 @@ public class MatListFragment extends Fragment {
                 }
 
                 //Pass ArrayList to RecyclerView
-                recyclerViewAdapter = new RecyclerAdapter(materials);
-                recyclerViewLayoutManager = new LinearLayoutManager(MatListFragment.this.getContext());
+                RecyclerView.Adapter recyclerViewAdapter = new RecyclerAdapter(materials);
+                RecyclerView.LayoutManager recyclerViewLayoutManager = new LinearLayoutManager(MatListFragment.this.getContext());
                 recyclerView.setLayoutManager(recyclerViewLayoutManager);
                 recyclerView.setAdapter(recyclerViewAdapter);
             }
@@ -128,6 +131,15 @@ public class MatListFragment extends Fragment {
         if(!MatAppSession.getInstance().isListWriteable()) {
             fabAddItem.setVisibility(View.GONE);
         }
+    }
+
+    /* Getter & Setter */
+    public List<Map<String, String>> getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(List<Map<String, String>> materials) {
+        this.materials = materials;
     }
 
 }

@@ -85,6 +85,7 @@ public class MatAddActivity extends AppCompatActivity {
 
     /* static Variables */
     public static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final String LOG_MAT_ADD_ACTIVITY = "MatAddActivity";
 
 
     /* Lifecycle Methods */
@@ -102,7 +103,7 @@ public class MatAddActivity extends AppCompatActivity {
 
         //Get reference to material
         itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
-        Log.i("MatAddActivity", "Reference: " + "material/" + MatAppSession.getInstance().getListKey() + "/item");
+        Log.i(LOG_MAT_ADD_ACTIVITY, "Reference: " + "material/" + MatAppSession.getInstance().getListKey() + "/item");
 
         // binding of UI elements
         detTitle = (EditText) findViewById(R.id.det_title_add);
@@ -335,7 +336,7 @@ public class MatAddActivity extends AppCompatActivity {
         //Save newMat into DB
         String itemKey = itemReference.push().getKey();
         itemReference.child(itemKey).setValue(newMat);
-        Log.i("MatAddActivity", "new item created with itemKey=" + itemKey);
+        Log.i(LOG_MAT_ADD_ACTIVITY, "new item created with itemKey=" + itemKey);
 
         // load Mat Detail activity
         Intent intent = new Intent(this, MatDetailActivity.class);

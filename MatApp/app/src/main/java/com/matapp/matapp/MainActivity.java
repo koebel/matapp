@@ -38,6 +38,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
+    /* Variables */
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
 
@@ -52,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
     private ActionBarDrawerToggle drawerToggle;
+
+    /* static Variables */
+    public static final String LOG_MAIN_ACTIVITY = "MainActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
 
-        Log.i("MainActivity", "listKey: " + MatAppSession.getInstance().getListKey());
+        Log.i(LOG_MAIN_ACTIVITY, "listKey: " + MatAppSession.getInstance().getListKey());
         if(MatAppSession.getInstance().getListKey() != null) {
             // load MatListFragment on Start Screen
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

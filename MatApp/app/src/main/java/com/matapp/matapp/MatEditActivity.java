@@ -89,6 +89,11 @@ public class MatEditActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference itemReference;
 
+    /* static Variables */
+    public static final String LOG_MAT_ADD_ACTIVITY = "MatAddActivity";
+    public static final String LOG_MAT_EDIT_ACTIVITY = "MatEditActivity";
+
+
     /* Lifecycle Methods */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +138,7 @@ public class MatEditActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 item = dataSnapshot.getValue(Material.class);
-                Log.i("MatEditActivity", "item: " + item);
+                Log.i(LOG_MAT_EDIT_ACTIVITY, "item: " + item);
 
                 // binding of extracted values to the UI elements
                 // if no value is stored for attributes show default value for that field
@@ -288,29 +293,14 @@ public class MatEditActivity extends AppCompatActivity {
 
         //Save changes in database
         itemReference.child(itemKey).setValue(item);
-        Log.i("MatAddActivity", "saved modified item with itemKey=" + itemKey);
+        Log.i(LOG_MAT_ADD_ACTIVITY, "saved modified item with itemKey=" + itemKey);
         Toast.makeText(getApplicationContext(), getString(R.string.edit_saved), Toast.LENGTH_SHORT).show();
-
-        // put extras into intent to pass them on to the Material Detail
-        //Intent intent = new Intent(this, MatDetailActivity.class);
-        //intent.putExtra("ITEM_KEY", itemKey);
-
-        // start Material Detail Activity
-        //startActivity(intent);
         finish();
     }
 
     // Cancel Button:
     // return to Material Detail view without making any changes
     public void onCancel(View view) {
-
-        // create intent with original values passed on to this view
-        // and load Mat Detail activity
-        //Intent intent = new Intent(this, MatDetailActivity.class);
-        //intent.putExtra("ITEM_KEY", itemKey);
-
-        // start Material Detail Activity
-        //startActivity(intent);
         finish();
     }
 

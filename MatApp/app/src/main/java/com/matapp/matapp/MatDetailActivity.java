@@ -71,6 +71,10 @@ public class MatDetailActivity extends AppCompatActivity
     FragmentManager fragmentManagerDelete = getSupportFragmentManager();
     FragmentManager fragmentManagerLoan = getSupportFragmentManager();
 
+    /* static Variables */
+    public static final String LOG_MAT_ADD_ACTIVITY = "MatAddActivity";
+    public static final String LOG_MAT_DETAIL_ACTIVITY = "MatDetailActivity";
+
     /* Lifecycle Methods */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +115,7 @@ public class MatDetailActivity extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 item = dataSnapshot.getValue(Material.class);
-                Log.i("MatDetailActivity", "item: " + item);
+                Log.i(LOG_MAT_DETAIL_ACTIVITY, "item: " + item);
 
                 if(item != null) {
 
@@ -266,7 +270,7 @@ public class MatDetailActivity extends AppCompatActivity
 
         //Save changes in database
         itemReference.child(itemKey).setValue(item);
-        Log.i("MatAddActivity", "saved modified item with itemKey=" + itemKey);
+        Log.i(LOG_MAT_ADD_ACTIVITY, "saved modified item with itemKey=" + itemKey);
         Toast.makeText(getApplicationContext(), getString(R.string.edit_saved), Toast.LENGTH_SHORT).show();
     }
 
@@ -320,7 +324,7 @@ public class MatDetailActivity extends AppCompatActivity
 
         //Save changes in database
         itemReference.child(itemKey).setValue(item);
-        Log.i("MatAddActivity", "saved modified item with itemKey=" + itemKey);
+        Log.i(LOG_MAT_ADD_ACTIVITY, "saved modified item with itemKey=" + itemKey);
         Toast.makeText(getApplicationContext(), getString(R.string.edit_saved), Toast.LENGTH_SHORT).show();
 
         dialog.dismiss();
