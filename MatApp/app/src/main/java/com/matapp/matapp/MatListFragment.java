@@ -89,7 +89,7 @@ public class MatListFragment extends Fragment {
 
                 // check if list is empty (first use)
                 if (materials.isEmpty()) {
-                    // TODO add some Text for first use case
+                    // toast some Text for first use case
                     Toast.makeText(getContext(), getResources().getString(R.string.first_use_title) + getResources().getString(R.string.first_use_text), Toast.LENGTH_LONG).show();
                 }
 
@@ -113,7 +113,6 @@ public class MatListFragment extends Fragment {
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // Setup any handles to view objects here
 
         // FAB neues Material erstellen
         FloatingActionButton fabAddItem = (FloatingActionButton) view.findViewById(R.id.fab_add_item);
@@ -126,7 +125,7 @@ public class MatListFragment extends Fragment {
             }
         });
 
-        if(MatAppSession.getInstance().listWriteable == false) {
+        if(!MatAppSession.getInstance().listWriteable) {
             fabAddItem.setVisibility(View.GONE);
         }
     }

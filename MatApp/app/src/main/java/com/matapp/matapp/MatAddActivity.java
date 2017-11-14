@@ -1,6 +1,5 @@
 package com.matapp.matapp;
 
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;

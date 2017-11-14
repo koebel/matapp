@@ -29,7 +29,6 @@ import com.matapp.matapp.R;
 public class MatLoanAlertDialogFragment extends DialogFragment {
 
     /* Variables */
-    private String title;
     private String loanName;
     private String loanContact;
     private String loanUntil;
@@ -51,11 +50,10 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
     public MatLoanAlertDialogFragment(){
     }
 
-    public static MatLoanAlertDialogFragment newInstance(String title) { // removed: int id
+    public static MatLoanAlertDialogFragment newInstance(String title) {
         MatLoanAlertDialogFragment frag = new MatLoanAlertDialogFragment();
         Bundle args = new Bundle();
         args.putString("TITLE", title);
-        //args.putInt("ID", id);
         frag.setArguments(args);
         return frag;
     }
@@ -86,8 +84,7 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
         int paddingDpSmall = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingPxSmall, getActivity().getResources().getDisplayMetrics());
 
         // Fetch arguments from bundle and set title
-        title = getArguments().getString("TITLE", "Material Title");
-        // uniqueId = getArguments().getInt("ID", 0);
+        String title = getArguments().getString("TITLE", "Material Title");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -149,7 +146,6 @@ public class MatLoanAlertDialogFragment extends DialogFragment {
         final EditText loan_dialog_note = (EditText) inputView.findViewById(R.id.loan_dialog_note);
         */
 
-        //builder.setTitle(R.string.loan_dialog_title)
         String loan = getText(R.string.loan_txt).toString();
         builder.setTitle(title+ " " + loan)
 

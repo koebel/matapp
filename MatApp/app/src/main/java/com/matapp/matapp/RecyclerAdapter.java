@@ -29,7 +29,6 @@ import java.util.Map;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
 
     /* Attributes */
-    //List<Material> items;
     public List<Map<String,String>> items;
     public RecyclerAdapter (List<Map<String,String>> items){
         this.items = items;

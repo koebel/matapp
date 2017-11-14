@@ -36,11 +36,9 @@ public class  ScannerActivity extends Activity {
 
         // turn the flash on if set via intent
         Intent scanIntent = getIntent();
-        if(scanIntent.hasExtra(this.CAMERA_FLASH_ON)){
-            if(scanIntent.getBooleanExtra(this.CAMERA_FLASH_ON,false)){
-                barcodeScannerView.setTorchOn();
-                updateView();
-            }
+        if(scanIntent.hasExtra(this.CAMERA_FLASH_ON) && scanIntent.getBooleanExtra(this.CAMERA_FLASH_ON,false)){
+            barcodeScannerView.setTorchOn();
+            updateView();
         }
 
         capture = new CaptureManager(this, barcodeScannerView);
