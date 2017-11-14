@@ -82,7 +82,7 @@
     <!-- Scan menu labels -->
     <string name="turn_on_flashlight">Licht an</string>
     <string name="turn_off_flashlight">Licht aus</string>
-    <string name="scan_bar_code">Scane einen Strichcode</string>
+    <string name="scan_bar_code">Scanne einen Strichcode</string>
     <string name="item_notFound">Artikel nicht gefunden</string>
 
 
@@ -100,9 +100,10 @@
     <string name="drawer_close">Schliesse Navigation</string>
 
 
-    <!-- Menu Item labels -->
+    <!-- Menu Item & Tabbar labels -->
     <string name="mi_scanner">Strichcode-Scanner</string>
     <string name="mi_matlist">Materialübersicht</string>
+    <string name="tabbar_matlist">Übersicht</string>
 
 
     <!-- Login Fragment -->

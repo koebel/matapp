@@ -291,7 +291,7 @@ public class MatDetailActivity extends AppCompatActivity
 
     /* Implementation of MatDeleteDialogListener */
     @Override
-    public void onDeleteDialogPositiveClick(DialogFragment dialog, int id) {
+    public void onDeleteDialogPositiveClick(DialogFragment dialog) {
 
         //Delete item from DB
         itemReference.child(itemKey).setValue(null);

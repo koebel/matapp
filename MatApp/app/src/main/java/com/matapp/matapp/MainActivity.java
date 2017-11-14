@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             ft.commit();
 
             //Set Title to Listname
-            String title = MatAppSession.getInstance().listName + " " + getResources().getText(R.string.nav_matlist);
+            String title = MatAppSession.getInstance().listName + " " + getResources().getText(R.string.tabbar_matlist);
             setTitle(title);
         }
     }
@@ -260,8 +260,9 @@ public class MainActivity extends AppCompatActivity {
         // Set action bar title
         setTitle(mi.getTitle());
 
-        // TODO: maybe set Name of the Organisation into the Toolbar
-        // setTitle(MatAppSession.getInstance().listName);
+        // Set Title to Listname
+        // String title = MatAppSession.getInstance().listName + " " + getResources().getText(R.string.tabbar_matlist);
+        // setTitle(title);
     }
     */
 }
