@@ -1,15 +1,10 @@
 package com.matapp.matapp;
 
 import android.os.Build;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import com.matapp.matapp.other.Material;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -18,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.*;
 
 
