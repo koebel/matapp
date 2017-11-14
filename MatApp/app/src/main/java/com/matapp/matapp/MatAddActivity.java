@@ -78,8 +78,6 @@ public class MatAddActivity extends AppCompatActivity {
     Bitmap smallPicture;
     Bitmap bigPicture;
 
-
-    private FirebaseDatabase database;
     private DatabaseReference itemReference;
     private Uri uriImagePath;
 
@@ -99,7 +97,7 @@ public class MatAddActivity extends AppCompatActivity {
 
 
         //Get Firebase database instance
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         //Get reference to material
         itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
@@ -132,11 +130,6 @@ public class MatAddActivity extends AppCompatActivity {
 
         btnCreate = (Button) findViewById(R.id.btn_create);
         btnDelete = (Button) findViewById(R.id.btn_delete_material);
-
-        // Get the Intent that started this activity (and extract values)
-        // there are no values passed into this activity
-        final Intent intent = this.getIntent();
-
 
         btnAddBarcode = (Button) findViewById(R.id.btn_add_barcode);
         btnAddBarcode.setOnClickListener(new View.OnClickListener() {
@@ -210,26 +203,20 @@ public class MatAddActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                //Always selected one
             }
         });
     }
 
 
-    // TODO save Image into DB!
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        // super.onActivityResult(requestCode, resultCode, intent);
 
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (scanningResult != null) {
             if (scanningResult.getContents() != null) {
                 //we have a result
                 codeContent = scanningResult.getContents();
-                //codeFormat = scanningResult.getFormatName();
-
-                // formatTxt.setText("FORMAT: " + codeFormat);
                 textViewBarcode.setText(codeContent);
             } else {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
@@ -243,8 +230,8 @@ public class MatAddActivity extends AppCompatActivity {
             int maxWidth = 500;
             int maxHeight = 500;
 
-            int newImageWidth = 0;
-            int newImageHeight = 0;
+            int newImageWidth;
+            int newImageHeight;
 
             if (imageWidth > imageHeight) {
                 // landscape
@@ -270,7 +257,7 @@ public class MatAddActivity extends AppCompatActivity {
             img = imageString;
             detImg.setImageBitmap(bigPicture);
 
-            //Scale for small Picture;
+            //Scale for small picture
             int length = 25;
             smallPicture = Bitmap.createScaledBitmap(bigPicture,length,length,false);
             //Convert to Base64
@@ -285,8 +272,6 @@ public class MatAddActivity extends AppCompatActivity {
     }
 
     /* Implement Functions for Click on add Barcode Button */
-    // TODO add this function to the new Button (not FAB),
-    // looks like there are some dependencies... doesn't work for regular Button
     public void addBarcode() {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);

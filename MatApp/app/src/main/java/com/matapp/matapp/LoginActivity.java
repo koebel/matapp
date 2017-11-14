@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private int backButtonCount;
 
     private FirebaseAuth auth;
-    private FirebaseDatabase database;
     private DatabaseReference materialReference;
 
     private String listKey;
@@ -76,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         //Get Firebase database instance
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         //Get reference to material
         materialReference = database.getReference("material");
 
@@ -149,7 +148,6 @@ public class LoginActivity extends AppCompatActivity {
                                         Log.i(LOG_LOGIN_ACTIVITY, "found listKey: " + listKey + " writeable: " + listWriteable);
                                     } else {
                                         //Otherwise create new list
-                                        //TODO: dialog to confirm
                                         listKey = materialReference.push().getKey();
                                         materialReference.child(listKey).child("listName").setValue(listName);
                                         materialReference.child(listKey).child("listUid").setValue(auth.getCurrentUser().getUid());
