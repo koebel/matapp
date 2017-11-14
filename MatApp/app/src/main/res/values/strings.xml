@@ -16,6 +16,7 @@
     <string name="link_cancel">Änderungen verwerfen</string>
 
     <string name="btn_next">show detail</string>
+    <string name="db_error">Datenbank-Fehler</string>
 
 
     <!-- Material Detail -->

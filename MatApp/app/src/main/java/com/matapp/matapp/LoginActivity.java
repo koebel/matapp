@@ -168,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
+                                    Toast.makeText(view.getContext(), getString(R.string.db_error), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         } else {

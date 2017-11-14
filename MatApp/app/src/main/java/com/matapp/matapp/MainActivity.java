@@ -43,11 +43,6 @@ public class MainActivity extends AppCompatActivity {
     String codeFormat;
     String codeContent;
 
-    private FirebaseAuth auth;
-
-    private FirebaseDatabase database;
-    private DatabaseReference itemReference;
-
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
     private ActionBarDrawerToggle drawerToggle;
@@ -77,9 +72,8 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerContent(navigationDrawer);
 
         //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         //Check if logged in
-        // TODO: maybe in onStart or onResume?
         if (auth.getCurrentUser() == null || MatAppSession.getInstance().getListKey() == null) {
             //Call login screen
             Intent intent = new Intent(this, LoginActivity.class);
@@ -154,8 +148,6 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         drawerToggle.onConfigurationChanged(newConfig);
-        int x=3;
-        int y = x;
     }
 
     @Override
@@ -188,12 +180,10 @@ public class MainActivity extends AppCompatActivity {
                 codeFormat = scanningResult.getFormatName();
                 Toast.makeText(this, "Scan: " + codeContent, Toast.LENGTH_LONG).show();
 
-                //TODO find codeContent in database or start add otherwise
-
                 //Get Firebase database instance
-                database = FirebaseDatabase.getInstance();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
                 //Get reference to material
-                itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
+                DatabaseReference itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
                 //Select child where barcode=codeContent
                 Query query = itemReference.orderByChild("barcode").equalTo(codeContent);
                 //Add Listener for one read
@@ -225,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        Toast.makeText(MainActivity.this, getString(R.string.db_error), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -237,36 +227,4 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
     }
-
-    /*
-    this Function is currently not in use because in response to Usability test feedback
-    we have decided to show only the barcode scannere in the toolbar as long as
-    additional features such as usermanagement are implemented this is not needed
-
-    public void onMatListAction(MenuItem mi) {
-
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
-        Class fragmentClass = MatListFragment.class;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
-
-        // Set action bar title
-        setTitle(mi.getTitle());
-
-        // Set Title to Listname
-        // String title = MatAppSession.getInstance().getListName() + " " + getResources().getText(R.string.tabbar_matlist);
-        // setTitle(title);
-    }
-    */
 }
-
-
-
