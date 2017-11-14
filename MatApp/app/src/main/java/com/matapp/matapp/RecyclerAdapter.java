@@ -50,7 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         holder.rowMatTitle.setText(items.get(position).get("title"));
         holder.rowMatDesc.setText(items.get(position).get("description"));
 
-        // TODO thumb muss in Bitmap umgewandelt werden!!!
+        // thumb in Bitmap umgewandelen
         if(items.get(position).get("thumb").length() > 0) {
             byte[] imageBytes = Base64.decode(items.get(position).get("thumb"), Base64.DEFAULT);
             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
