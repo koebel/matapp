@@ -121,11 +121,8 @@ public class MatAddActivity extends AppCompatActivity {
         detLoanContact = (EditText) findViewById(R.id.det_loan_contact_edit);
         detLoanUntil = (EditText) findViewById(R.id.det_loan_until_edit);
         detLoanNote = (EditText) findViewById(R.id.det_loan_note_edit);
-        //imageView = (ImageView) findViewById(R.id.showPic);
 
-        //formatTxt = (TextView)findViewById(R.id.scan_format);
         textViewBarcode = (TextView)findViewById(R.id.barcode_result);
-        //getIntent().hasExtra("barcode");
         if(getIntent().hasExtra("barcode")){
             String scannercontext = getIntent().getStringExtra("barcode");
             textViewBarcode.setText(scannercontext);
@@ -243,8 +240,6 @@ public class MatAddActivity extends AppCompatActivity {
             int imageHeight = fullSizeImage.getWidth();
 
             //Scale for BigPicture
-            //int maxWidth = Math.round(Width/4);
-            //int maxHeight = Math.round(Height/4);
             int maxWidth = 500;
             int maxHeight = 500;
 
@@ -276,7 +271,6 @@ public class MatAddActivity extends AppCompatActivity {
             detImg.setImageBitmap(bigPicture);
 
             //Scale for small Picture;
-            //int length = Math.round(64*getResources().getDisplayMetrics().density);
             int length = 25;
             smallPicture = Bitmap.createScaledBitmap(bigPicture,length,length,false);
             //Convert to Base64
@@ -299,12 +293,8 @@ public class MatAddActivity extends AppCompatActivity {
         integrator.setPrompt(this.getString(R.string.scan_bar_code));
         integrator.setCaptureActivity(ScannerActivity.class);
         integrator.setOrientationLocked(false);
-        //integrator.setResultDisplayDuration(0);
-        //integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
         integrator.setCameraId(0);  // Use a specific camera of the device
         integrator.setBarcodeImageEnabled(true);
-        // set turn the camera flash on by default
-        // integrator.addExtra(appConstants.CAMERA_FLASH_ON,true);
         integrator.initiateScan();
     }
 

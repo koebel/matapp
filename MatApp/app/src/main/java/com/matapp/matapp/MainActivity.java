@@ -156,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         drawerToggle.onConfigurationChanged(newConfig);
+        int x=3;
+        int y = x;
     }
 
     @Override
@@ -172,12 +174,8 @@ public class MainActivity extends AppCompatActivity {
         integrator.setPrompt(this.getString(R.string.scan_bar_code));
         integrator.setCaptureActivity(ScannerActivity.class);
         integrator.setOrientationLocked(false);
-        //integrator.setResultDisplayDuration(0);
-        //integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
         integrator.setCameraId(0);  // Use a specific camera of the device
         integrator.setBarcodeImageEnabled(true);
-        // set turn the camera flash on by default
-        // integrator.addExtra(appConstants.CAMERA_FLASH_ON,true);
         integrator.initiateScan();
     }
 

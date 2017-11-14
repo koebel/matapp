@@ -311,12 +311,8 @@ public class MatEditActivity extends AppCompatActivity {
         integrator.setPrompt(this.getString(R.string.scan_bar_code));
         integrator.setCaptureActivity(ScannerActivity.class);
         integrator.setOrientationLocked(false);
-        //integrator.setResultDisplayDuration(0);
-        //integrator.setWide();  // Wide scanning rectangle, may work better for 1D barcodes
         integrator.setCameraId(0);  // Use a specific camera of the device
         integrator.setBarcodeImageEnabled(true);
-        // set turn the camera flash on by default
-        // integrator.addExtra(appConstants.CAMERA_FLASH_ON,true);
         integrator.initiateScan();
 
     }
@@ -336,7 +332,6 @@ public class MatEditActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        // super.onActivityResult(requestCode, resultCode, intent);
 
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (scanningResult != null) {
@@ -353,8 +348,6 @@ public class MatEditActivity extends AppCompatActivity {
             int imageHeight = fullSizeImage.getWidth();
 
             //Scale for BigPicture
-            //int maxWidth = Math.round(Width/4);
-            //int maxHeight = Math.round(Height/4);
             int maxWidth = 500;
             int maxHeight = 500;
 
@@ -386,7 +379,6 @@ public class MatEditActivity extends AppCompatActivity {
             detImg.setImageBitmap(bigPicture);
 
             //Scale for small Picture;
-            //int length = Math.round(64*getResources().getDisplayMetrics().density);
             int length = 25;
             smallPicture = Bitmap.createScaledBitmap(bigPicture,length,length,false);
             //Convert to Base64
