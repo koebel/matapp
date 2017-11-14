@@ -26,9 +26,6 @@ import com.matapp.matapp.fragments.MatDeleteAlertDialogFragment;
 import com.matapp.matapp.fragments.MatLoanAlertDialogFragment;
 import com.matapp.matapp.other.Material;
 
-import java.io.File;
-import java.io.IOException;
-
 
 /**
  *
@@ -46,9 +43,22 @@ public class MatDetailActivity extends AppCompatActivity
         implements MatDeleteAlertDialogFragment.MatDeleteDialogListener, MatLoanAlertDialogFragment.LoanDialogListener {
 
     /* Variables for Mat Detail */
-    TextView det_title, det_desc, det_owner, det_location, det_status, det_barcode, det_barcode_result,
-            det_loan, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
-    Button btn_loan, btn_return, btn_delete;
+    TextView det_title;
+    TextView det_desc;
+    TextView det_owner;
+    TextView det_location;
+    TextView det_status;
+    TextView det_barcode;
+    TextView det_barcode_result;
+    TextView det_loan;
+    TextView det_loan_name;
+    TextView det_loan_contact;
+    TextView det_loan_until;
+    TextView det_loan_note;
+
+    Button btnLoan;
+    Button btnReturn;
+    Button btnDelete;
     FloatingActionButton fabEditItem;
     ImageView det_img;
 
@@ -58,9 +68,8 @@ public class MatDetailActivity extends AppCompatActivity
     private FirebaseDatabase database;
     private DatabaseReference itemReference;
 
-    FragmentManager fm_delete = getSupportFragmentManager();
-    FragmentManager fm_loan = getSupportFragmentManager();
-
+    FragmentManager fragmentManagerDelete = getSupportFragmentManager();
+    FragmentManager fragmentManagerLoan = getSupportFragmentManager();
 
     /* Lifecycle Methods */
     @Override
@@ -83,9 +92,9 @@ public class MatDetailActivity extends AppCompatActivity
         det_barcode = (TextView) findViewById(R.id.det_barcode);
         det_barcode_result = (TextView) findViewById(R.id.barcode_result);
 
-        btn_loan = (Button) findViewById(R.id.btn_loan);
-        btn_return = (Button) findViewById(R.id.btn_return);
-        btn_delete = (Button) findViewById(R.id.btn_delete_material);
+        btnLoan = (Button) findViewById(R.id.btn_loan);
+        btnReturn = (Button) findViewById(R.id.btn_return);
+        btnDelete = (Button) findViewById(R.id.btn_delete_material);
 
         // Get the Intent that started this activity and extract values
         Intent intent = this.getIntent();
@@ -175,24 +184,24 @@ public class MatDetailActivity extends AppCompatActivity
                     // buttons: show/hide depending on status
                     if (item.getStatus() == Material.STATUS_AVAILABLE) {
                         det_status.setText(R.string.det_status_available);
-                        btn_loan.setVisibility(View.VISIBLE);
-                        btn_return.setVisibility(View.GONE);
+                        btnLoan.setVisibility(View.VISIBLE);
+                        btnReturn.setVisibility(View.GONE);
                     } else if (item.getStatus() == Material.STATUS_LENT) {
                         det_status.setText(R.string.det_status_lent);
-                        btn_loan.setVisibility(View.GONE);
-                        btn_return.setVisibility(View.VISIBLE);
+                        btnLoan.setVisibility(View.GONE);
+                        btnReturn.setVisibility(View.VISIBLE);
                     }
 
                     // material nicht verfügbar
                     else {
                         det_status.setText(R.string.det_status_unavailable);
-                        btn_loan.setVisibility(View.GONE);
-                        btn_return.setVisibility(View.GONE);
+                        btnLoan.setVisibility(View.GONE);
+                        btnReturn.setVisibility(View.GONE);
                     }
 
                     if (MatAppSession.getInstance().listWriteable == false) {
-                        btn_loan.setVisibility(View.GONE);
-                        btn_return.setVisibility(View.GONE);
+                        btnLoan.setVisibility(View.GONE);
+                        btnReturn.setVisibility(View.GONE);
                     }
 
                 }
@@ -222,24 +231,24 @@ public class MatDetailActivity extends AppCompatActivity
 
         if(MatAppSession.getInstance().listWriteable == false) {
             fabEditItem.setVisibility(View.GONE);
-            btn_delete.setVisibility(View.GONE);
+            btnDelete.setVisibility(View.GONE);
         }
 
         // attach AlertDialog to Delete Button
         // and pass the item's uniqueId and title on to the AlertDialog
-        btn_delete.setOnClickListener(new View.OnClickListener() {
+        btnDelete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MatDeleteAlertDialogFragment alertDialog = new MatDeleteAlertDialogFragment();
                 Bundle args = new Bundle();
                 args.putString("ITEMKEY", itemKey);
                 args.putString("TITLE", item.getTitle());
                 alertDialog.setArguments(args);
-                alertDialog.show(fm_delete, "MatDeleteAlertDialogFragment");
+                alertDialog.show(fragmentManagerDelete, "MatDeleteAlertDialogFragment");
             }
         });
 
         // attach AlertDialog to Loan Button
-        btn_loan.setOnClickListener(new View.OnClickListener() {
+        btnLoan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showLoanAlertDialog();
             }
@@ -264,7 +273,7 @@ public class MatDetailActivity extends AppCompatActivity
     public void showLoanAlertDialog() {
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = MatLoanAlertDialogFragment.newInstance(item.getTitle());
-        dialog.show(fm_loan, "MatLoanAlertDialogFragment");
+        dialog.show(fragmentManagerLoan, "MatLoanAlertDialogFragment");
     }
 
     // TODO check this function

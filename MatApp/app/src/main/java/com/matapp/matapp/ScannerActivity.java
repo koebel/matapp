@@ -18,7 +18,8 @@ import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 public class  ScannerActivity extends Activity {
     private CaptureManager capture;
     private DecoratedBarcodeView barcodeScannerView;
-    private View turnflashOn, turnflashOff;
+    private View turnFlashOn;
+    private View turnFlashOff;
     private boolean cameraFlashOn = false;
     public static final String CAMERA_FLASH_ON = "CAMERA_FLASH_ON";
 
@@ -30,8 +31,8 @@ public class  ScannerActivity extends Activity {
         TorchEventListener torchEventListener = new TorchEventListener(this);
         barcodeScannerView.setTorchListener(torchEventListener);
 
-        turnflashOn = findViewById(R.id.switch_flashlight_on);
-        turnflashOff = findViewById(R.id.switch_flashlight_off);
+        turnFlashOn = findViewById(R.id.switch_flashlight_on);
+        turnFlashOff = findViewById(R.id.switch_flashlight_off);
 
         // turn the flash on if set via intent
         Intent scanIntent = getIntent();
@@ -101,11 +102,11 @@ public class  ScannerActivity extends Activity {
 
     public void updateView(){
         if(cameraFlashOn){
-            turnflashOn.setVisibility(View.GONE);
-            turnflashOff.setVisibility(View.VISIBLE);
+            turnFlashOn.setVisibility(View.GONE);
+            turnFlashOff.setVisibility(View.VISIBLE);
         }else{
-            turnflashOn.setVisibility(View.VISIBLE);
-            turnflashOff.setVisibility(View.GONE);
+            turnFlashOn.setVisibility(View.VISIBLE);
+            turnFlashOff.setVisibility(View.GONE);
         }
     }
 

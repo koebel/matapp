@@ -1,6 +1,5 @@
 package com.matapp.matapp;
 
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,7 +24,6 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.matapp.matapp.other.Material;
@@ -45,22 +43,39 @@ import java.io.File;
 public class MatAddActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Add */
-    EditText det_title, det_desc, det_owner, det_location;
-    Spinner det_status;
+    EditText detTitle;
+    EditText detDesc;
+    EditText detOwner;
+    EditText detLocation;
+
+    Spinner detStatus;
     int status;
-    String title, description, owner, location, img = "", thumb = "", codeContent = "";
-    Button btn_create, btn_delete, btn_add_barcode;
+
+    String title;
+    String description;
+    String owner;
+    String location;
+    String img = "";
+    String thumb = "";
+    String codeContent = "";
+
+    Button btnCreate;
+    Button btn_delete;
+    Button btnAddBarcode;
+
     FloatingActionButton fabAddImg;
     TextView textViewBarcode;
-    ImageView det_img;
-    Bitmap smallPicture, bigPicture;
+    ImageView detImg;
+    Bitmap smallPicture;
+    Bitmap bigPicture;
+
 
     private FirebaseDatabase database;
     private DatabaseReference itemReference;
-    private Uri UriImagePath;
+    private Uri uriImagePath;
 
     /* static Variables */
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
     /* Lifecycle Methods */
@@ -81,11 +96,11 @@ public class MatAddActivity extends AppCompatActivity {
         Log.i("MatAddActivity", "Reference: " + "material/" + MatAppSession.getInstance().listKey + "/item");
 
         // binding of UI elements
-        det_title = (EditText) findViewById(R.id.det_title_add);
-        det_desc = (EditText) findViewById(R.id.det_desc_add);
-        det_owner = (EditText) findViewById(R.id.det_owner_add);
-        det_location = (EditText) findViewById(R.id.det_location_add);
-        det_status = (Spinner) findViewById(R.id.det_status_add);
+        detTitle = (EditText) findViewById(R.id.det_title_add);
+        detDesc = (EditText) findViewById(R.id.det_desc_add);
+        detOwner = (EditText) findViewById(R.id.det_owner_add);
+        detLocation = (EditText) findViewById(R.id.det_location_add);
+        detStatus = (Spinner) findViewById(R.id.det_status_add);
         //imageView = (ImageView) findViewById(R.id.showPic);
 
         //formatTxt = (TextView)findViewById(R.id.scan_format);
@@ -96,9 +111,9 @@ public class MatAddActivity extends AppCompatActivity {
             textViewBarcode.setText(scannercontext);
         }
 
-        det_img = (ImageView) findViewById(R.id.img_mat_add);
+        detImg = (ImageView) findViewById(R.id.img_mat_add);
 
-        btn_create = (Button) findViewById(R.id.btn_create);
+        btnCreate = (Button) findViewById(R.id.btn_create);
         btn_delete = (Button) findViewById(R.id.btn_delete_material);
 
         // Get the Intent that started this activity (and extract values)
@@ -106,8 +121,8 @@ public class MatAddActivity extends AppCompatActivity {
         final Intent intent = this.getIntent();
 
 
-        btn_add_barcode = (Button) findViewById(R.id.btn_add_barcode);
-        btn_add_barcode.setOnClickListener(new View.OnClickListener() {
+        btnAddBarcode = (Button) findViewById(R.id.btn_add_barcode);
+        btnAddBarcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Barcode hinzufügen", Toast.LENGTH_SHORT).show();
@@ -130,8 +145,8 @@ public class MatAddActivity extends AppCompatActivity {
                         File wallpaperDirectory = new File(Environment.getExternalStorageDirectory() + "/MatAppImage");
                         wallpaperDirectory.mkdirs();
                     }
-                    UriImagePath = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/MatAppImage", "temp.png"));
-                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, UriImagePath);
+                    uriImagePath = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/MatAppImage", "temp.png"));
+                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriImagePath);
                     startActivityForResult(captureIntent, 1);
                 } catch (ActivityNotFoundException anfe) {
                     //Do Something...
@@ -160,9 +175,9 @@ public class MatAddActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
         }else if ((requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)){
-            Bitmap FullSizeImage = BitmapFactory.decodeFile(UriImagePath.getPath());
-            int ImageWidth = FullSizeImage.getHeight();
-            int ImageHeight = FullSizeImage.getWidth();
+            Bitmap fullSizeImage = BitmapFactory.decodeFile(uriImagePath.getPath());
+            int imageWidth = fullSizeImage.getHeight();
+            int imageHeight = fullSizeImage.getWidth();
 
             //Scale for BigPicture
             //int maxWidth = Math.round(Width/4);
@@ -173,14 +188,14 @@ public class MatAddActivity extends AppCompatActivity {
             int newImageWidth = 0;
             int newImageHeight = 0;
 
-            if (ImageWidth > ImageHeight) {
+            if (imageWidth > imageHeight) {
                 // landscape
-                float ratio = (float) ImageHeight / ImageWidth;
+                float ratio = (float) imageHeight / imageWidth;
                 newImageWidth = maxWidth;
                 newImageHeight = (int)(maxWidth * ratio);
-            } else if (ImageHeight > ImageWidth) {
+            } else if (imageHeight > imageWidth) {
                 // portrait
-                float ratio = (float) ImageWidth / ImageHeight;
+                float ratio = (float) imageWidth / imageHeight;
                 newImageHeight = maxHeight;
                 newImageWidth = (int)(maxHeight * ratio);
             } else {
@@ -188,14 +203,14 @@ public class MatAddActivity extends AppCompatActivity {
                 newImageHeight = maxHeight;
                 newImageWidth = maxWidth;
             }
-            bigPicture = Bitmap.createScaledBitmap(FullSizeImage,newImageWidth,newImageHeight,false);
+            bigPicture = Bitmap.createScaledBitmap(fullSizeImage,newImageWidth,newImageHeight,false);
             //Convert to Base 64
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bigPicture.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream .toByteArray();
             String imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
             img = imageString;
-            det_img.setImageBitmap(bigPicture);
+            detImg.setImageBitmap(bigPicture);
 
             //Scale for small Picture;
             //int length = Math.round(64*getResources().getDisplayMetrics().density);
@@ -233,15 +248,15 @@ public class MatAddActivity extends AppCompatActivity {
     // create new Material
     public void onCreateItem (View view){
         // get Content from Input fields
-        title = det_title.getText().toString();
+        title = detTitle.getText().toString();
         if (TextUtils.isEmpty(title)) {
             Toast.makeText(getApplicationContext(), R.string.det_title_error, Toast.LENGTH_SHORT).show();
             return;
         }
-        description = det_desc.getText().toString();
-        owner = det_owner.getText().toString();
-        location = det_location.getText().toString();
-        status = det_status.getSelectedItemPosition();
+        description = detDesc.getText().toString();
+        owner = detOwner.getText().toString();
+        location = detLocation.getText().toString();
+        status = detStatus.getSelectedItemPosition();
 
         // create new Material Object
         Material newMat = new Material(title, description, owner, location, status);
