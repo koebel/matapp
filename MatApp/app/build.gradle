@@ -2,6 +2,19 @@ plugins {
     id "org.sonarqube" version "2.6"
 }
 
+sonarqube {
+    properties {
+        property "sonar.language", "java"
+        property "sonar.projectKey", "MatApp"
+        property "sonar.projectVersion", android.defaultConfig.versionName
+        property "sonar.sources", "./app/src/main/java"
+        property "sonar.java.binaries", "."
+        property "sonar.test", "./app/src/test/java"
+        property "sonar.java.test.binaries", "./app/build/test-results/testDebugUnitTest/binary"
+        property "sonar.junit.reportsPath", "./app/build/test-results/testDebugUnitTest"
+    }
+}
+
 apply plugin: 'com.android.application'
 
 
