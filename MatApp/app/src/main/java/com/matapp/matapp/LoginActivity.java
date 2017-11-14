@@ -99,11 +99,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
 
-                loginBtn.setEnabled(false);
-                registerBtn.setEnabled(false);
-                progressDialog.setMessage(getString(R.string.login_loginProgress));
-                progressDialog.show();
-
                 String email = emailInput.getText().toString();
                 final String password = passwordInput.getText().toString();
                 final String listName = listNameInput.getText().toString().trim();
@@ -122,6 +117,11 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(view.getContext(), getString(R.string.login_missingList), Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                loginBtn.setEnabled(false);
+                registerBtn.setEnabled(false);
+                progressDialog.setMessage(getString(R.string.login_loginProgress));
+                progressDialog.show();
 
                 //authenticate user
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -190,11 +190,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
 
-                loginBtn.setEnabled(false);
-                registerBtn.setEnabled(false);
-                progressDialog.setMessage(getString(R.string.login_registerProgress));
-                progressDialog.show();
-
                 String email = emailInput.getText().toString().trim();
                 String password = passwordInput.getText().toString().trim();
 
@@ -207,6 +202,11 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(view.getContext(), getString(R.string.login_shortPassword), Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                loginBtn.setEnabled(false);
+                registerBtn.setEnabled(false);
+                progressDialog.setMessage(getString(R.string.login_registerProgress));
+                progressDialog.show();
 
                 //create user
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
