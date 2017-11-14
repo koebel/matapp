@@ -57,8 +57,6 @@ public class MatListFragment extends Fragment {
     }
 
 
-
-
     /* Lifecycle Methods */
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
