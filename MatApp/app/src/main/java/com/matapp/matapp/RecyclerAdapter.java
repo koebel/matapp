@@ -29,8 +29,9 @@ import java.util.Map;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
 
     /* Attributes */
-    //List<Material> items;
-    public List<Map<String,String>> items;
+    private List<Map<String,String>> items;
+
+    /* Constructor */
     public RecyclerAdapter (List<Map<String,String>> items){
         this.items = items;
     }
@@ -105,6 +106,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                 }
             });
         }
+    }
+
+    /* Getter & Setter */
+    public List<Map<String, String>> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Map<String, String>> items) {
+        this.items = items;
     }
 }
 

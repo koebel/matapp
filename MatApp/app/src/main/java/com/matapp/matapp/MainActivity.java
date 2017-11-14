@@ -38,6 +38,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
+    /* Variables */
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
 
@@ -52,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
     private ActionBarDrawerToggle drawerToggle;
+
+    /* static Variables */
+    public static final String LOG_MAIN_ACTIVITY = "MainActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         //Check if logged in
         // TODO: maybe in onStart or onResume?
-        if (auth.getCurrentUser() == null || MatAppSession.getInstance().listKey == null) {
+        if (auth.getCurrentUser() == null || MatAppSession.getInstance().getListKey() == null) {
             //Call login screen
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -90,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
 
-        Log.i("MainActivity", "listKey: " + MatAppSession.getInstance().listKey);
-        if(MatAppSession.getInstance().listKey != null) {
+        Log.i(LOG_MAIN_ACTIVITY, "listKey: " + MatAppSession.getInstance().getListKey());
+        if(MatAppSession.getInstance().getListKey() != null) {
             // load MatListFragment on Start Screen
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             MatListFragment fragment = MatListFragment.newInstance(0, "");
@@ -99,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             ft.commit();
 
             //Set Title to Listname
-            String title = MatAppSession.getInstance().listName + " " + getResources().getText(R.string.nav_matlist);
+            String title = MatAppSession.getInstance().getListName() + " " + getResources().getText(R.string.tabbar_matlist);
             setTitle(title);
         }
     }
@@ -192,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 //Get Firebase database instance
                 database = FirebaseDatabase.getInstance();
                 //Get reference to material
-                itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+                itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
                 //Select child where barcode=codeContent
                 Query query = itemReference.orderByChild("barcode").equalTo(codeContent);
                 //Add Listener for one read
@@ -211,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                             newMatIntent.putExtra("ITEM_KEY", itemKey);
                             startActivity(newMatIntent);
                         } else {
-                            if(MatAppSession.getInstance().listWriteable) {
+                            if(MatAppSession.getInstance().isListWriteable()) {
                                 //Intent for Add
                                 Intent newMatIntent = new Intent(MainActivity.this, MatAddActivity.class);
                                 newMatIntent.putExtra("barcode", codeContent);
@@ -260,8 +265,9 @@ public class MainActivity extends AppCompatActivity {
         // Set action bar title
         setTitle(mi.getTitle());
 
-        // TODO: maybe set Name of the Organisation into the Toolbar
-        // setTitle(MatAppSession.getInstance().listName);
+        // Set Title to Listname
+        // String title = MatAppSession.getInstance().getListName() + " " + getResources().getText(R.string.tabbar_matlist);
+        // setTitle(title);
     }
     */
 }

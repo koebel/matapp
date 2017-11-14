@@ -43,24 +43,24 @@ public class MatDetailActivity extends AppCompatActivity
         implements MatDeleteAlertDialogFragment.MatDeleteDialogListener, MatLoanAlertDialogFragment.LoanDialogListener {
 
     /* Variables for Mat Detail */
-    TextView det_title;
-    TextView det_desc;
-    TextView det_owner;
-    TextView det_location;
-    TextView det_status;
-    TextView det_barcode;
-    TextView det_barcode_result;
-    TextView det_loan;
-    TextView det_loan_name;
-    TextView det_loan_contact;
-    TextView det_loan_until;
-    TextView det_loan_note;
+    TextView detTitle;
+    TextView detDesc;
+    TextView detOwner;
+    TextView detLocation;
+    TextView detStatus;
+    TextView detBarcode;
+    TextView detBarcodeResult;
+    TextView detLoan;
+    TextView detLoanName;
+    TextView detLoanContact;
+    TextView detLoanUntil;
+    TextView detLoanNote;
 
     Button btnLoan;
     Button btnReturn;
     Button btnDelete;
     FloatingActionButton fabEditItem;
-    ImageView det_img;
+    ImageView detImg;
 
     private String itemKey;
     private Material item;
@@ -71,6 +71,10 @@ public class MatDetailActivity extends AppCompatActivity
     FragmentManager fragmentManagerDelete = getSupportFragmentManager();
     FragmentManager fragmentManagerLoan = getSupportFragmentManager();
 
+    /* static Variables */
+    public static final String LOG_MAT_ADD_ACTIVITY = "MatAddActivity";
+    public static final String LOG_MAT_DETAIL_ACTIVITY = "MatDetailActivity";
+
     /* Lifecycle Methods */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +82,19 @@ public class MatDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_matdetail);
 
         // binding of UI elements
-        det_title = (TextView) findViewById(R.id.det_title);
-        det_desc = (TextView) findViewById(R.id.det_desc);
-        det_owner = (TextView) findViewById(R.id.det_owner);
-        det_location = (TextView) findViewById(R.id.det_location);
-        det_status = (TextView) findViewById(R.id.det_status);
-        det_loan = (TextView) findViewById(R.id.det_loan);
-        det_loan_name = (TextView) findViewById(R.id.det_loan_name);
-        det_loan_contact = (TextView) findViewById(R.id.det_loan_contact);
-        det_loan_until = (TextView) findViewById(R.id.det_loan_until);
-        det_loan_note = (TextView) findViewById(R.id.det_loan_note);
-        det_img = (ImageView) findViewById(R.id.img_mat);
-        det_barcode = (TextView) findViewById(R.id.det_barcode);
-        det_barcode_result = (TextView) findViewById(R.id.barcode_result);
+        detTitle = (TextView) findViewById(R.id.det_title);
+        detDesc = (TextView) findViewById(R.id.det_desc);
+        detOwner = (TextView) findViewById(R.id.det_owner);
+        detLocation = (TextView) findViewById(R.id.det_location);
+        detStatus = (TextView) findViewById(R.id.det_status);
+        detLoan = (TextView) findViewById(R.id.det_loan);
+        detLoanName = (TextView) findViewById(R.id.det_loan_name);
+        detLoanContact = (TextView) findViewById(R.id.det_loan_contact);
+        detLoanUntil = (TextView) findViewById(R.id.det_loan_until);
+        detLoanNote = (TextView) findViewById(R.id.det_loan_note);
+        detImg = (ImageView) findViewById(R.id.img_mat);
+        detBarcode = (TextView) findViewById(R.id.det_barcode);
+        detBarcodeResult = (TextView) findViewById(R.id.barcode_result);
 
         btnLoan = (Button) findViewById(R.id.btn_loan);
         btnReturn = (Button) findViewById(R.id.btn_return);
@@ -105,101 +109,101 @@ public class MatDetailActivity extends AppCompatActivity
         //Get Firebase database instance
         database = FirebaseDatabase.getInstance();
         //Get reference to material
-        itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+        itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
         //Read from database
         itemReference.child(itemKey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 item = dataSnapshot.getValue(Material.class);
-                Log.i("MatDetailActivity", "item: " + item);
+                Log.i(LOG_MAT_DETAIL_ACTIVITY, "item: " + item);
 
                 if(item != null) {
 
                     // binding of extracted values to the UI elements
-                    det_title.setText(item.getTitle());
-                    det_desc.setText(item.getDescription());
-                    det_barcode.setText(item.getBarcode());
-                    det_owner.setText(item.getOwner());
-                    det_location.setText(item.getLocation());
-                    det_loan_name.setText(item.getLoanName());
-                    det_loan_contact.setText(item.getLoanContact());
-                    det_loan_until.setText(item.getLoanUntil());
-                    det_loan_note.setText(item.getLoanNote());
+                    detTitle.setText(item.getTitle());
+                    detDesc.setText(item.getDescription());
+                    detBarcode.setText(item.getBarcode());
+                    detOwner.setText(item.getOwner());
+                    detLocation.setText(item.getLocation());
+                    detLoanName.setText(item.getLoanName());
+                    detLoanContact.setText(item.getLoanContact());
+                    detLoanUntil.setText(item.getLoanUntil());
+                    detLoanNote.setText(item.getLoanNote());
 
                     //TODO get Full Image from storage.
-                    det_img.setImageBitmap(stringToBitmap(item.getImg()));
+                    detImg.setImageBitmap(stringToBitmap(item.getImg()));
 
                     if (item.getBarcode().trim().length() > 0) {
-                        det_barcode.setText(item.getBarcode());
+                        detBarcode.setText(item.getBarcode());
                     } else {
-                        det_barcode.setText(getString(R.string.det_barcode));
+                        detBarcode.setText(getString(R.string.det_barcode));
                     }
 
                     // display only attributes that are not empty
                     if (item.getDescription() != null && item.getDescription().trim().length() == 0) {
-                        det_desc.setVisibility(View.GONE);
+                        detDesc.setVisibility(View.GONE);
                     }
                     if (item.getBarcode() != null && item.getBarcode().trim().length() == 0) {
-                        det_barcode.setVisibility(View.GONE);
-                        det_barcode_result.setVisibility(View.GONE);
+                        detBarcode.setVisibility(View.GONE);
+                        detBarcodeResult.setVisibility(View.GONE);
                     }
                     if (item.getOwner() != null && item.getOwner().trim().length() == 0) {
-                        det_owner.setVisibility(View.GONE);
+                        detOwner.setVisibility(View.GONE);
                     }
                     if (item.getLocation() != null && item.getLocation().trim().length() == 0) {
-                        det_location.setVisibility(View.GONE);
+                        detLocation.setVisibility(View.GONE);
                     }
 
                     // display loan subtitle only if any of the loan attributes contains a value
                     String loanDetails = item.getLoanName() + item.getLoanContact() + item.getLoanUntil() + item.getLoanNote();
                     if (loanDetails.trim().length() == 0) {
-                        det_loan.setVisibility(View.GONE);
+                        detLoan.setVisibility(View.GONE);
                     } else {
-                        det_loan.setVisibility(View.VISIBLE);
+                        detLoan.setVisibility(View.VISIBLE);
                     }
                     // hide empty fields
                     if (item.getLoanName() != null && item.getLoanName().trim().length() > 0) {
-                        det_loan_name.setVisibility(View.VISIBLE);
+                        detLoanName.setVisibility(View.VISIBLE);
                     } else {
-                        det_loan_name.setVisibility(View.GONE);
+                        detLoanName.setVisibility(View.GONE);
                     }
                     if (item.getLoanContact() != null && item.getLoanContact().trim().length() > 0) {
-                        det_loan_contact.setVisibility(View.VISIBLE);
+                        detLoanContact.setVisibility(View.VISIBLE);
                     } else {
-                        det_loan_contact.setVisibility(View.GONE);
+                        detLoanContact.setVisibility(View.GONE);
                     }
                     if (item.getLoanUntil() != null && item.getLoanUntil().trim().length() > 0) {
-                        det_loan_until.setVisibility(View.VISIBLE);
+                        detLoanUntil.setVisibility(View.VISIBLE);
                     } else {
-                        det_loan_until.setVisibility(View.GONE);
+                        detLoanUntil.setVisibility(View.GONE);
                     }
                     if (item.getLoanNote() != null && item.getLoanNote().trim().length() > 0) {
-                        det_loan_note.setVisibility(View.VISIBLE);
+                        detLoanNote.setVisibility(View.VISIBLE);
                     } else {
-                        det_loan_note.setVisibility(View.GONE);
+                        detLoanNote.setVisibility(View.GONE);
                     }
 
                     // status dependent bindings & visibility settings
                     // det_status: transform status value into text variable
                     // buttons: show/hide depending on status
                     if (item.getStatus() == Material.STATUS_AVAILABLE) {
-                        det_status.setText(R.string.det_status_available);
+                        detStatus.setText(R.string.det_status_available);
                         btnLoan.setVisibility(View.VISIBLE);
                         btnReturn.setVisibility(View.GONE);
                     } else if (item.getStatus() == Material.STATUS_LENT) {
-                        det_status.setText(R.string.det_status_lent);
+                        detStatus.setText(R.string.det_status_lent);
                         btnLoan.setVisibility(View.GONE);
                         btnReturn.setVisibility(View.VISIBLE);
                     }
 
                     // material nicht verfügbar
                     else {
-                        det_status.setText(R.string.det_status_unavailable);
+                        detStatus.setText(R.string.det_status_unavailable);
                         btnLoan.setVisibility(View.GONE);
                         btnReturn.setVisibility(View.GONE);
                     }
 
-                    if (MatAppSession.getInstance().listWriteable == false) {
+                    if (!MatAppSession.getInstance().isListWriteable()) {
                         btnLoan.setVisibility(View.GONE);
                         btnReturn.setVisibility(View.GONE);
                     }
@@ -229,7 +233,7 @@ public class MatDetailActivity extends AppCompatActivity
             }
         });
 
-        if(MatAppSession.getInstance().listWriteable == false) {
+        if(!MatAppSession.getInstance().isListWriteable()) {
             fabEditItem.setVisibility(View.GONE);
             btnDelete.setVisibility(View.GONE);
         }
@@ -266,7 +270,7 @@ public class MatDetailActivity extends AppCompatActivity
 
         //Save changes in database
         itemReference.child(itemKey).setValue(item);
-        Log.i("MatAddActivity", "saved modified item with itemKey=" + itemKey);
+        Log.i(LOG_MAT_ADD_ACTIVITY, "saved modified item with itemKey=" + itemKey);
         Toast.makeText(getApplicationContext(), getString(R.string.edit_saved), Toast.LENGTH_SHORT).show();
     }
 
@@ -291,7 +295,7 @@ public class MatDetailActivity extends AppCompatActivity
 
     /* Implementation of MatDeleteDialogListener */
     @Override
-    public void onDeleteDialogPositiveClick(DialogFragment dialog, int id) {
+    public void onDeleteDialogPositiveClick(DialogFragment dialog) {
 
         //Delete item from DB
         itemReference.child(itemKey).setValue(null);
@@ -320,7 +324,7 @@ public class MatDetailActivity extends AppCompatActivity
 
         //Save changes in database
         itemReference.child(itemKey).setValue(item);
-        Log.i("MatAddActivity", "saved modified item with itemKey=" + itemKey);
+        Log.i(LOG_MAT_ADD_ACTIVITY, "saved modified item with itemKey=" + itemKey);
         Toast.makeText(getApplicationContext(), getString(R.string.edit_saved), Toast.LENGTH_SHORT).show();
 
         dialog.dismiss();

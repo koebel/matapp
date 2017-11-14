@@ -13,56 +13,34 @@ package com.matapp.matapp.other;
 public class Material {
 
     /* static Attributes */
-    //private static int idCounter = 0;
     public static final int STATUS_AVAILABLE = 0;
     public static final int STATUS_LENT = 1;
     public static final int STATUS_UNAVAILABLE = 2;
 
     /* Material Attributes */
-    private String title;
-    private String description;
-    private String owner;
-    private String location;
+    private String title = "";
+    private String description = "";
+    private String owner = "";
+    private String location = "";
     private int status;
-    private String barcode;
-    private String img;
-    private String thumb;
-    private String loanName;
-    private String loanContact;
-    private String loanUntil;
-    private String loanNote;
+    private String barcode = "";
+    private String img = "";
+    private String thumb = "";
+    private String loanName = "";
+    private String loanContact = "";
+    private String loanUntil = "";
+    private String loanNote = "";
 
 
     /* Constructor with no arguments */
-    public Material(){
-        this.title = "";
-        this.description = "";
-        this.owner = "";
-        this.location = "";
-        this.status = STATUS_AVAILABLE;
-        this.barcode = "";
-        this.img = "";
-        this.thumb = "";
-        this.loanName = "";
-        this.loanContact = "";
-        this.loanUntil = "";
-        this.loanNote = "";
+    public Material () {
     }
 
     /* basic Constructor */
     public Material(String title, String description){
         this.title = title;
         this.description = description;
-        this.owner = "";
-        this.location = "";
         this.status = STATUS_AVAILABLE;
-        this.barcode = "";
-        this.img = "";
-        this.thumb = "";
-        this.loanName = "";
-        this.loanContact = "";
-        this.loanUntil = "";
-        this.loanNote = "";
     }
 
     /* Constructor for initial creation of Materials in MatAddActivity */
@@ -72,13 +50,6 @@ public class Material {
         this.owner = owner;
         this.location = location;
         this.status = status;
-        this.barcode = "";
-        this.img = "";
-        this.thumb = "";
-        this.loanName = "";
-        this.loanContact = "";
-        this.loanUntil = "";
-        this.loanNote = "";
     }
 
     /* full Constructor for creation of Material with all attributes */
@@ -91,7 +62,6 @@ public class Material {
         this.status = status;
         this.barcode = barcode;
         this.img = img;
-        //this.thumb = makeThumb(img);
         this.loanName = loanName;
         this.loanContact = loanContact;
         this.loanUntil = loanUntil;
@@ -169,42 +139,29 @@ public class Material {
         return loanName;
     }
 
-    public void setLoanName(String loan_name) { this.loanName = loan_name; }
+    public void setLoanName(String loanName) { this.loanName = loanName; }
 
     public String getLoanContact() {
         return loanContact;
     }
 
-    public void setLoanContact(String loan_contact) {
-        this.loanContact = loan_contact;
+    public void setLoanContact(String loanContact) {
+        this.loanContact = loanContact;
     }
 
     public String getLoanUntil() {
         return loanUntil;
     }
 
-    public void setLoanUntil(String loan_until) {
-        this.loanUntil = loan_until;
+    public void setLoanUntil(String loanUntil) {
+        this.loanUntil = loanUntil;
     }
 
     public String getLoanNote() {
         return loanNote;
     }
 
-    public void setLoanNote(String loan_note) {
-        this.loanNote = loan_note;
+    public void setLoanNote(String loanNote) {
+        this.loanNote = loanNote;
     }
-
-
-
-
-    /*public String makeThumb(String img) {
-
-        // TODO resize image to thumbnail size (64 x 64dp)
-        // https://stackoverflow.com/questions/35195713/re-sizing-an-image-which-in-base64-format-and-converting-to-base64-again-in-java
-        // https://www.playframework.com/documentation/1.0/api/play/libs/Images.html
-        String thumb = new String("this is a placeholder for the thumbnail size image");
-
-        return thumb;
-    }*/
 }
