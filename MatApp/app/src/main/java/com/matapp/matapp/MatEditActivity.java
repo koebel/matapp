@@ -86,7 +86,6 @@ public class MatEditActivity extends AppCompatActivity {
     private String itemKey;
     private Material item;
 
-    private FirebaseDatabase database;
     private DatabaseReference itemReference;
 
     /* static Variables */
@@ -127,10 +126,15 @@ public class MatEditActivity extends AppCompatActivity {
         intent = this.getIntent();
 
         // receive Extras
-        itemKey = intent.getExtras().getString("ITEM_KEY");
+        if(intent.hasExtra("ITEM_KEY")) {
+            itemKey = intent.getExtras().getString("ITEM_KEY");
+        } else {
+            finish();
+            return;
+        }
 
         //Get Firebase database instance
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         //Get reference to material
         itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
         //Read from database
@@ -196,7 +200,7 @@ public class MatEditActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), getString(R.string.db_error), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -262,7 +266,7 @@ public class MatEditActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                //Always one selected
             }
         });
     }
@@ -320,15 +324,13 @@ public class MatEditActivity extends AppCompatActivity {
     public Bitmap stringToBitmap(String imgString){
         try{
             byte[] encode = Base64.decode(imgString,Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(Base64.decode(imgString,Base64.DEFAULT), 0, encode.length);
-            return bitmap;
+            return BitmapFactory.decodeByteArray(Base64.decode(imgString,Base64.DEFAULT), 0, encode.length);
         } catch (Exception e) {
             e.getMessage();
             return null;
         }
     }
 
-    // TODO save Image into DB!
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -351,8 +353,8 @@ public class MatEditActivity extends AppCompatActivity {
             int maxWidth = 500;
             int maxHeight = 500;
 
-            int newImageWidth = 0;
-            int newImageHeight = 0;
+            int newImageWidth;
+            int newImageHeight;
 
             if (imageWidth > imageHeight) {
                 // landscape
@@ -378,7 +380,7 @@ public class MatEditActivity extends AppCompatActivity {
             img = imageString;
             detImg.setImageBitmap(bigPicture);
 
-            //Scale for small Picture;
+            //Scale for small picture
             int length = 25;
             smallPicture = Bitmap.createScaledBitmap(bigPicture,length,length,false);
             //Convert to Base64
