@@ -38,9 +38,6 @@ public class MatListFragment extends Fragment {
     /* Variables */
     private List<Map<String,String>> materials;
 
-    private FirebaseDatabase database;
-    private DatabaseReference itemReference;
-
     /* static Variables */
     public static final String LOG_MAT_LIST_FRAGMENT = "MatListFragment";
 
@@ -69,9 +66,9 @@ public class MatListFragment extends Fragment {
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_matlist);
 
         //Get Firebase database instance
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         //Get reference to material
-        itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
+        DatabaseReference itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
         //Read at reference
         itemReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -103,6 +100,7 @@ public class MatListFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getContext(), getString(R.string.db_error), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -129,15 +127,6 @@ public class MatListFragment extends Fragment {
         if(!MatAppSession.getInstance().isListWriteable()) {
             fabAddItem.setVisibility(View.GONE);
         }
-    }
-
-    /* Getter & Setter */
-    public List<Map<String, String>> getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(List<Map<String, String>> materials) {
-        this.materials = materials;
     }
 
 }
