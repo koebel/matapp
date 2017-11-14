@@ -161,6 +161,76 @@
                     android:prompt="@string/det_status_prompt"
                     android:spinnerMode="dropdown" />
 
+                <!-- Input Fields regarding Loan -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:id="@+id/det_loan"
+                    android:text="@string/det_loan_sub" />
+
+                <TextView
+                    android:id="@+id/det_loan_name_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_loan_name_label" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/det_loan_name_edit"
+                    android:hint="@string/det_loan_name_hint"/>
+
+                <TextView
+                    android:id="@+id/det_loan_contact_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_loan_contact_label" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/det_loan_contact_edit"
+                    android:hint="@string/det_loan_contact_hint"/>
+
+                <TextView
+                    android:id="@+id/det_loan_until_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_loan_until_label" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/det_loan_until_edit"
+                    android:hint="@string/det_loan_until_hint"/>
+
+                <TextView
+                    android:id="@+id/det_loan_note_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textIsSelectable="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/det_loan_note_label" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/det_loan_note_edit"
+                    android:hint="@string/det_loan_note_hint"/>
+
                 <!-- Buttons -->
                 <Button
                     android:id="@+id/btn_create"

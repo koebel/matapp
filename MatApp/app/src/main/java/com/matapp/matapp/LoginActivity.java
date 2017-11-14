@@ -1,5 +1,6 @@
 package com.matapp.matapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -40,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     private String listKey;
     private boolean listWriteable;
 
+    private ProgressDialog progressDialog;
+
     /* static Variables */
     public static final String LOGIN_ACTIVITY = "LoginActivity";
 
@@ -61,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        progressDialog = new ProgressDialog(this);
+
         //Reset backButton counter
         backButtonCount = 0;
 
@@ -90,12 +95,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
 
+                loginBtn.setEnabled(false);
+                registerBtn.setEnabled(false);
+                progressDialog.setMessage(getString(R.string.login_loginProgress));
+                progressDialog.show();
+
                 String email = emailInput.getText().toString();
                 final String password = passwordInput.getText().toString();
                 final String listName = listNameInput.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(view.getContext(), getString(R.string.login_missingEmail), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (password.length() < 6) {
+                    Toast.makeText(view.getContext(), getString(R.string.login_shortPassword), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -109,8 +124,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //Success
-                            Toast.makeText(view.getContext(), getString(R.string.login_loginSuccessful), Toast.LENGTH_SHORT).show();
                             Log.i(LOGIN_ACTIVITY, "uid: " + auth.getCurrentUser().getUid());
                             //Select child where listName=listName
                             Query query = materialReference.orderByChild("listName").equalTo(listName);
@@ -143,6 +156,11 @@ public class LoginActivity extends AppCompatActivity {
                                     MatAppSession.getInstance().listKey = listKey;
                                     MatAppSession.getInstance().listName = listName;
                                     MatAppSession.getInstance().listWriteable = listWriteable;
+                                    //Success
+                                    Toast.makeText(view.getContext(), getString(R.string.login_loginSuccessful), Toast.LENGTH_SHORT).show();
+                                    loginBtn.setEnabled(true);
+                                    registerBtn.setEnabled(true);
+                                    progressDialog.dismiss();
                                     finish();
                                 }
 
@@ -153,6 +171,9 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             //There was an error
                             Toast.makeText(view.getContext(), getString(R.string.login_loginFailed) + task.getException(), Toast.LENGTH_LONG).show();
+                            loginBtn.setEnabled(true);
+                            registerBtn.setEnabled(true);
+                            progressDialog.dismiss();
                         }
                     }
                 });
@@ -164,6 +185,11 @@ public class LoginActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+
+                loginBtn.setEnabled(false);
+                registerBtn.setEnabled(false);
+                progressDialog.setMessage(getString(R.string.login_registerProgress));
+                progressDialog.show();
 
                 String email = emailInput.getText().toString().trim();
                 String password = passwordInput.getText().toString().trim();
@@ -190,6 +216,9 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(view.getContext(), getString(R.string.login_registerFailed) + task.getException(), Toast.LENGTH_LONG).show();
                         }
+                        loginBtn.setEnabled(true);
+                        registerBtn.setEnabled(true);
+                        progressDialog.dismiss();
                     }
                 });
 

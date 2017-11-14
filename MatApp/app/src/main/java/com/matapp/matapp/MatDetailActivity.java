@@ -286,7 +286,6 @@ public class MatDetailActivity extends AppCompatActivity
 
         //Delete item from DB
         itemReference.child(itemKey).setValue(null);
-        //TODO: delete Image from Storage
         Toast.makeText(getApplicationContext(), getString(R.string.delete_item_deleted), Toast.LENGTH_SHORT).show();
 
         dialog.dismiss();

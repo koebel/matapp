@@ -73,7 +73,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/det_desc_edit" />
+                    android:id="@+id/det_desc_edit"
+                    android:hint="@string/det_desc_hint"/>
 
                 <!-- Barcode Section -->
                 <RelativeLayout
@@ -123,7 +124,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/det_owner_edit" />
+                    android:id="@+id/det_owner_edit"
+                    android:hint="@string/det_owner_hint"/>
 
                 <TextView
                     android:id="@+id/det_location_label"
@@ -137,7 +139,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/det_location_edit" />
+                    android:id="@+id/det_location_edit"
+                    android:hint="@string/det_location_hint"/>
 
                 <TextView
                     android:id="@+id/det_status_label"
@@ -168,7 +171,7 @@
                     android:text="@string/det_loan_sub" />
 
                 <TextView
-                    android:id="@+id/loan_dialog_name_label"
+                    android:id="@+id/det_loan_name_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1"
@@ -179,10 +182,11 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/det_loan_name_edit" />
+                    android:id="@+id/det_loan_name_edit"
+                    android:hint="@string/det_loan_name_hint"/>
 
                 <TextView
-                    android:id="@+id/loan_dialog_contact_label"
+                    android:id="@+id/det_loan_contact_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1"
@@ -193,10 +197,11 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/det_loan_contact_edit" />
+                    android:id="@+id/det_loan_contact_edit"
+                    android:hint="@string/det_loan_contact_hint"/>
 
                 <TextView
-                    android:id="@+id/loan_dialog_until_label"
+                    android:id="@+id/det_loan_until_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1"
@@ -207,10 +212,11 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/det_loan_until_edit" />
+                    android:id="@+id/det_loan_until_edit"
+                    android:hint="@string/det_loan_until_hint"/>
 
                 <TextView
-                    android:id="@+id/loan_dialog_note_label"
+                    android:id="@+id/det_loan_note_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1"
@@ -221,7 +227,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/det_loan_note_edit" />
+                    android:id="@+id/det_loan_note_edit"
+                    android:hint="@string/det_loan_note_hint"/>
 
                 <!-- Buttons -->
                 <Button

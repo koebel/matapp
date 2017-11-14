@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,8 +46,9 @@ import java.io.File;
 public class MatAddActivity extends AppCompatActivity {
 
     /* Variables for Mat Detail Add */
-    EditText det_title, det_desc, det_owner, det_location;
+    EditText det_title, det_desc, det_owner, det_location, det_loan_name, det_loan_contact, det_loan_until, det_loan_note;
     Spinner det_status;
+    TextView det_loan, det_loan_name_label, det_loan_contact_label, det_loan_until_label, det_loan_note_label;
     int status;
     String title, description, owner, location, img = "", thumb = "", codeContent = "";
     Button btn_create, btn_delete, btn_add_barcode;
@@ -86,6 +88,16 @@ public class MatAddActivity extends AppCompatActivity {
         det_owner = (EditText) findViewById(R.id.det_owner_add);
         det_location = (EditText) findViewById(R.id.det_location_add);
         det_status = (Spinner) findViewById(R.id.det_status_add);
+
+        det_loan = (TextView) findViewById(R.id.det_loan);
+        det_loan_name_label = (TextView) findViewById(R.id.det_loan_name_label);
+        det_loan_contact_label = (TextView) findViewById(R.id.det_loan_contact_label);
+        det_loan_until_label = (TextView) findViewById(R.id.det_loan_until_label);
+        det_loan_note_label = (TextView) findViewById(R.id.det_loan_note_label);
+        det_loan_name = (EditText) findViewById(R.id.det_loan_name_edit);
+        det_loan_contact = (EditText) findViewById(R.id.det_loan_contact_edit);
+        det_loan_until = (EditText) findViewById(R.id.det_loan_until_edit);
+        det_loan_note = (EditText) findViewById(R.id.det_loan_note_edit);
         //imageView = (ImageView) findViewById(R.id.showPic);
 
         //formatTxt = (TextView)findViewById(R.id.scan_format);
@@ -136,6 +148,49 @@ public class MatAddActivity extends AppCompatActivity {
                 } catch (ActivityNotFoundException anfe) {
                     //Do Something...
                 }
+            }
+        });
+
+        //Hide Loan section
+        det_loan.setVisibility(View.GONE);
+        det_loan_name_label.setVisibility(View.GONE);
+        det_loan_contact_label.setVisibility(View.GONE);
+        det_loan_until_label.setVisibility(View.GONE);
+        det_loan_note_label.setVisibility(View.GONE);
+        det_loan_name.setVisibility(View.GONE);
+        det_loan_contact.setVisibility(View.GONE);
+        det_loan_until.setVisibility(View.GONE);
+        det_loan_note.setVisibility(View.GONE);
+
+        det_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (det_status.getSelectedItemPosition() == Material.STATUS_LENT) {
+                    det_loan.setVisibility(View.VISIBLE);
+                    det_loan_name_label.setVisibility(View.VISIBLE);
+                    det_loan_contact_label.setVisibility(View.VISIBLE);
+                    det_loan_until_label.setVisibility(View.VISIBLE);
+                    det_loan_note_label.setVisibility(View.VISIBLE);
+                    det_loan_name.setVisibility(View.VISIBLE);
+                    det_loan_contact.setVisibility(View.VISIBLE);
+                    det_loan_until.setVisibility(View.VISIBLE);
+                    det_loan_note.setVisibility(View.VISIBLE);
+                } else {
+                    det_loan.setVisibility(View.GONE);
+                    det_loan_name_label.setVisibility(View.GONE);
+                    det_loan_contact_label.setVisibility(View.GONE);
+                    det_loan_until_label.setVisibility(View.GONE);
+                    det_loan_note_label.setVisibility(View.GONE);
+                    det_loan_name.setVisibility(View.GONE);
+                    det_loan_contact.setVisibility(View.GONE);
+                    det_loan_until.setVisibility(View.GONE);
+                    det_loan_note.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }
@@ -248,6 +303,12 @@ public class MatAddActivity extends AppCompatActivity {
         newMat.setImg(img);
         newMat.setThumb(thumb);
         newMat.setBarcode(codeContent);
+        if (status == Material.STATUS_LENT) {
+            newMat.setLoanName(det_loan_name.getText().toString());
+            newMat.setLoanContact(det_loan_contact.getText().toString());
+            newMat.setLoanUntil(det_loan_until.getText().toString());
+            newMat.setLoanNote(det_loan_note.getText().toString());
+        }
 
         //Save newMat into DB
         String itemKey = itemReference.push().getKey();

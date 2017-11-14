@@ -122,33 +122,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-        if(menuItem.getItemId() != R.id.nav_logout) {
-            // Create a new fragment and specify the fragment to show based on nav item clicked
-            Fragment fragment = null;
-            Class fragmentClass = MatListFragment.class;
-            switch (menuItem.getItemId()) {
-                case R.id.nav_scanner:
-                    onScannerAction(menuItem);
-                    break;
-                case R.id.nav_matlist:
-                    fragmentClass = MatListFragment.class;
-                    break;
-
-                default:
-                    fragmentClass = MatListFragment.class;
-            }
-
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // Insert the fragment by replacing any existing fragment
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
-
-        } else {
+        if(menuItem.getItemId() == R.id.nav_scanner) {
+            //Start Scanner
+            onScannerAction(menuItem);
+        } else if(menuItem.getItemId() == R.id.nav_logout){
             // Start activity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

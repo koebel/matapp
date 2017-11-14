@@ -120,6 +120,8 @@
     <string name="login_missingEmail">Email fehlt</string>
     <string name="login_shortPassword">Passwort zu kurz (min. 6 Zeichen)</string>
     <string name="login_backBtn">Klicken Sie ein zweites Mal auf Zurück, um die App zu schliessen.</string>
+    <string name="login_loginProgress">Anmeldung läuft...</string>
+    <string name="login_registerProgress">Registrierung läuft...</string>
 
     <!-- List View first Use -->
     <string name="first_use_title">Herzlich willkommen bei MatApp! </string>

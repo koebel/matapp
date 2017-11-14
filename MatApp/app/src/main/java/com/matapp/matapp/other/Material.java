@@ -19,7 +19,6 @@ public class Material {
     public static final int STATUS_UNAVAILABLE = 2;
 
     /* Material Attributes */
-    //public int uniqueId;
     public String title;
     public String description;
     public String owner;
@@ -36,7 +35,6 @@ public class Material {
 
     /* Constructor with no arguments */
     public Material(){
-        //this.uniqueId = createUniqueId();
         this.title = "";
         this.description = "";
         this.owner = "";
@@ -53,12 +51,10 @@ public class Material {
 
     /* basic Constructor */
     public Material(String title, String description){
-        //this.uniqueId = createUniqueId();
         this.title = title;
         this.description = description;
         this.owner = "";
         this.location = "";
-        //this.gps = "";
         this.status = STATUS_AVAILABLE;
         this.barcode = "";
         this.img = "";
@@ -71,7 +67,6 @@ public class Material {
 
     /* Constructor for initial creation of Materials in MatAddActivity */
     public Material(String title, String description, String owner, String location, int status){
-        //this.uniqueId = createUniqueId();
         this.title = title;
         this.description = description;
         this.owner = owner;
@@ -88,8 +83,7 @@ public class Material {
 
     /* full Constructor for creation of Material with all attributes */
     public Material(String title, String description, String owner, String location, int status,
-                    String gps, String barcode, String img, String loan_name, String loan_contact, String loan_until, String loan_note){
-        //this.uniqueId = createUniqueId();
+                    String barcode, String img, String loan_name, String loan_contact, String loan_until, String loan_note){
         this.title = title;
         this.description = description;
         this.owner = owner;
@@ -97,7 +91,7 @@ public class Material {
         this.status = status;
         this.barcode = barcode;
         this.img = img;
-        this.thumb = makeThumb(img);
+        //this.thumb = makeThumb(img);
         this.loanName = loan_name;
         this.loanContact = loan_contact;
         this.loanUntil = loan_until;
@@ -106,12 +100,6 @@ public class Material {
 
 
     /* Getter & Setter Methods */
-    /*public int getUniqueId() {
-        return uniqueId;
-    }*/
-
-    // no Setter for uniqueID, because the Id should never be changed.
-    // in case modifictation of the Id is requested, it needs to be checked if new Id is really unique.
 
     public String getTitle() {
         return title;
@@ -208,14 +196,9 @@ public class Material {
     }
 
 
-    /* static Methods */
-    /*public static synchronized int createUniqueId()
-    {
-        return idCounter++;
-    }*/
 
 
-    public String makeThumb(String img) {
+    /*public String makeThumb(String img) {
 
         // TODO resize image to thumbnail size (64 x 64dp)
         // https://stackoverflow.com/questions/35195713/re-sizing-an-image-which-in-base64-format-and-converting-to-base64-again-in-java
@@ -223,5 +206,5 @@ public class Material {
         String thumb = new String("this is a placeholder for the thumbnail size image");
 
         return thumb;
-    }
+    }*/
 }
