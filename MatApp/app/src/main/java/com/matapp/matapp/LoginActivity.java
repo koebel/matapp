@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             emailInput.setText(auth.getCurrentUser().getEmail());
             //Logout
             auth.signOut();
-            Log.i(LOG_LOGIN_ACTIVITY, "listKey: " + MatAppSession.getInstance().listKey);
+            Log.i(LOG_LOGIN_ACTIVITY, "listKey: " + MatAppSession.getInstance().getListKey());
         }
 
         //Login Button
@@ -157,9 +157,9 @@ public class LoginActivity extends AppCompatActivity {
                                         Log.i(LOG_LOGIN_ACTIVITY, "created new list with listKey=" + listKey);
                                         Toast.makeText(view.getContext(), getString(R.string.login_listCreated), Toast.LENGTH_SHORT).show();
                                     }
-                                    MatAppSession.getInstance().listKey = listKey;
-                                    MatAppSession.getInstance().listName = listName;
-                                    MatAppSession.getInstance().listWriteable = listWriteable;
+                                    MatAppSession.getInstance().setListKey(listKey);
+                                    MatAppSession.getInstance().setListName(listName);
+                                    MatAppSession.getInstance().setListWriteable(listWriteable);
                                     //Success
                                     Toast.makeText(view.getContext(), getString(R.string.login_loginSuccessful), Toast.LENGTH_SHORT).show();
                                     loginBtn.setEnabled(true);

@@ -105,7 +105,7 @@ public class MatDetailActivity extends AppCompatActivity
         //Get Firebase database instance
         database = FirebaseDatabase.getInstance();
         //Get reference to material
-        itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+        itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
         //Read from database
         itemReference.child(itemKey).addValueEventListener(new ValueEventListener() {
             @Override
@@ -199,7 +199,7 @@ public class MatDetailActivity extends AppCompatActivity
                         btnReturn.setVisibility(View.GONE);
                     }
 
-                    if (!MatAppSession.getInstance().listWriteable) {
+                    if (!MatAppSession.getInstance().isListWriteable()) {
                         btnLoan.setVisibility(View.GONE);
                         btnReturn.setVisibility(View.GONE);
                     }
@@ -229,7 +229,7 @@ public class MatDetailActivity extends AppCompatActivity
             }
         });
 
-        if(!MatAppSession.getInstance().listWriteable) {
+        if(!MatAppSession.getInstance().isListWriteable()) {
             fabEditItem.setVisibility(View.GONE);
             btnDelete.setVisibility(View.GONE);
         }

@@ -101,8 +101,8 @@ public class MatAddActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         //Get reference to material
-        itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
-        Log.i("MatAddActivity", "Reference: " + "material/" + MatAppSession.getInstance().listKey + "/item");
+        itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
+        Log.i("MatAddActivity", "Reference: " + "material/" + MatAppSession.getInstance().getListKey() + "/item");
 
         // binding of UI elements
         detTitle = (EditText) findViewById(R.id.det_title_add);

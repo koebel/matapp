@@ -127,7 +127,7 @@ public class MatEditActivity extends AppCompatActivity {
         //Get Firebase database instance
         database = FirebaseDatabase.getInstance();
         //Get reference to material
-        itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+        itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
         //Read from database
         itemReference.child(itemKey).addValueEventListener(new ValueEventListener() {
             @Override

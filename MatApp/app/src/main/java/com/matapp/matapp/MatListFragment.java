@@ -70,7 +70,7 @@ public class MatListFragment extends Fragment {
         //Get Firebase database instance
         database = FirebaseDatabase.getInstance();
         //Get reference to material
-        itemReference = database.getReference("material/" + MatAppSession.getInstance().listKey + "/item");
+        itemReference = database.getReference("material/" + MatAppSession.getInstance().getListKey() + "/item");
         //Read at reference
         itemReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,7 +125,7 @@ public class MatListFragment extends Fragment {
             }
         });
 
-        if(!MatAppSession.getInstance().listWriteable) {
+        if(!MatAppSession.getInstance().isListWriteable()) {
             fabAddItem.setVisibility(View.GONE);
         }
     }

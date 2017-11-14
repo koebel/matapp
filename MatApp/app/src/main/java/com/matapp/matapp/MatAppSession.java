@@ -7,9 +7,9 @@ package com.matapp.matapp;
 public class MatAppSession {
     private static MatAppSession instance = null;
 
-    public String listKey = null;
-    public String listName = null;
-    public boolean listWriteable = false;
+    private String listKey = null;
+    private String listName = null;
+    private boolean listWriteable = false;
 
     protected MatAppSession() {
         //Exists only to defeat instantiation
@@ -22,7 +22,28 @@ public class MatAppSession {
         return instance;
     }
 
+    /* Getter & Setter */
+    public String getListKey() {
+        return listKey;
+    }
+
+    public void setListKey(String listKey) {
+        this.listKey = listKey;
+    }
+
     public String getListName() {
         return listName;
+    }
+
+    public void setListName(String listName) {
+        this.listName = listName;
+    }
+
+    public boolean isListWriteable() {
+        return listWriteable;
+    }
+
+    public void setListWriteable(boolean listWriteable) {
+        this.listWriteable = listWriteable;
     }
 }
