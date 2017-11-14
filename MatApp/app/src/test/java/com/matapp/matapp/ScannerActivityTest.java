@@ -31,7 +31,7 @@ import static org.junit.Assert.*;
 
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricTestRunner.class)
-public class ScannerUnitTest {
+public class ScannerActivityTest {
 
     @Test
     public void scannerActivityShouldNotBeNull() {

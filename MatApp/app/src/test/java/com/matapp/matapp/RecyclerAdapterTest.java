@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
 
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricTestRunner.class)
-public class RecyclerAdapterUnitTest {
+public class RecyclerAdapterTest {
 
     private RecyclerAdapter emptyRecyclerAdapter;
     private RecyclerAdapter recyclerAdapter;
