@@ -122,8 +122,8 @@ public class MatAddActivity extends AppCompatActivity {
 
         textViewBarcode = (TextView)findViewById(R.id.barcode_result);
         if(getIntent().hasExtra("barcode")){
-            String scannercontext = getIntent().getStringExtra("barcode");
-            textViewBarcode.setText(scannercontext);
+            codeContent = getIntent().getStringExtra("barcode");
+            textViewBarcode.setText(codeContent);
         }
 
         detImg = (ImageView) findViewById(R.id.img_mat_add);
